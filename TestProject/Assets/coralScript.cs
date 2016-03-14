@@ -1,0 +1,38 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class coralScript : MonoBehaviour {
+
+    private bool hasUrchin;
+    public GameObject urchin;
+    public GameObject algae;
+    private GameObject algaeClone;
+
+    // Use this for initialization
+    void Start () {
+        hasUrchin = false;
+        algaeClone = Instantiate(algae, new Vector3(transform.position.x, transform.position.y+1.5f, transform.position.z), Quaternion.identity) as GameObject;
+    }
+	
+	// Update is called once per frame
+	void Update () {
+        if(hasUrchin == true)
+        {
+            Destroy(algaeClone);
+            Destroy(algae);
+        }
+	
+	}
+
+    void OnTriggerEnter(Collider collision)
+    {
+        if(collision.gameObject.name == "Sphere")
+        {
+            //for proof of concept, we can just add the urchin here
+            GameObject urchinClone1 = Instantiate(urchin, new Vector3(transform.position.x, transform.position.y+2, transform.position.z), Quaternion.identity) as GameObject;
+            //and then set the boolean to true so we don't grow anymore algae
+            hasUrchin = true;
+        }
+
+    }
+}
