@@ -3,6 +3,7 @@ using System.Collections;
 
 public class coralScript : MonoBehaviour {
 
+    public bool supersucker;
     private bool hasUrchin;
     public GameObject urchin;
     public GameObject algae;
@@ -10,13 +11,14 @@ public class coralScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        supersucker = false;
         hasUrchin = false;
         algaeClone = Instantiate(algae, new Vector3(transform.position.x, transform.position.y+1.5f, transform.position.z), Quaternion.identity) as GameObject;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if(hasUrchin == true)
+        if(hasUrchin == true || supersucker == true)
         {
             Destroy(algaeClone);
             Destroy(algae);

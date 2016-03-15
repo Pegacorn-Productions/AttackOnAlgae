@@ -12,8 +12,9 @@ public class PlayerController : MonoBehaviour {
 
 	//will show up in the inspector as an editable property, and since public, can make changes in editor
 	public float speed = 10;
-	//public bool[] clearCoral = {false,false,false,false,false};
-	public bool clearCoral1 = false;
+    public Vector3 movement;
+    //public bool[] clearCoral = {false,false,false,false,false};
+    public bool clearCoral1 = false;
 	public bool clearCoral2 = false;
 	public bool clearCoral3 = false;
 	public bool clearCoral4 = false;
@@ -46,7 +47,9 @@ public class PlayerController : MonoBehaviour {
 		float moveVertical = Input.GetAxis("Vertical");
 
 		//leave the force mode at default by omitting it from code
-		Vector3 movement = new Vector3(moveHorizontal,0.0f,moveVertical);
+		movement = new Vector3(moveHorizontal,0.0f,moveVertical);
+
+
 
 		rb.AddForce (movement * speed);
 	}
