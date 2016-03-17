@@ -34,6 +34,7 @@ public class AlgaeController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        
         if (movementX != 0f || movementY != 0f || movementZ != 0f) {
            
             Vector3 destination = new Vector3(movementX, movementY, movementZ);
@@ -58,8 +59,10 @@ public class AlgaeController : MonoBehaviour {
             algaeClone = Instantiate(algae, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity) as GameObject;
             float[] movement = new float[3] {(transform.position.x +  Random.Range(-20f, 20f)), 0f, (transform.position.z + Random.Range(-20f, 20f))};
             algaeClone.SendMessage("setMovement", movement);
-            int zero = 0;
-            algaeClone.SendMessage("setExpandLimit", zero);
+            int temp = 0;
+            algaeClone.SendMessage("setExpandLimit", temp);
+            temp = 100;
+            algaeClone.SendMessage("setMaxParticles", temp);
             this.expandLimit--;
         }
       
@@ -74,4 +77,10 @@ public class AlgaeController : MonoBehaviour {
     public void setExpandLimit(int limit) {
         this.expandLimit = limit;
     }
+
+    public void setMaxParticles(int maxParticle) {
+        this.maxParticles = maxParticle;
+    }
+
+    
 }
