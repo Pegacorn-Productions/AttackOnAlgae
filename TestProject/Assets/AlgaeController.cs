@@ -7,7 +7,7 @@ public class AlgaeController : MonoBehaviour {
     private int maxParticles;
     private ParticleSystem.MinMaxCurve emissionRate;
     private float radius;
-    private float waitTime = 10; //wait 10 seconds before moving and populating
+    private float waitTime = 2; //wait 10 seconds before moving and populating
     public GameObject algae;
     private GameObject algaeClone;
     private float movementX = 0;
@@ -34,7 +34,11 @@ public class AlgaeController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
+
+        if (maxParticles != 1000) {
+            ps.maxParticles = maxParticles;
+        }
+
         if (movementX != 0f || movementY != 0f || movementZ != 0f) {
            
             Vector3 destination = new Vector3(movementX, movementY, movementZ);
@@ -61,8 +65,8 @@ public class AlgaeController : MonoBehaviour {
             algaeClone.SendMessage("setMovement", movement);
             int temp = 0;
             algaeClone.SendMessage("setExpandLimit", temp);
-            temp = 100;
-            algaeClone.SendMessage("setMaxParticles", temp);
+            int temp2 = 1;
+            SendMessage("setParticleNumber", temp2);
             this.expandLimit--;
         }
       
@@ -78,8 +82,8 @@ public class AlgaeController : MonoBehaviour {
         this.expandLimit = limit;
     }
 
-    public void setMaxParticles(int maxParticle) {
-        this.maxParticles = maxParticle;
+    public void setParticleNumber(int maxParticle) {
+        this.maxParticles = maxParticle;        
     }
 
     
