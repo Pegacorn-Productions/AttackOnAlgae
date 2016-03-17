@@ -4,13 +4,10 @@ using System.Collections;
 public class AlgaeController : MonoBehaviour {
 
     private ParticleSystem ps;
-    private float lifetime;
     private int maxParticles;
     private ParticleSystem.MinMaxCurve emissionRate;
     private float radius;
-    private float time;
     private float waitTime = 10; //wait 10 seconds before moving and populating
-    private float timeToMove;
     public GameObject algae;
     private GameObject algaeClone;
     private float movementX = 0;
@@ -30,7 +27,6 @@ public class AlgaeController : MonoBehaviour {
         emissionRate = ps.emission.rate;
         maxParticles = ps.maxParticles;
         radius = ps.shape.radius;
-        timeToMove = Time.time + waitTime;
         source = ps.transform.position;
         startTime = Time.time;
         
@@ -54,6 +50,9 @@ public class AlgaeController : MonoBehaviour {
             }
         }
 
+        if (Time.time < startTime + waitTime) {
+            return;
+        }
 
         if (this.expandLimit > 0) {
             algaeClone = Instantiate(algae, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity) as GameObject;
