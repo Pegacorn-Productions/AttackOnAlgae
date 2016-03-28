@@ -86,7 +86,7 @@ public class SpeechBubble : MonoBehaviour
 
 
 			//Render the round part of the bubble
-			GUI.Label(new Rect(0,0,200,100),"",guiSkin.customStyles[0]);
+			GUI.Label(new Rect(10,25,200,100),"",guiSkin.customStyles[0]);
 
 			//Render the text
 			GUI.Label(new Rect(10,25,190,50),"Hello, I am your Aumakua. Our ocean is in great danger.",guiSkin.label);

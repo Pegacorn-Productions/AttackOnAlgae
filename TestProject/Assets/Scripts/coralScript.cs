@@ -31,7 +31,7 @@ public class coralScript : MonoBehaviour {
         if(collision.gameObject.tag == "Player")
         {
             //for proof of concept, we can just add the urchin here
-            GameObject urchinClone1 = Instantiate(urchin, new Vector3(transform.position.x, transform.position.y+2, transform.position.z), Quaternion.identity) as GameObject;
+            GameObject urchinClone1 = Instantiate(urchin, new Vector3(transform.position.x, transform.position.y+2.7f, transform.position.z), Quaternion.identity) as GameObject;
             //and then set the boolean to true so we don't grow anymore algae
             hasUrchin = true;
         }
