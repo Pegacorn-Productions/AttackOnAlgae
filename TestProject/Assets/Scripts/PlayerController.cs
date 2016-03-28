@@ -26,9 +26,9 @@ public class PlayerController : MonoBehaviour {
 	GameObject urchinClone3;
 	GameObject urchinClone4;
 
-
-    public GameObject superSucker;
-    private bool superSuckerOn;
+	//Variables for supersucker
+  public GameObject superSucker;
+  private bool superSuckerOn;
 
 	//called on the first frame the script is active
 	void Start()
@@ -39,8 +39,9 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	// Update is called once per frame, before rendering a frame, where most of game will go
-	void Update() 
+	void Update()
 	{
+				//For debugging purposes when Kinect is not availaible.
         if (Input.GetKey(KeyCode.R)) {
             GetSuperSucker();
         }
@@ -56,7 +57,7 @@ public class PlayerController : MonoBehaviour {
 		movement = new Vector3(moveHorizontal,0.0f,moveVertical);
 
 		rb.AddForce (movement * speed);
- 
+
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -78,16 +79,21 @@ public class PlayerController : MonoBehaviour {
 			clearCoral4 = true;
 			urchinClone4 = Instantiate (urchin_01, new Vector3(-5.23f,0.55f,0.74f), Quaternion.identity) as GameObject;
 		}
-        if (other.CompareTag("Algae")) { //Kill all the algae!
-            if (superSuckerOn) {
-                Destroy(other.gameObject);
-                
-            }
+    if (other.CompareTag("Algae")) { //Kill all the algae!
+        if (superSuckerOn) { //Super sucker is on, destroy algae on player contact.
+            Destroy(other.gameObject);
         }
-			
+    }
+
 		//if(Int32.TryParse (other.tag, out tag))//converts tag To int
 		//{clearCoral[tag] == true;}
 	}
+
+		/**
+		* Instantiates a super sucker game object and have it folow the player.
+		* Usually called by a Kinect Gesture Frame update.
+		* Can be called by a hotkey for debugging purposes.
+		*/
 
     public void GetSuperSucker() {
         if (superSuckerOn == false) {
