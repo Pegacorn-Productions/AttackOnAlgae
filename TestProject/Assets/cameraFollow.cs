@@ -3,7 +3,7 @@ using System.Collections;
 
 public class cameraFollow : MonoBehaviour {
 
-    public GameObject Ball;
+    public GameObject player;
 
 	// Use this for initialization
 	void Start () {
@@ -13,7 +13,7 @@ public class cameraFollow : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        transform.position = new Vector3(Ball.transform.position.x, Ball.transform.position.y + 3, Ball.transform.position.z - 7);
+        transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 3, player.transform.position.z - 7);
 
 
     }

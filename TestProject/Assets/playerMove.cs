@@ -3,21 +3,60 @@ using System.Collections;
 
 public class playerMove : MonoBehaviour {
 
+    public float speed;
+    public float rotationSpeed;
 
-    public GameObject Ball;
+    private Rigidbody rb;
+    private Vector3 prevlocation;
 
     // Use this for initialization
     void Start()
     {
-
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
-        transform.position = new Vector3(Ball.transform.position.x, Ball.transform.position.y, Ball.transform.position.z);
+        Vector3 relativePos = transform.position - prevlocation;
 
-        transform.LookAt(Ball.GetComponent<PlayerController>().movement * 10);
+        if (Input.GetKey("up"))
+        {
+            
+            
+           //transform.rotation = Quaternion.LookRotation(relativePos);
+            transform.position += transform.forward * speed * Time.deltaTime;
+
+        }
+
+        else if (Input.GetKey("down"))
+        {
+            
+            
+           // transform.rotation =  Quaternion.LookRotation(relativePos);
+            transform.position -= transform.forward * speed * Time.deltaTime;
+        }
+
+        else if (Input.GetKey("left"))
+        {
+            
+         
+          //  transform.rotation = Quaternion.LookRotation(relativePos);
+            transform.position -= transform.right * speed * Time.deltaTime;
+        }
+
+        else if (Input.GetKey("right"))
+        {
+            
+         
+           // transform.rotation = Quaternion.LookRotation(relativePos);
+            transform.position += transform.right * speed * Time.deltaTime;
+        }
+
+      prevlocation = transform.position;
+
+
+
     }
 }

@@ -28,7 +28,7 @@ public class coralScript : MonoBehaviour {
 
     void OnTriggerEnter(Collider collision)
     {
-        if(collision.gameObject.name == "Sphere")
+        if(collision.gameObject.tag == "Player")
         {
             //for proof of concept, we can just add the urchin here
             GameObject urchinClone1 = Instantiate(urchin, new Vector3(transform.position.x, transform.position.y+2, transform.position.z), Quaternion.identity) as GameObject;
