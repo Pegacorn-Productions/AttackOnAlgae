@@ -86,5 +86,5 @@ public class AlgaeController : MonoBehaviour {
         this.maxParticles = maxParticle;        
     }
 
-    
+ 
 }
