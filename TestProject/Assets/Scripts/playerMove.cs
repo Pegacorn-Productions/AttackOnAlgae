@@ -19,39 +19,52 @@ public class playerMove : MonoBehaviour {
     void FixedUpdate()
     {
 
-        Vector3 relativePos = transform.position - prevlocation;
+        Vector3 relativePos = prevlocation - transform.position;
 
         if (Input.GetKey("up"))
         {
-            
-            
-           //transform.rotation = Quaternion.LookRotation(relativePos);
-            transform.position += transform.forward * speed * Time.deltaTime;
+
+
+            //transform.rotation = Quaternion.LookRotation(relativePos);
+            transform.forward = new Vector3(0f, 0f, 1f);
+            Vector3 newTransform = transform.position + transform.forward * speed * Time.deltaTime;
+            transform.position = Vector3.Lerp(transform.position, newTransform, 1);
 
         }
 
         else if (Input.GetKey("down"))
         {
-            
-            
-           // transform.rotation =  Quaternion.LookRotation(relativePos);
-            transform.position -= transform.forward * speed * Time.deltaTime;
+
+
+            // transform.rotation =  Quaternion.LookRotation(relativePos);
+            transform.forward = new Vector3(0f, 0f, -1f);
+            //transform.position += transform.forward * speed * Time.deltaTime;
+            Vector3 newTransform = transform.position + transform.forward * speed * Time.deltaTime;
+            transform.position = Vector3.Lerp(transform.position, newTransform, 1);
         }
 
         else if (Input.GetKey("left"))
         {
-            
-         
-          //  transform.rotation = Quaternion.LookRotation(relativePos);
-            transform.position -= transform.right * speed * Time.deltaTime;
+
+
+            //  transform.rotation = Quaternion.LookRotation(relativePos);
+          
+            transform.forward = new Vector3(-1f, 0f, 0f);
+            //transform.position += transform.forward * speed * Time.deltaTime;
+            Vector3 newTransform = transform.position + transform.forward * speed * Time.deltaTime;
+            transform.position = Vector3.Lerp(transform.position, newTransform, 1);
         }
 
         else if (Input.GetKey("right"))
         {
-            
-         
-           // transform.rotation = Quaternion.LookRotation(relativePos);
-            transform.position += transform.right * speed * Time.deltaTime;
+
+            // transform.rotation = Quaternion.LookRotation(relativePos);
+           
+            transform.forward = new Vector3(1f, 0f, 0f);
+
+            //transform.position += transform.forward * speed * Time.deltaTime;
+            Vector3 newTransform = transform.position + transform.forward * speed * Time.deltaTime;
+            transform.position = Vector3.Lerp(transform.position, newTransform, 1);
         }
 
       prevlocation = transform.position;

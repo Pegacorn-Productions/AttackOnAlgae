@@ -5,7 +5,7 @@ public class AlgaeController : MonoBehaviour {
 
     private ParticleSystem ps;
     private int maxParticles;
-    private ParticleSystem.MinMaxCurve emissionRate;
+   // private ParticleSystem.MinMaxCurve emissionRate;
     private float radius;
     private float waitTime = 2; //wait 10 seconds before moving and populating
     public GameObject algae;
@@ -24,9 +24,9 @@ public class AlgaeController : MonoBehaviour {
     // Use this for initialization
 	void Start () {
         ps = GetComponent<ParticleSystem>();
-        emissionRate = ps.emission.rate;
+       // emissionRate = ps.emission.rate;
         maxParticles = ps.maxParticles;
-        radius = ps.shape.radius;
+       // radius = ps.shape.radius;
         source = ps.transform.position;
         startTime = Time.time;
         

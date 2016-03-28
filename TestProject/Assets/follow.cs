@@ -14,17 +14,36 @@ public class follow : MonoBehaviour {
 	Vector3 endPos;
 	public GameObject Ball;
 
+    //animation stuffs
+  //  public Animator anim;
+    
+    private Vector3 lastPos;
+    private bool playing;
+
 	void Start () {
-		
-		//playerPos = GameObject.Find ("player_Rough").transform;
-		//startTime = Time.time;
-	}
+       
+        //playerPos = GameObject.Find ("player_Rough").transform;
+        //startTime = Time.time;
+    }
 	void Update(){
 		transform.position = new Vector3(Ball.transform.position.x -1.0f, Ball.transform.position.y + 2.79f, Ball.transform.position.z - 4.0f);
-		transform.Rotate (Ball.transform.rotation.x, Ball.transform.rotation.y, 0);
-		/*var lookDir = Ball.transform.position - transform.position;
+        if (lastPos == transform.position)
+        {
+           // anim.SetInteger = 1;
+            
+            playing = false;
+        }
+        else if (playing != true)
+        {
+           // IdleAnim.Stop();
+          //  SwimAnim.Play();
+            playing = true;
+        }
+        //transform.Rotate (Ball.transform.rotation.x, Ball.transform.rotation.y, 0);
+        /*var lookDir = Ball.transform.position - transform.position;
 		lookDir.y = 0;
 		transform.rotation = Quaternion.LookRotation (lookDir);*/
+        lastPos = transform.position;
 	}
 	
 	// Update is called once per frame
