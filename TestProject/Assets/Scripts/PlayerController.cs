@@ -55,9 +55,8 @@ public class PlayerController : MonoBehaviour {
 		//leave the force mode at default by omitting it from code
 		movement = new Vector3(moveHorizontal,0.0f,moveVertical);
 
-
-
 		rb.AddForce (movement * speed);
+ 
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -94,6 +93,7 @@ public class PlayerController : MonoBehaviour {
         if (superSuckerOn == false) {
             Debug.Log("Getting super sucker");
             GameObject newSuperSucker = Instantiate(superSucker, rb.position, Quaternion.identity) as GameObject;
+            newSuperSucker.transform.parent = gameObject.transform;
             superSuckerOn = true;
         }
         //else { //put away super sucker
