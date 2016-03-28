@@ -27,19 +27,25 @@ public class PlayerController : MonoBehaviour {
 	GameObject urchinClone4;
 
 
+    public GameObject superSucker;
+    private bool superSuckerOn;
 
 	//called on the first frame the script is active
 	void Start()
 	{
 		rb = GetComponent<Rigidbody> ();
+        superSuckerOn = false;
 
 	}
 
 	// Update is called once per frame, before rendering a frame, where most of game will go
 	void Update() 
 	{
+        if (Input.GetKey(KeyCode.R)) {
+            GetSuperSucker();
+        }
+    }
 
-	}
 	//called just before performing physics calculations
 	void FixedUpdate()
 	{
@@ -73,9 +79,26 @@ public class PlayerController : MonoBehaviour {
 			clearCoral4 = true;
 			urchinClone4 = Instantiate (urchin_01, new Vector3(-5.23f,0.55f,0.74f), Quaternion.identity) as GameObject;
 		}
-		
+        if (other.CompareTag("Algae")) { //Kill all the algae!
+            if (superSuckerOn) {
+                Destroy(other.gameObject);
+                
+            }
+        }
 			
 		//if(Int32.TryParse (other.tag, out tag))//converts tag To int
 		//{clearCoral[tag] == true;}
 	}
+
+    public void GetSuperSucker() {
+        if (superSuckerOn == false) {
+            Debug.Log("Getting super sucker");
+            GameObject newSuperSucker = Instantiate(superSucker, rb.position, Quaternion.identity) as GameObject;
+            superSuckerOn = true;
+        }
+        //else { //put away super sucker
+        //    Debug.Log("Put away super sucker");
+        //    superSuckerOn = false;
+        //}
+    }
 }
