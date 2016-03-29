@@ -81,7 +81,7 @@ public class SpeechBubble : MonoBehaviour
 		GUI.BeginGroup(new Rect(goScreenPos.x-centerOffsetX-offsetX,Screen.height-goScreenPos.y-centerOffsetY-offsetY,bubbleWidth,bubbleHeight));
 
 		
-			//If the button is pressed, go back to 41 Post
+			//If the button is pressed, dismiss
 		if (!dismissed) {
 
 
@@ -89,10 +89,10 @@ public class SpeechBubble : MonoBehaviour
 			GUI.Label(new Rect(10,25,200,100),"",guiSkin.customStyles[0]);
 
 			//Render the text
-			GUI.Label(new Rect(10,25,190,50),"Hello, I am your Aumakua. Our ocean is in great danger.",guiSkin.label);
+			GUI.Label(new Rect(20,50,190,50),"Hello, I am your Aumakua. Our ocean is in great danger.",guiSkin.label);
 
 
-			if (GUI.Button (new Rect (50, 60, 70, 30), "Dismiss")) {
+			if (GUI.Button (new Rect (60, 85, 70, 30), "Dismiss")) {
 				dismissed = true;
 				mat = null;
 			}
