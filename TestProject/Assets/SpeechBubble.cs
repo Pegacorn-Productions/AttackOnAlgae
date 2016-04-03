@@ -4,6 +4,8 @@ using System.Collections;
 [ExecuteInEditMode]
 public class SpeechBubble : MonoBehaviour 
 {
+	public GameObject otherObject;
+	Animator otherAnimator;
 	//this game object's transform
 	private Transform goTransform;
 	//the game object's position on the screen, in pixels
@@ -28,6 +30,7 @@ public class SpeechBubble : MonoBehaviour
 	
 	//a material to render the triangular part of the speech balloon
 	public Material mat;
+	Material temp;
 
 	//a guiSkin, to render the round part of the speech balloon
 	public GUISkin guiSkin;
@@ -42,6 +45,8 @@ public class SpeechBubble : MonoBehaviour
 	//use this for initialization
 	void Start()
 	{
+		 temp = mat;
+		otherAnimator = otherObject.GetComponent<Animator>();
 		//if the material hasn't been found
 		if (!mat) 
 		{
@@ -77,6 +82,9 @@ public class SpeechBubble : MonoBehaviour
 	//Draw GUIs
 	void OnGUI()
 	{
+		bool second = false;
+		bool dismissed2 = false;
+		mat = temp;
 		//Begin the GUI group centering the speech bubble at the same position of this game object. After that, apply the offset
 		GUI.BeginGroup(new Rect(goScreenPos.x-centerOffsetX-offsetX,Screen.height-goScreenPos.y-centerOffsetY-offsetY,bubbleWidth,bubbleHeight));
 
@@ -86,17 +94,34 @@ public class SpeechBubble : MonoBehaviour
 
 
 			//Render the round part of the bubble
-			GUI.Label(new Rect(10,25,200,100),"",guiSkin.customStyles[0]);
+			GUI.Label (new Rect (10, 25, 200, 100), "", guiSkin.customStyles [0]);
 
 			//Render the text
-			GUI.Label(new Rect(20,50,190,50),"Hello, I am your Aumakua. Our ocean is in great danger.",guiSkin.label);
+			GUI.Label (new Rect (20, 50, 190, 50), "Hello, I am your Aumakua. Our ocean is in great danger.", guiSkin.label);
 
 
 			if (GUI.Button (new Rect (60, 85, 70, 30), "Dismiss")) {
 				dismissed = true;
 				mat = null;
+				//otherAnimator.SetBool("nextStep1",true);
 			}
 		} 
+		else if (!dismissed2) {
+					//Render the round part of the bubble
+					GUI.Label (new Rect (10, 25, 200, 100), "", guiSkin.customStyles [0]);
+
+					//Render the text
+					GUI.Label (new Rect (20, 50, 190, 50), "This is an urchin, it eats algae.", guiSkin.label);
+
+
+					if (GUI.Button (new Rect (60, 85, 70, 30), "Dismiss")) {
+						dismissed2 = true;
+						mat = null;
+						//otherAnimator.SetBool("nextStep2",true);
+					}
+					
+				}
+
 		
 		GUI.EndGroup();
 	}
