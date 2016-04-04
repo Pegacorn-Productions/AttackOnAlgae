@@ -22,6 +22,8 @@ public class diverScript : MonoBehaviour {
     public GameObject cameraLocation;
     public GameObject miniMap;
 
+    public GameObject viewcamera;
+
 
     public bool exitCutscene = false;
     private bool move = true;
@@ -155,7 +157,10 @@ public class diverScript : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate () {
 
-        if(moveOnToTwo == true)
+        Vector3 diverdirection = speechBubbleObject.transform.position - viewcamera.transform.position;
+        viewcamera.transform.rotation = Quaternion.LookRotation(diverdirection);
+
+        if (moveOnToTwo == true)
         {
             StartCoroutine("partTwo");
             moveOnToTwo = false;
