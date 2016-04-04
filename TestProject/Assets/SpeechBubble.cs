@@ -4,8 +4,15 @@ using System.Collections;
 [ExecuteInEditMode]
 public class SpeechBubble : MonoBehaviour 
 {
-	//this game object's transform
-	private Transform goTransform;
+
+    public GameObject otherObject;
+    diverScript script;
+
+    public GameObject suckerObject;
+   // Animator suckerAnimator;
+
+    //this game object's transform
+    private Transform goTransform;
 	//the game object's position on the screen, in pixels
 	private Vector3 goScreenPos;
 	//the game objects position on the screen
@@ -25,25 +32,35 @@ public class SpeechBubble : MonoBehaviour
 	private int centerOffsetY;
 
 	private bool dismissed = false;
-	
-	//a material to render the triangular part of the speech balloon
-	public Material mat;
+    private bool dismissed2 = false;
+    private bool dismissed3 = false;
 
-	//a guiSkin, to render the round part of the speech balloon
-	public GUISkin guiSkin;
+    //a material to render the triangular part of the speech balloon
+    public Material mat;
+    Material temp;
+
+    public string text;
+    public bool addDismiss = false;
+
+    //a guiSkin, to render the round part of the speech balloon
+    public GUISkin guiSkin;
 	
 	//use this for early initialization
 	void Awake() 
 	{
 		//get this game object's transform
 		goTransform = this.GetComponent<Transform>();
+        script = otherObject.GetComponent<diverScript>();
 	}
 	
 	//use this for initialization
 	void Start()
 	{
-		//if the material hasn't been found
-		if (!mat) 
+        temp = mat;
+        
+       // suckerAnimator = suckerObject.GetComponent<Animator>();
+        //if the material hasn't been found
+        if (!mat) 
 		{
 			Debug.LogError("Please assign a material on the Inspector.");
 			return;
@@ -80,25 +97,70 @@ public class SpeechBubble : MonoBehaviour
 		//Begin the GUI group centering the speech bubble at the same position of this game object. After that, apply the offset
 		GUI.BeginGroup(new Rect(goScreenPos.x-centerOffsetX-offsetX,Screen.height-goScreenPos.y-centerOffsetY-offsetY,bubbleWidth,bubbleHeight));
 
+       // if (addDismiss)
+     //   {
+           
+     //   }
+
 		
 			//If the button is pressed, dismiss
 		if (!dismissed) {
+            mat = temp;
 
-
-			//Render the round part of the bubble
-			GUI.Label(new Rect(10,25,200,100),"",guiSkin.customStyles[0]);
+            //Render the round part of the bubble
+            GUI.Label(new Rect(10,25,200,100),"",guiSkin.customStyles[0]);
 
 			//Render the text
-			GUI.Label(new Rect(20,50,190,50),"Hello, I am your Aumakua. Our ocean is in great danger.",guiSkin.label);
+			GUI.Label(new Rect(20,50,190,50),text,guiSkin.label);
+            if (GUI.Button(new Rect(70, 85, 70, 30), "Dismiss"))
+            {
+                dismissed = true;
+                mat = null;
+                script.moveOnToTwo = true;
+            }
 
 
-			if (GUI.Button (new Rect (60, 85, 70, 30), "Dismiss")) {
-				dismissed = true;
-				mat = null;
-			}
-		} 
-		
-		GUI.EndGroup();
+        }
+        else if (!dismissed2)
+        {
+            mat = temp;
+            //Render the round part of the bubble
+            GUI.Label(new Rect(10, 25, 200, 100), "", guiSkin.customStyles[0]);
+
+            //Render the text
+            GUI.Label(new Rect(20, 50, 190, 50), text, guiSkin.label);
+
+            if (GUI.Button(new Rect(70, 85, 70, 30), "Dismiss"))
+            {
+                dismissed2 = true;
+                mat = null;
+                script.moveOnToThree = true;
+            }
+
+
+
+        }
+        else if (!dismissed3)
+        {
+            mat = temp;
+            //Render the round part of the bubble
+            GUI.Label(new Rect(10, 25, 200, 100), "", guiSkin.customStyles[0]);
+
+            //Render the text
+            GUI.Label(new Rect(20, 50, 190, 50),text, guiSkin.label);
+
+    
+            if (GUI.Button(new Rect(70, 85, 70, 30), "Dismiss"))
+            {
+                dismissed2 = true;
+                mat = null;
+                script.moveOnToFour = true;
+            }
+
+
+        }
+
+        GUI.EndGroup();
 	}
 	
 	//Called after camera has finished rendering the scene
@@ -128,6 +190,7 @@ public class SpeechBubble : MonoBehaviour
 		GL.PopMatrix();
 	}
 
+  
     public void DismissSpeechBuble() {
         dismissed = true;
     }
