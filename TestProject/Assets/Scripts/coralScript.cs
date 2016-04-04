@@ -13,7 +13,7 @@ public class coralScript : MonoBehaviour {
     void Start () {
         supersucker = false;
         hasUrchin = false;
-        algaeClone = Instantiate(algae, new Vector3(transform.position.x, transform.position.y+1.5f, transform.position.z), Quaternion.identity) as GameObject;
+        algaeClone = Instantiate(algae, new Vector3(transform.position.x, transform.position.y+0.5f, transform.position.z-0.25f), Quaternion.identity) as GameObject;
     }
 	
 	// Update is called once per frame
