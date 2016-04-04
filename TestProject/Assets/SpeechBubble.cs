@@ -127,4 +127,8 @@ public class SpeechBubble : MonoBehaviour
 		//pop the orthogonal matrix from the stack
 		GL.PopMatrix();
 	}
+
+    public void DismissSpeechBuble() {
+        dismissed = true;
+    }
 }

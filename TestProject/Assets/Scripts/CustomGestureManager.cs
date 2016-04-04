@@ -75,6 +75,7 @@ public class CustomGestureManager : MonoBehaviour {
 
                 if (handSwipeGestureResult.Detected == true && handSwipeGestureResult.Confidence > 0.99f) {
                     Debug.Log("Hand Swipe detected. Confidence is" + handSwipeGestureResult.Confidence.ToString());
+                    SpeechBubble.GetComponent<SpeechBubble>().DismissSpeechBuble();
                 }
 
                 if (grasppingResult.Detected == true && grasppingResult.Confidence > 0.99f) {
