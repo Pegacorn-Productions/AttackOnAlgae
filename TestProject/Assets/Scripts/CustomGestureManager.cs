@@ -68,12 +68,12 @@ public class CustomGestureManager : MonoBehaviour {
                     return;
                 }
 
-                if (rightHandAboveResult.Detected == true && rightHandAboveResult.Confidence > 0.99f) {
-                    Debug.Log("Right hand above head detected. Confidence is " + handSwipeGestureResult.Confidence.ToString());
+                if (rightHandAboveResult.Detected == true && rightHandAboveResult.Confidence > 0.20f) {
+                    Debug.Log("Right hand above head detected. Confidence is " + rightHandAboveResult.Confidence.ToString());
                     AttachedObject.GetComponent<diverScript>().GetSuperSucker();
                 }
 
-                if (handSwipeGestureResult.Detected == true && handSwipeGestureResult.Confidence > 0.99f) {
+                if (handSwipeGestureResult.Detected == true && handSwipeGestureResult.Confidence > 0.20f) {
                     Debug.Log("Hand Swipe detected. Confidence is" + handSwipeGestureResult.Confidence.ToString());
                     SpeechBubble.GetComponent<SpeechBubble>().DismissSpeechBuble();
                 }

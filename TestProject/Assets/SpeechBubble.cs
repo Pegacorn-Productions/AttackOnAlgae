@@ -35,6 +35,8 @@ public class SpeechBubble : MonoBehaviour
     private bool dismissed2 = false;
     private bool dismissed3 = false;
 
+    private float oldTime = Time.time;
+
     //a material to render the triangular part of the speech balloon
     public Material mat;
     Material temp;
@@ -57,7 +59,9 @@ public class SpeechBubble : MonoBehaviour
 	void Start()
 	{
         temp = mat;
-        
+
+        oldTime = Time.time;
+
        // suckerAnimator = suckerObject.GetComponent<Animator>();
         //if the material hasn't been found
         if (!mat) 
@@ -192,6 +196,25 @@ public class SpeechBubble : MonoBehaviour
 
   
     public void DismissSpeechBuble() {
-        dismissed = true;
+
+        if (Time.time - oldTime > 3) {
+            oldTime = Time.time;
+            if (dismissed == false) {
+                dismissed = true;
+                script.moveOnToTwo = true;
+            }
+            else if (dismissed2 == false) {
+                dismissed = true;
+                script.moveOnToThree = true;
+            }
+            else if (dismissed3 == false) {
+                dismissed = true;
+                script.moveOnToFour = true;
+            }
+        } 
+        else {
+            return;
+        }
+       
     }
 }

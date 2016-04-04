@@ -24,7 +24,6 @@ public class diverScript : MonoBehaviour {
 
     public GameObject viewcamera;
 
-
     public bool exitCutscene = false;
     private bool move = true;
     public bool moveOnToTwo = false;
@@ -33,6 +32,7 @@ public class diverScript : MonoBehaviour {
 
     public GameObject supersucker;
     private bool supersuckerMove = false;
+    private bool superSuckerOn = true;
 
     // Use this for initialization
     void Start() {
@@ -138,7 +138,7 @@ public class diverScript : MonoBehaviour {
     IEnumerator partFour()
     {
         CameraAnim.SetBool("tosupersucker", true);
-
+        superSuckerOn = true;
         int index = 0;
         foreach (string text in part4)
         {
@@ -156,7 +156,9 @@ public class diverScript : MonoBehaviour {
 
     // Update is called once per frame
     void FixedUpdate () {
-
+        if (Input.GetKey(KeyCode.R)) {
+            GetSuperSucker();
+        }
         Vector3 diverdirection = speechBubbleObject.transform.position - viewcamera.transform.position;
         viewcamera.transform.rotation = Quaternion.LookRotation(diverdirection);
 
@@ -206,8 +208,10 @@ public class diverScript : MonoBehaviour {
 
     public void GetSuperSucker()
     {
-        supersucker.SetActive(true);
-        supersuckerMove = true;
-
+        if (superSuckerOn == true) {
+            supersucker.SetActive(true);
+            supersuckerMove = true;
+        }
+  
     }
 }
