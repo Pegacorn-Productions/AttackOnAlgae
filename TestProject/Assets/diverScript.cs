@@ -199,7 +199,7 @@ public class diverScript : MonoBehaviour {
         
 	}
 
-    void GetSuperSucker()
+    public void GetSuperSucker()
     {
         supersucker.SetActive(true);
         supersuckerMove = true;
