@@ -5,71 +5,47 @@ public class playerMove : MonoBehaviour {
 
     public float speed;
     public float rotationSpeed;
+    public GameObject superSucker;
+
 
     private Rigidbody rb;
     private Vector3 prevlocation;
 
+    private bool superSuckerOn;
+    private GameObject mySuperSucker;
+
     // Use this for initialization
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+       // rb = GetComponent<Rigidbody>();
+        superSuckerOn = false;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
 
-        Vector3 relativePos = prevlocation - transform.position;
-
-        if (Input.GetKey("up"))
-        {
-
-
-            //transform.rotation = Quaternion.LookRotation(relativePos);
-            transform.forward = new Vector3(0f, 0f, 1f);
-            Vector3 newTransform = transform.position + transform.forward * speed * Time.deltaTime;
-            transform.position = Vector3.Lerp(transform.position, newTransform, 1);
-
+        if (Input.GetKey(KeyCode.R)) {
+            GetSuperSucker();
         }
 
-        else if (Input.GetKey("down"))
-        {
-
-
-            // transform.rotation =  Quaternion.LookRotation(relativePos);
-            transform.forward = new Vector3(0f, 0f, -1f);
-            //transform.position += transform.forward * speed * Time.deltaTime;
-            Vector3 newTransform = transform.position + transform.forward * speed * Time.deltaTime;
-            transform.position = Vector3.Lerp(transform.position, newTransform, 1);
+        if (Input.GetKey(KeyCode.T)) {
+            RemoveSuperSucker();
         }
-
-        else if (Input.GetKey("left"))
-        {
-
-
-            //  transform.rotation = Quaternion.LookRotation(relativePos);
-          
-            transform.forward = new Vector3(-1f, 0f, 0f);
-            //transform.position += transform.forward * speed * Time.deltaTime;
-            Vector3 newTransform = transform.position + transform.forward * speed * Time.deltaTime;
-            transform.position = Vector3.Lerp(transform.position, newTransform, 1);
-        }
-
-        else if (Input.GetKey("right"))
-        {
-
-            // transform.rotation = Quaternion.LookRotation(relativePos);
-           
-            transform.forward = new Vector3(1f, 0f, 0f);
-
-            //transform.position += transform.forward * speed * Time.deltaTime;
-            Vector3 newTransform = transform.position + transform.forward * speed * Time.deltaTime;
-            transform.position = Vector3.Lerp(transform.position, newTransform, 1);
-        }
-
-      prevlocation = transform.position;
-
-
 
     }
+
+    public void GetSuperSucker() {
+        if (superSuckerOn == false) {
+            Debug.Log("Getting the super sucker");
+            mySuperSucker = Instantiate(superSucker, this.transform.position, Quaternion.identity) as GameObject;
+            superSuckerOn = true;
+        }
+    }
+
+    public void RemoveSuperSucker() {
+        superSuckerOn = false;
+        Destroy(mySuperSucker);
+    }
+
 }
