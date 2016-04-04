@@ -69,8 +69,8 @@ public class CustomGestureManager : MonoBehaviour {
                 }
 
                 if (rightHandAboveResult.Detected == true && rightHandAboveResult.Confidence > 0.99f) {
-                    //Debug.Log("Right hand above head detected. Confidence is " + handSwipeGestureResult.Confidence.ToString()");
-                    //AttachedObject.GetComponent<PlayerController>().GetSuperSucker();
+                    Debug.Log("Right hand above head detected. Confidence is " + handSwipeGestureResult.Confidence.ToString());
+                    AttachedObject.GetComponent<playerMove>().GetSuperSucker();
                 }
 
                 if (handSwipeGestureResult.Detected == true && handSwipeGestureResult.Confidence > 0.99f) {
