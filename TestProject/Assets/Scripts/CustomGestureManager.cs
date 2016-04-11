@@ -12,6 +12,7 @@ public class CustomGestureManager : MonoBehaviour {
     Gesture rightHandAbove;
     Gesture handSwipe;
     Gesture grasping;
+    Gesture handWave;
     ParticleSystem _ps;
 
     public GameObject AttachedObject;
@@ -44,6 +45,9 @@ public class CustomGestureManager : MonoBehaviour {
             else if (gesture.Name == "Grasping") {
                 grasping = gesture;
             }
+            else if (gesture.Name == "HandWave") {
+                handWave = gesture;
+            }
 
         }
 
@@ -58,22 +62,24 @@ public class CustomGestureManager : MonoBehaviour {
                 DiscreteGestureResult rightHandAboveResult = null;
                 DiscreteGestureResult handSwipeGestureResult = null;
                 DiscreteGestureResult grasppingResult = null;
+                DiscreteGestureResult handWaveResult = null;
 
                 if (frame.DiscreteGestureResults.Count > 0) {
                     rightHandAboveResult = frame.DiscreteGestureResults[rightHandAbove];
                     handSwipeGestureResult = frame.DiscreteGestureResults[handSwipe];
                     grasppingResult = frame.DiscreteGestureResults[grasping];
+                    handWaveResult = frame.DiscreteGestureResults[handWave];
                 }
                 if (rightHandAboveResult == null) {
                     return;
                 }
 
-                if (rightHandAboveResult.Detected == true && rightHandAboveResult.Confidence > 0.20f) {
+                if (rightHandAboveResult.Detected == true && rightHandAboveResult.Confidence > 0.85f) {
                     Debug.Log("Right hand above head detected. Confidence is " + rightHandAboveResult.Confidence.ToString());
                     AttachedObject.GetComponent<diverScript>().GetSuperSucker();
                 }
 
-                if (handSwipeGestureResult.Detected == true && handSwipeGestureResult.Confidence > 0.20f) {
+                if (handSwipeGestureResult.Detected == true && handSwipeGestureResult.Confidence > 0.85f) {
                     Debug.Log("Hand Swipe detected. Confidence is" + handSwipeGestureResult.Confidence.ToString());
                     SpeechBubble.GetComponent<SpeechBubble>().DismissSpeechBuble();
                 }
@@ -81,6 +87,10 @@ public class CustomGestureManager : MonoBehaviour {
                 if (grasppingResult.Detected == true && grasppingResult.Confidence > 0.99f) {
                     Debug.Log("Grasping detected. Confidence is" + grasppingResult.Confidence.ToString());
                    // AttachedObject.GetComponent<PlayerController>().DestroyAlgae();
+                }
+
+                if (handWaveResult.Detected == true && handWaveResult.Confidence > 0.85f) {
+                    //Need to fill in function for when a detecting hand wave.
                 }
 
             }

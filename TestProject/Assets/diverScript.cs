@@ -156,9 +156,14 @@ public class diverScript : MonoBehaviour {
 
     // Update is called once per frame
     void FixedUpdate () {
-        if (Input.GetKey(KeyCode.R)) {
+        if (Input.GetKey(KeyCode.R)) { //For debugging purposes when gesture controls fail.
             GetSuperSucker();
         }
+
+        if (Input.GetKey("escape")) {
+            Application.Quit();
+        }
+            
         Vector3 diverdirection = speechBubbleObject.transform.position - viewcamera.transform.position;
         viewcamera.transform.rotation = Quaternion.LookRotation(diverdirection);
 
