@@ -9,9 +9,10 @@ public class CustomGestureManager : MonoBehaviour {
     VisualGestureBuilderFrameSource _gestureFrameSource;
     VisualGestureBuilderFrameReader _gestureFrameReader;
     KinectSensor _kinect;
-    Gesture rightHandAbove;
+    Gesture handAboveHead;
     Gesture handSwipe;
     Gesture grasping;
+    Gesture handWave;
     ParticleSystem _ps;
 
     public GameObject AttachedObject;
@@ -29,20 +30,23 @@ public class CustomGestureManager : MonoBehaviour {
 
         _kinect = KinectSensor.GetDefault();
 
-        _gestureDatabase = VisualGestureBuilderDatabase.Create(Application.streamingAssetsPath + "/rightHandAbove.gbd");
+        _gestureDatabase = VisualGestureBuilderDatabase.Create(Application.streamingAssetsPath + "/gestureDatabase.gbd");
         _gestureFrameSource = VisualGestureBuilderFrameSource.Create(_kinect, 0);
 
         foreach (var gesture in _gestureDatabase.AvailableGestures) {
             _gestureFrameSource.AddGesture(gesture);
 
-            if (gesture.Name == "rightHandAbove") {
-                rightHandAbove = gesture;
+            if (gesture.Name == "HandAboveHead") {
+                handAboveHead = gesture;
             }
-            else if (gesture.Name == "HandSwipe") {
+            else if (gesture.Name == "HandSwipeV2") {
                 handSwipe = gesture;
             }
-            else if (gesture.Name == "Grasping") {
+            else if (gesture.Name == "GraspingV2") {
                 grasping = gesture;
+            }
+            else if (gesture.Name == "HandWaveV2") {
+                handWave = gesture;
             }
 
         }
@@ -55,33 +59,38 @@ public class CustomGestureManager : MonoBehaviour {
         VisualGestureBuilderFrameReference frameReference = e.FrameReference;
         using (VisualGestureBuilderFrame frame = frameReference.AcquireFrame()) {
             if (frame != null && frame.DiscreteGestureResults != null) {
-                DiscreteGestureResult rightHandAboveResult = null;
-                DiscreteGestureResult handSwipeGestureResult = null;
-                DiscreteGestureResult grasppingResult = null;
+                DiscreteGestureResult handAboveHeadResult = null;
+                ContinuousGestureResult handSwipeGestureResult = null;
+                ContinuousGestureResult grasppingResult = null;
+                ContinuousGestureResult handWaveResult = null;
 
                 if (frame.DiscreteGestureResults.Count > 0) {
-                    rightHandAboveResult = frame.DiscreteGestureResults[rightHandAbove];
-                    handSwipeGestureResult = frame.DiscreteGestureResults[handSwipe];
-                    grasppingResult = frame.DiscreteGestureResults[grasping];
+                    handAboveHeadResult = frame.DiscreteGestureResults[handAboveHead];
+                   // handSwipeGestureResult = frame.ContinuousGestureResults[handSwipe];
+                    //grasppingResult = frame.ContinuousGestureResults[grasping];
+                    //handWaveResult = frame.ContinuousGestureResults[handWave];
                 }
-                if (rightHandAboveResult == null) {
+                if (handAboveHeadResult == null) {
                     return;
                 }
 
-                if (rightHandAboveResult.Detected == true && rightHandAboveResult.Confidence > 0.20f) {
-                    Debug.Log("Right hand above head detected. Confidence is " + rightHandAboveResult.Confidence.ToString());
+                if (handAboveHeadResult.Detected == true && handAboveHeadResult.Confidence > 0.70f) {
+                    Debug.Log("Right hand above head detected. Confidence is " + handAboveHeadResult.Confidence.ToString());
                     AttachedObject.GetComponent<diverScript>().GetSuperSucker();
                 }
 
-                if (handSwipeGestureResult.Detected == true && handSwipeGestureResult.Confidence > 0.20f) {
-                    Debug.Log("Hand Swipe detected. Confidence is" + handSwipeGestureResult.Confidence.ToString());
-                    SpeechBubble.GetComponent<SpeechBubble>().DismissSpeechBuble();
-                }
+                //if (handSwipeGestureResult.Progress > 0.80f) {
+                //    Debug.Log("Hand Swipe detected. Confidence is" + handSwipeGestureResult.Progress.ToString());
+                //    SpeechBubble.GetComponent<SpeechBubble>().DismissSpeechBuble();
+                //}
 
-                if (grasppingResult.Detected == true && grasppingResult.Confidence > 0.99f) {
-                    Debug.Log("Grasping detected. Confidence is" + grasppingResult.Confidence.ToString());
-                   // AttachedObject.GetComponent<PlayerController>().DestroyAlgae();
-                }
+                //if (grasppingResult.Progress > 0.80f) {
+                //    Debug.Log("Grasping detected. Confidence is" + grasppingResult.Progress.ToString());
+                //   // AttachedObject.GetComponent<PlayerController>().DestroyAlgae();
+                //}
+                //if (handWaveResult.Progress > 0.80f) {
+                //    Debug.Log("Hand Wave detected. Confidence is " + handWaveResult.Progress.ToString());
+                //}
 
             }
         }
