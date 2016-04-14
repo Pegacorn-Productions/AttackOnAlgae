@@ -227,5 +227,42 @@ public class PlayerGesture : MonoBehaviour {
             return false;
         }
     }
+
+    private void forcePush(int bodyID) {
+        Kinect.Body body = data[bodyID];
+        Kinect.Joint handRight = body.Joints[Kinect.JointType.HandRight];
+        Kinect.Joint handLeft = body.Joints[Kinect.JointType.HandLeft];
+        Kinect.Joint spineMid = body.Joints[Kinect.JointType.SpineMid];
+
+        float handMidNormalizedX = (handLeft.Position.X + handRight.Position.X + 2) / 2.0f;
+        float handMixNormalizedY = (handLeft.Position.Y + handRight.Position.Y + 2) / 2.0f;
+
+        float spineMidNormalizedX = spineMid.Position.X + 1;
+        float spineMidNormalizedY = spineMid.Position.Y + 1;
+
+        float distanceX = Mathf.Abs(handMidNormalizedX - spineMidNormalizedX);
+        float distanceY = Mathf.Abs(handMixNormalizedY - handMixNormalizedY);
+
+        Vector3 ret;
+
+        if (handMidNormalizedX > spineMidNormalizedX) { // right
+            if (handMixNormalizedY > spineMidNormalizedY) { // above
+                ret = new Vector3(distanceX, distanceY);
+            }
+            else {
+                ret = new Vector3(distanceX, -1 * distanceY);
+            }
+        }
+        else { // left
+            if (handMixNormalizedY > spineMidNormalizedY) {
+                ret = new Vector3(-1 * distanceX, distanceY);
+            }
+            else {
+                ret = new Vector3(-1 * distanceX, -1 * distanceY);
+            }
+        }
+
+        //return ret;
+    }
   
 }
