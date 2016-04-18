@@ -6,7 +6,7 @@ public class SpeechBubble : MonoBehaviour
 {
 
     public GameObject otherObject;
-    diverScript script;
+    tourScript script;
 
     public GameObject suckerObject;
    // Animator suckerAnimator;
@@ -52,7 +52,7 @@ public class SpeechBubble : MonoBehaviour
 	{
 		//get this game object's transform
 		goTransform = this.GetComponent<Transform>();
-        script = otherObject.GetComponent<diverScript>();
+        script = otherObject.GetComponent<tourScript>();
 	}
 	
 	//use this for initialization
@@ -120,7 +120,7 @@ public class SpeechBubble : MonoBehaviour
             {
                 dismissed = true;
                 mat = null;
-                script.moveOnToTwo = true;
+                script.moveOnFromBreakpoint = true;
             }
 
 
@@ -201,7 +201,7 @@ public class SpeechBubble : MonoBehaviour
             oldTime = Time.time;
             if (dismissed == false) {
                 dismissed = true;
-                script.moveOnToTwo = true;
+                script.moveOnFromBreakpoint = true;
             }
             else if (dismissed2 == false) {
                 dismissed = true;

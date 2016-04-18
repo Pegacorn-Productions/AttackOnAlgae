@@ -21,7 +21,7 @@ public class tourScript : MonoBehaviour {
 
     public bool exitCutscene = false;
     private bool diverMove = true, fishMove = true;
-    public bool moveOnToTwo = false;
+    public bool moveOnFromBreakpoint = false;
     public bool moveOnToThree = false;
     public bool moveOnToFour = false;
 
@@ -59,18 +59,32 @@ public class tourScript : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 
+        if (moveOnFromBreakpoint == true)
+        {
+            Debug.Log("Moving on to part 2!");
+        }
+        if (moveOnToThree == true)
+        {
+            Debug.Log("Moving on to part 3!");
+        }
 
-        if (exitCutscene == true)
+        if (moveOnToFour == true)
+        {
+            Debug.Log("Moving on to part 4!");
+
+        }
+
+        if (supersuckerMove)
+        {
+            supersucker.transform.position = Vector3.MoveTowards(supersucker.transform.position, gameObject.transform.position, 0.05f);
+        }
+        if (exitCutscene == false)
         {
             if(fishCurrentTarget) moveFish(fishCurrentTarget);
             if (diverCurrentTarget) moveDiver(diverCurrentTarget);
             
             
             
-        }
-        if (supersuckerMove)
-        {
-            supersucker.transform.position = Vector3.MoveTowards(supersucker.transform.position, cameraLocation.transform.position, 0.05f);
         }
 
 
@@ -82,15 +96,33 @@ public class tourScript : MonoBehaviour {
         yield return new WaitForSeconds(6);
         setDiverWave(false);
 
-        sayNextLine();
+        StartCoroutine("sayNextLine");
        // fishCurrentTarget = fishTargets[1];
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(2.5f);
 
-        sayNextLine();
+        StartCoroutine("sayNextLine");
+        yield return new WaitForSeconds(3.5f);
+        diverCurrentTarget = diverTargets[0];
+        moveDiver(diverCurrentTarget);
+        yield return new WaitForSeconds(2.5f);
+        StartCoroutine("sayNextLine");
+        yield return new WaitForSeconds(2.5f);
+        StartCoroutine("sayNextLine");
+        yield return new WaitForSeconds(2.5f);
+        StartCoroutine("sayNextLine");
+        yield return new WaitForSeconds(2.5f);
+        StartCoroutine("sayNextLine");
+        yield return new WaitForSeconds(2.5f);
+        StartCoroutine("sayNextLine");
+        yield return new WaitForSeconds(2.5f);
+        StartCoroutine("sayNextLine");
+        yield return new WaitForSeconds(2.5f);
+        StartCoroutine("sayNextLine");
+        yield return new WaitForSeconds(2.5f);
 
 
         //need a way to wait for a signal from update
-        while (moveOnToTwo == false)
+        while (moveOnFromBreakpoint == false)
         {
             yield return new WaitForSeconds(1);
         }
@@ -100,33 +132,46 @@ public class tourScript : MonoBehaviour {
        
     }
 
-    void sayNextLine()
+    IEnumerator sayNextLine()
     {
-        if(script[currLine,0] == "diver")
+
+        if (script[currLine,0] == "diver")
         {
             updateDiverBubble(script[currLine,1]);
             showDiverBubble(true);
+            currLine++;
+            yield return new WaitForSeconds(5);
+            showDiverBubble(false);
         }
         else if(script[currLine,0] == "aumakua")
         {
             updateFishBubble(script[currLine,1]);
             showFishBubble(true);
+            currLine++;
+            yield return new WaitForSeconds(5);
+            showFishBubble(false);
         }
-
-        currLine++;
+    
     }
 
     void moveDiver(GameObject moveTarget)
     {
+
+        diverAnim.SetBool("move", true);
+
+
         if (moveTarget.transform.position != diver.transform.position)
         {
             Vector3 direction = moveTarget.transform.position - diver.transform.position;
             diverLookAtTarget(moveTarget);
+            diver.transform.position = Vector3.MoveTowards(diver.transform.position, moveTarget.transform.position, 0.05f);
+            Debug.Log("Moving!");
         }
         else
         {
-            if (diverMove == false) stopMoveDiver();
-            diverLookAtTarget(moveTarget);
+            Debug.Log("Not Moving!");
+            stopMoveDiver();
+            diverLookAtTarget(viewcamera);
 
         }
     }
@@ -204,6 +249,7 @@ public class tourScript : MonoBehaviour {
 
     void diverLookAtTarget(GameObject target)
     {
+        Debug.Log("turning diver!");
         Vector3 newDir = Vector3.RotateTowards(diver.transform.position, target.transform.position, 0.05f, 0.05f);
         diver.transform.rotation = Quaternion.LookRotation(-newDir);
     }
