@@ -97,14 +97,22 @@ public class tourScript : MonoBehaviour {
         setDiverWave(false);
 
         StartCoroutine("sayNextLine");
-       // fishCurrentTarget = fishTargets[1];
+        
         yield return new WaitForSeconds(2.5f);
+        fishCurrentTarget = fishTargets[0];
+        moveFish(fishCurrentTarget);
 
+        yield return new WaitForSeconds(2.5f);
         StartCoroutine("sayNextLine");
-        yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(2.5f);
         diverCurrentTarget = diverTargets[0];
         moveDiver(diverCurrentTarget);
         yield return new WaitForSeconds(2.5f);
+        fishCurrentTarget = fishTargets[1];
+        moveFish(fishCurrentTarget);
+        yield return new WaitForSeconds(1.5f);
+        StartCoroutine("sayNextLine");
+        yield return new WaitForSeconds(3.5f);
         StartCoroutine("sayNextLine");
         yield return new WaitForSeconds(2.5f);
         StartCoroutine("sayNextLine");
@@ -117,8 +125,7 @@ public class tourScript : MonoBehaviour {
         yield return new WaitForSeconds(2.5f);
         StartCoroutine("sayNextLine");
         yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
-        yield return new WaitForSeconds(2.5f);
+
 
 
         //need a way to wait for a signal from update
@@ -154,6 +161,15 @@ public class tourScript : MonoBehaviour {
     
     }
 
+    void turnCamera(GameObject target)
+    {
+
+        cameraLocation.GetComponent<Animator>().enabled = false;
+        Vector3 newDir = new Vector3(target.transform.position.x, cameraLocation.transform.position.y, target.transform.position.z);
+        cameraLocation.transform.rotation = Quaternion.Slerp(cameraLocation.transform.rotation, Quaternion.LookRotation(newDir - cameraLocation.transform.position), 1 * Time.deltaTime);
+        
+    }
+
     void moveDiver(GameObject moveTarget)
     {
 
@@ -166,6 +182,7 @@ public class tourScript : MonoBehaviour {
             diverLookAtTarget(moveTarget);
             diver.transform.position = Vector3.MoveTowards(diver.transform.position, moveTarget.transform.position, 0.05f);
             Debug.Log("Moving!");
+            turnCamera(moveTarget);
         }
         else
         {
@@ -187,11 +204,13 @@ public class tourScript : MonoBehaviour {
         {
             Vector3 direction = moveTarget.transform.position - fish.transform.position;
             fishLookAtTarget(moveTarget);
+            fish.transform.position = Vector3.MoveTowards(fish.transform.position, moveTarget.transform.position, 0.05f);
+            turnCamera(moveTarget);
         }
         else
         {
-            if (fishMove == false) stopMoveFish();
-            fishLookAtTarget(moveTarget); 
+            stopMoveFish();
+            fishLookAtTarget(viewcamera); 
 
         }
     }
@@ -243,15 +262,15 @@ public class tourScript : MonoBehaviour {
     
     void fishLookAtTarget(GameObject target)
     {
-        Vector3 newDir = Vector3.RotateTowards(fish.transform.position, target.transform.position, 0.05f, 0.05f);
-        fish.transform.rotation = Quaternion.LookRotation(-newDir);
+        Vector3 newDir = new Vector3(target.transform.position.x, fish.transform.position.y, target.transform.position.z);
+        fish.transform.rotation = Quaternion.LookRotation(newDir - fish.transform.position);
     }
 
     void diverLookAtTarget(GameObject target)
     {
         Debug.Log("turning diver!");
-        Vector3 newDir = Vector3.RotateTowards(diver.transform.position, target.transform.position, 0.05f, 0.05f);
-        diver.transform.rotation = Quaternion.LookRotation(-newDir);
+        Vector3 newDir = new Vector3(target.transform.position.x, diver.transform.position.y, target.transform.position.z);
+        diver.transform.rotation = Quaternion.LookRotation(newDir - diver.transform.position);
     }
 
     public void GetSuperSucker()
