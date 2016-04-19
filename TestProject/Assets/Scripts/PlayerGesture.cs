@@ -75,18 +75,7 @@ public class PlayerGesture : MonoBehaviour {
             return;
         }
 
-        if (DetectRightHandAbove(nearestBodyID)) {
-            //Call some functon
-        }
-        if (DetectHandWave(nearestBodyID)) {
-            //call some function
-        }
-        if (DetectGrasping(nearestBodyID)) {
-            //call some function
-        }
-        if (DetectHandSwipe(nearestBodyID)) {
-            //call some function
-        }
+        forcePush(nearestBodyID);
 
 	}
 
@@ -240,29 +229,16 @@ public class PlayerGesture : MonoBehaviour {
         float spineMidNormalizedX = spineMid.Position.X + 1;
         float spineMidNormalizedY = spineMid.Position.Y + 1;
 
-        float distanceX = Mathf.Abs(handMidNormalizedX - spineMidNormalizedX);
-        float distanceY = Mathf.Abs(handMixNormalizedY - handMixNormalizedY);
+        float distanceX = handMidNormalizedX - spineMidNormalizedX;
+        float distanceY = handMixNormalizedY - spineMidNormalizedY;
 
         Vector3 ret;
 
-        if (handMidNormalizedX > spineMidNormalizedX) { // right
-            if (handMixNormalizedY > spineMidNormalizedY) { // above
-                ret = new Vector3(distanceX, distanceY);
-            }
-            else {
-                ret = new Vector3(distanceX, -1 * distanceY);
-            }
-        }
-        else { // left
-            if (handMixNormalizedY > spineMidNormalizedY) {
-                ret = new Vector3(-1 * distanceX, distanceY);
-            }
-            else {
-                ret = new Vector3(-1 * distanceX, -1 * distanceY);
-            }
-        }
+        ret = new Vector3(distanceX, distanceY);
 
+        Debug.Log(ret.ToString());
         //return ret;
+
     }
   
 }
