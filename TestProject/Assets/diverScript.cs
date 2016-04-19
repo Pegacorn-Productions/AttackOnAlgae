@@ -158,25 +158,27 @@ public class diverScript : MonoBehaviour {
         Debug.Log("starting script");
         yield return new WaitForSeconds(6);
         diverAnim.SetBool("wave", false);
-        speechBubbleObject.SetActive(true);
+        //speechBubbleObject.SetActive(true);
 		speechBubbleObject2.SetActive(true);
 
         int index = 0,index2 = 0;
 		int i;
 		for(i = 0; i < part1d.Length;i++) {
 			//this is for the diver
-			if(part1d[i] != "")
+			/*if(part1d[i] != "")
 			{
 				//hide other speech bubble
+				speechBubbleScript2.addDismiss = true;
 
 	            speechBubbleScript.text = part1d[i];
 	            if (index == part1d.Length - 1) speechBubbleScript.addDismiss = true;
 	            else yield return new WaitForSeconds(textspeed);
 	            index++;
-			}
+			}*/
 			//this is for the aumakua
 			if(part1a[i] != "")
 			{
+				//speechBubbleScript.addDismiss = true;
 				//hide other speech bubble
 				speechBubbleScript2.text = part1a[i];
 				if (index2 == part1a.Length - 1) speechBubbleScript2.addDismiss = true;
