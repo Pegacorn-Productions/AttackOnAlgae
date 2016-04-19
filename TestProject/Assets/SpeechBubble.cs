@@ -6,7 +6,6 @@ public class SpeechBubble : MonoBehaviour
 {
 
     public GameObject otherObject;
-	public GameObject transObject;
     diverScript script;
 
     public GameObject suckerObject;
@@ -52,7 +51,7 @@ public class SpeechBubble : MonoBehaviour
 	void Awake() 
 	{
 		//get this game object's transform
-		goTransform = transObject.GetComponent<Transform>();//? is this where it determines position?
+		goTransform = this.GetComponent<Transform>();
         script = otherObject.GetComponent<diverScript>();
 	}
 	
