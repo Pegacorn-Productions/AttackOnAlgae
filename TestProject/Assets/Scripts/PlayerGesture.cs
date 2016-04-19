@@ -8,12 +8,17 @@ public class PlayerGesture : MonoBehaviour {
     public GameObject BodySourceManager;
     private Dictionary<ulong, GameObject> _Bodies = new Dictionary<ulong, GameObject>();
     private BodySourceManager _BodyManager;
+    public GameObject superSucker;
 
+    private Transform joint;
     private Kinect.Body[] data;
 
 	// Use this for initialization
 	void Start () {
-	
+        joint = superSucker.transform.Find("joint1");
+        for (int i = 2; i < 32; i++) {
+            joint = joint.transform.Find("joint" + i);
+        }
 	}
 	
 	// Update is called once per frame
@@ -234,8 +239,12 @@ public class PlayerGesture : MonoBehaviour {
 
         Vector3 ret;
 
-        ret = new Vector3(distanceX, distanceY);
+        ret = new Vector3(distanceX*100, distanceY*100);
+        
 
+      
+        Rigidbody rbJoint = joint.GetComponent<Rigidbody>();
+        rbJoint.AddForce(ret);
         Debug.Log(ret.ToString());
         //return ret;
 
