@@ -31,9 +31,14 @@ public class SpeechBubble : MonoBehaviour
 	private int centerOffsetX;
 	private int centerOffsetY;
 
+	public int bubbleX;
+	public int bubbleY;
+
 	private bool dismissed = false;
     private bool dismissed2 = false;
     private bool dismissed3 = false;
+	public int sw = Screen.width;
+	public int sh = Screen.height;
 
     private float oldTime = Time.time;
 
@@ -58,17 +63,19 @@ public class SpeechBubble : MonoBehaviour
 	//use this for initialization
 	void Start()
 	{
-        temp = mat;
-
+        //temp = mat;
+		mat = null;
+		bubbleX = Screen.width/4;//(int)((200/867) * Screen.width);
+		bubbleY = Screen.height/3 *2;//(int)((200/310) * Screen.height);
         oldTime = Time.time;
 
        // suckerAnimator = suckerObject.GetComponent<Animator>();
         //if the material hasn't been found
-        if (!mat) 
+       /* if (!mat) 
 		{
 			Debug.LogError("Please assign a material on the Inspector.");
 			return;
-		}
+		}*/
 		
 		//if the guiSkin hasn't been found
 		if (!guiSkin) 
@@ -80,6 +87,7 @@ public class SpeechBubble : MonoBehaviour
 		//Calculate the X and Y offsets to center the speech balloon exactly on the center of the game object
 		centerOffsetX = bubbleWidth/2;
 		centerOffsetY = bubbleHeight/2;
+
 	}
 	
 	
@@ -93,6 +101,7 @@ public class SpeechBubble : MonoBehaviour
 		//goViewportPos = Camera.main.WorldToViewportPoint(goTransform.position);
 		goViewportPos.x = goScreenPos.x/(float)Screen.width;
 		goViewportPos.y = goScreenPos.y/(float)Screen.height;
+
 	}
 	
 	//Draw GUIs
@@ -105,21 +114,20 @@ public class SpeechBubble : MonoBehaviour
      //   {
            
      //   }
-
 		
 			//If the button is pressed, dismiss
 		if (!dismissed) {
-            mat = temp;
+            //mat = temp;
 
             //Render the round part of the bubble
-            GUI.Label(new Rect(10,25,200,100),"",guiSkin.customStyles[0]);
+			GUI.Label(new Rect(10,-20,bubbleX,bubbleY),"",guiSkin.customStyles[0]);
 
 			//Render the text
-			GUI.Label(new Rect(20,50,190,50),text,guiSkin.label);
-            if (GUI.Button(new Rect(70, 85, 70, 30), "Dismiss"))
+			GUI.Label(new Rect(20,50,bubbleX-10,bubbleY/4),text,guiSkin.label);
+			if (GUI.Button(new Rect(85, 120, bubbleY/4 + 20, bubbleY/10), "Dismiss"))
             {
                 dismissed = true;
-                mat = null;
+               // mat = null;
                 script.moveOnFromBreakpoint = true;
             }
 
@@ -127,17 +135,17 @@ public class SpeechBubble : MonoBehaviour
         }
         else if (!dismissed2)
         {
-            mat = temp;
+          //  mat = temp;
             //Render the round part of the bubble
-            GUI.Label(new Rect(10, 25, 200, 100), "", guiSkin.customStyles[0]);
+			GUI.Label(new Rect(10, -20, bubbleX, bubbleY), "", guiSkin.customStyles[0]);
 
             //Render the text
-            GUI.Label(new Rect(20, 50, 190, 50), text, guiSkin.label);
+			GUI.Label(new Rect(20, 50, bubbleX-10,bubbleY/4), text, guiSkin.label);
 
-            if (GUI.Button(new Rect(70, 85, 70, 30), "Dismiss"))
+			if (GUI.Button(new Rect(85, 120, bubbleY/4 + 20, bubbleY/10), "Dismiss"))
             {
                 dismissed2 = true;
-                mat = null;
+               // mat = null;
                 script.moveOnToThree = true;
             }
 
@@ -146,18 +154,18 @@ public class SpeechBubble : MonoBehaviour
         }
         else if (!dismissed3)
         {
-            mat = temp;
+            //mat = temp;
             //Render the round part of the bubble
-            GUI.Label(new Rect(10, 25, 200, 100), "", guiSkin.customStyles[0]);
+			GUI.Label(new Rect(10, -20, bubbleX, bubbleY), "", guiSkin.customStyles[0]);
 
             //Render the text
-            GUI.Label(new Rect(20, 50, 190, 50),text, guiSkin.label);
+			GUI.Label(new Rect(20, 50, bubbleX-10,bubbleY/4),text, guiSkin.label);
 
     
-            if (GUI.Button(new Rect(70, 85, 70, 30), "Dismiss"))
+			if (GUI.Button(new Rect(85,120, bubbleY/4 + 20, bubbleY/10), "Dismiss"))
             {
                 dismissed2 = true;
-                mat = null;
+               // mat = null;
                 script.moveOnToFour = true;
             }
 
