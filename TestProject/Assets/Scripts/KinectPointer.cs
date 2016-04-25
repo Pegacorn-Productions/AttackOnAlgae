@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Kinect = Windows.Kinect;
+using UnityEngine.UI;
 
 public class KinectPointer : MonoBehaviour {
     public Material mat;
@@ -15,12 +16,20 @@ public class KinectPointer : MonoBehaviour {
     private Dictionary<ulong, GameObject> _Bodies = new Dictionary<ulong, GameObject>();
     private BodySourceManager _BodyManager;
 
+    public Image image;
+
+    void start() {
+
+    }
+
     void Update() {
        // mousePos = Input.mousePosition;
        // if (Input.GetKeyDown(KeyCode.Space))
        //     startVertex = new Vector3(mousePos.x / Screen.width, mousePos.y / Screen.height, 0);
        // Debug.Log(mousePos.x / Screen.width + " " + mousePos.y / Screen.height);
 
+        image.transform.position = Input.mousePosition;
+       
 
         if (Input.GetKey("escape"))
             Application.Quit();
@@ -87,38 +96,37 @@ public class KinectPointer : MonoBehaviour {
                 float endY = rightNormalizedY - spineBaseNormalizedY;
 
 
-                startVertex = new Vector3(spineBaseNormalizedX, spineBaseNormalizedY, 0 );
+                startVertex = new Vector3(spineBaseNormalizedX, spineBaseNormalizedY, 0);
                 endRightVertex = new Vector3(rightNormalizedX, rightNormalizedY, 0);
                 endLeftVertex = new Vector3(leftNormalizedX, leftNormalizedY, 0);
-
             }
 
         }
 
 
-
+      
 
     }
-    void OnPostRender() {
-        if (!mat) {
-            Debug.LogError("Please Assign a material on the inspector");
-            return;
-        }
-        GL.PushMatrix();
-        mat.SetPass(0);
-        GL.LoadOrtho();
-        GL.Begin(GL.LINES);
-        GL.Color(Color.red);
-        GL.Vertex(startVertex);
-        GL.Vertex(endRightVertex);
-        GL.End();
-        GL.Begin(GL.LINES);
-        GL.Color(Color.red);
-        GL.Vertex(startVertex);
-        GL.Vertex(endLeftVertex);
-        GL.End();
-        GL.PopMatrix();
-    }
+    //void OnPostRender() {
+    //    if (!mat) {
+    //        Debug.LogError("Please Assign a material on the inspector");
+    //        return;
+    //    }
+    //    GL.PushMatrix();
+    //    mat.SetPass(0);
+    //    GL.LoadOrtho();
+    //    GL.Begin(GL.LINES);
+    //    GL.Color(Color.red);
+    //    GL.Vertex(startVertex);
+    //    GL.Vertex(endRightVertex);
+    //    GL.End();
+    //    GL.Begin(GL.LINES);
+    //    GL.Color(Color.red);
+    //    GL.Vertex(startVertex);
+    //    GL.Vertex(endLeftVertex);
+    //    GL.End();
+    //    GL.PopMatrix();
+    //}
 
 
     void Example() {
