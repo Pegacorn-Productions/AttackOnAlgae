@@ -123,7 +123,7 @@ public class SpeechBubble : MonoBehaviour
 			GUI.Label(new Rect(10,-20,bubbleX,bubbleY),"",guiSkin.customStyles[0]);
 
 			//Render the text
-			GUI.Label(new Rect(20,50,bubbleX-10,bubbleY/4),text,guiSkin.label);
+			GUI.Label(new Rect(20,50,bubbleX-10,bubbleY/4+20),text,guiSkin.label);
 			if (GUI.Button(new Rect(85, 120, bubbleY/4 + 20, bubbleY/10), "Dismiss"))
             {
                 dismissed = true;
@@ -140,7 +140,7 @@ public class SpeechBubble : MonoBehaviour
 			GUI.Label(new Rect(10, -20, bubbleX, bubbleY), "", guiSkin.customStyles[0]);
 
             //Render the text
-			GUI.Label(new Rect(20, 50, bubbleX-10,bubbleY/4), text, guiSkin.label);
+			GUI.Label(new Rect(20, 50, bubbleX-10,bubbleY/4+20), text, guiSkin.label);
 
 			if (GUI.Button(new Rect(85, 120, bubbleY/4 + 20, bubbleY/10), "Dismiss"))
             {
@@ -159,7 +159,7 @@ public class SpeechBubble : MonoBehaviour
 			GUI.Label(new Rect(10, -20, bubbleX, bubbleY), "", guiSkin.customStyles[0]);
 
             //Render the text
-			GUI.Label(new Rect(20, 50, bubbleX-10,bubbleY/4),text, guiSkin.label);
+			GUI.Label(new Rect(20, 50, bubbleX-10,bubbleY/4+20),text, guiSkin.label);
 
     
 			if (GUI.Button(new Rect(85,120, bubbleY/4 + 20, bubbleY/10), "Dismiss"))
