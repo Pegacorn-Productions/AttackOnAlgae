@@ -239,7 +239,8 @@ public class PlayerGesture : MonoBehaviour {
 
         Vector3 ret;
 
-        ret = new Vector3(distanceX*100, distanceY*100);
+        //Using y for z axis for now.
+        ret = new Vector3(distanceX*100, 0, distanceY*100);
         
 
       
