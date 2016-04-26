@@ -11,15 +11,16 @@ public class KinectPointer : MonoBehaviour {
     private Vector3 endRightVertex;
     private Vector3 endLeftVertex;
 
+
     public GameObject BodySourceManager;
 
     private Dictionary<ulong, GameObject> _Bodies = new Dictionary<ulong, GameObject>();
     private BodySourceManager _BodyManager;
 
     public Image image;
+    public Image image2;
 
     void start() {
-
     }
 
     void Update() {
@@ -28,7 +29,7 @@ public class KinectPointer : MonoBehaviour {
        //     startVertex = new Vector3(mousePos.x / Screen.width, mousePos.y / Screen.height, 0);
        // Debug.Log(mousePos.x / Screen.width + " " + mousePos.y / Screen.height);
 
-        image.transform.position = Input.mousePosition;
+       // image.transform.position = Input.mousePosition;
        
 
         if (Input.GetKey("escape"))
@@ -78,27 +79,55 @@ public class KinectPointer : MonoBehaviour {
             if (body.IsTracked) {
                 Kinect.Joint rightHand = body.Joints[Kinect.JointType.HandRight];
                 Kinect.Joint leftHand = body.Joints[Kinect.JointType.HandLeft];
-                Kinect.Joint shoulderRight = body.Joints[Kinect.JointType.ShoulderRight];
+                Kinect.Joint rightWrist = body.Joints[Kinect.JointType.WristRight];
+                Kinect.Joint rightElbow = body.Joints[Kinect.JointType.ElbowRight];
+                Kinect.Joint rightShoulder = body.Joints[Kinect.JointType.ShoulderRight];
+                Kinect.Joint spineMid = body.Joints[Kinect.JointType.SpineMid];
 
-                float refactoredX = leftHand.Position.X - shoulderRight.Position.X;
-                float refactoredY = leftHand.Position.Y - shoulderRight.Position.Y;
+                float rightHandNormalizedX = (rightHand.Position.X - (-1f)) / (1f - (-1f));
+                float rightHandNormalizedY = (rightHand.Position.Y - (-1f)) / (1f - (-1f));
+                float rightHandNormalizedZ = ((rightHand.Position.Z - _BodyManager.getMinZ()) / (_BodyManager.getMaxZ() - _BodyManager.getMinZ()));
 
-                float rightNormalizedX = (rightHand.Position.X - (-1f)) / (1 - (-1f));
-                float rightNormalizedY = (rightHand.Position.Y - (-1f)) / (1 - (-1f));
+                float leftHandNormalizedX = (leftHand.Position.X - (-1f)) / (1f - (-1f));
+                float leftHandNormalizedY = (leftHand.Position.Y - (-1f)) / (1f - (-1f));
+                float leftHandNormalizedZ = ((leftHand.Position.Z - _BodyManager.getMinZ()) / (_BodyManager.getMaxZ() - _BodyManager.getMinZ()));
 
-                float leftNormalizedX = (leftHand.Position.X - (-1f)) / (1 - (-1f));
-                float leftNormalizedY = (leftHand.Position.Y - (-1f)) / (1 - (-1f));
+                float rightWristNormalizedX = (rightWrist.Position.X - (-1f)) / (1f - (-1f));
+                float rightWristNormalizedY = (rightWrist.Position.Y - (-1f)) / (1f - (-1f));
+                float rightWristNormalizedZ = (rightWrist.Position.Z - _BodyManager.getMinZ()) / (_BodyManager.getMaxZ() - _BodyManager.getMinZ());
 
-                float spineBaseNormalizedX = (shoulderRight.Position.X - (-1f)) / (1 - (-1f));
-                float spineBaseNormalizedY = (shoulderRight.Position.Y - (-1f)) / (1 - (-1f));
+                float rightElbowNormalizedX = (rightElbow.Position.X - (-1f)) / (1f - (-1f));
+                float rightElbowNormalizedY = (rightElbow.Position.Y - (-1f)) / (1f - (-1f));
+                float rightElbowNormalizedZ = (rightElbow.Position.Z - _BodyManager.getMinZ()) / (_BodyManager.getMaxZ() - _BodyManager.getMinZ());
 
-                float endX = rightNormalizedX - spineBaseNormalizedX;
-                float endY = rightNormalizedY - spineBaseNormalizedY;
+                float rightShoulderNormalizedX = (rightShoulder.Position.X - (-1f)) / (1f - (-1f));
+                float rightShoulderNormalizedY = (rightShoulder.Position.Y - (-1f)) / (1f - (-1f));
+                float rightShoulderNormalizedZ = (rightShoulder.Position.Z - _BodyManager.getMinZ()) / (_BodyManager.getMaxZ() - _BodyManager.getMinZ());
+
+                float distance1 = Mathf.Sqrt(Mathf.Pow(rightElbowNormalizedX - rightWristNormalizedX, 2) + Mathf.Pow(rightElbowNormalizedY - rightWristNormalizedY, 2) + Mathf.Pow(rightElbowNormalizedZ - rightWristNormalizedZ, 2));
+                float distance2 = Mathf.Sqrt(Mathf.Pow(rightShoulderNormalizedX - rightElbowNormalizedX, 2) + Mathf.Pow(rightShoulderNormalizedY - rightElbowNormalizedY, 2) + Mathf.Pow(rightShoulderNormalizedZ - rightElbowNormalizedZ, 2));
+                float totalDistance = distance1 + distance2;
+
+                float spineMidNormalizedX = (spineMid.Position.X - (-1f)) / (1f - (-1f));
+                float spineMidNormalizedY = (spineMid.Position.Y - (-1f)) / (1f - (-1f));
+                float spineMidNormalizedZ = (spineMid.Position.Z - _BodyManager.getMinZ()) / (_BodyManager.getMaxZ() - _BodyManager.getMinZ());
+
+                float customCoordinateMaxX = spineMidNormalizedX + totalDistance;
+                float customCoordinateMinX = spineMidNormalizedX - totalDistance;
+                float customCoordinateMaxY = spineMidNormalizedY + totalDistance;
+                float customCoordinateMinY = spineMidNormalizedY - totalDistance;
+
+                
+
+                endRightVertex = new Vector3(rightHandNormalizedX * Screen.width, rightHandNormalizedY * Screen.height, 0);
+                endLeftVertex = new Vector3(leftHandNormalizedX * Screen.width, leftHandNormalizedY * Screen.height, 0);
+
+               // Debug.Log(endRightVertex.ToString());
 
 
-                startVertex = new Vector3(spineBaseNormalizedX, spineBaseNormalizedY, 0);
-                endRightVertex = new Vector3(rightNormalizedX, rightNormalizedY, 0);
-                endLeftVertex = new Vector3(leftNormalizedX, leftNormalizedY, 0);
+
+                image.transform.position = endRightVertex;
+                image2.transform.position = endLeftVertex;
             }
 
         }

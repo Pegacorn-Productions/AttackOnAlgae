@@ -240,13 +240,13 @@ public class PlayerGesture : MonoBehaviour {
         Vector3 ret;
 
         //Using y for z axis for now.
-        ret = new Vector3(distanceX*100, 0, distanceY*100);
+        ret = new Vector3(distanceX*400, distanceY*400, 0 );
         
 
       
         Rigidbody rbJoint = joint.GetComponent<Rigidbody>();
         rbJoint.AddForce(ret);
-        Debug.Log(ret.ToString());
+       // Debug.Log(ret.ToString());
         //return ret;
 
     }
