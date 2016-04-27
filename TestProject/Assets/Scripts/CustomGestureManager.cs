@@ -11,7 +11,6 @@ public class CustomGestureManager : MonoBehaviour {
     KinectSensor _kinect;
     Gesture handAboveHead;
     Gesture handSwipe;
-    Gesture grasping;
     Gesture handWave;
     ParticleSystem _ps;
 
@@ -42,9 +41,6 @@ public class CustomGestureManager : MonoBehaviour {
             else if (gesture.Name == "HandSwipe") {
                 handSwipe = gesture;
             }
-            else if (gesture.Name == "Grasping") {
-                grasping = gesture;
-            }
             else if (gesture.Name == "HandWave") {
                 handWave = gesture;
             }
@@ -61,13 +57,11 @@ public class CustomGestureManager : MonoBehaviour {
             if (frame != null && frame.DiscreteGestureResults != null) {
                 DiscreteGestureResult handAboveHeadResult = null;
                 DiscreteGestureResult handSwipeResult = null;
-                DiscreteGestureResult grasppingResult = null;
                 DiscreteGestureResult handWaveResult = null;
 
                 if (frame.DiscreteGestureResults.Count > 0) {
                     handAboveHeadResult = frame.DiscreteGestureResults[handAboveHead];
                     handSwipeResult = frame.DiscreteGestureResults[handSwipe];
-                    grasppingResult = frame.DiscreteGestureResults[grasping];
                     handWaveResult = frame.DiscreteGestureResults[handWave];
                 }
                 if (handAboveHeadResult == null) {
@@ -84,10 +78,6 @@ public class CustomGestureManager : MonoBehaviour {
                     SpeechBubble.GetComponent<SpeechBubble>().DismissSpeechBuble();
                 }
 
-                if (grasppingResult.Detected == true && grasppingResult.Confidence > 0.80f) {
-                    Debug.Log("Grasping detected. Confidence is" + grasppingResult.Confidence.ToString());
-                    // AttachedObject.GetComponent<PlayerController>().DestroyAlgae();
-                }
                 if (handWaveResult.Detected == true && handWaveResult.Confidence > 0.80f) {
                     Debug.Log("Hand Wave detected. Confidence is " + handWaveResult.Confidence.ToString());
                 }

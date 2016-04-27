@@ -82,6 +82,9 @@ public class KinectPointer : MonoBehaviour {
                 Kinect.Joint rightWrist = body.Joints[Kinect.JointType.WristRight];
                 Kinect.Joint rightElbow = body.Joints[Kinect.JointType.ElbowRight];
                 Kinect.Joint rightShoulder = body.Joints[Kinect.JointType.ShoulderRight];
+                Kinect.Joint leftWrist = body.Joints[Kinect.JointType.WristLeft];
+                Kinect.Joint leftElbow = body.Joints[Kinect.JointType.ElbowLeft];
+                Kinect.Joint leftShoulder = body.Joints[Kinect.JointType.ShoulderLeft];
                 Kinect.Joint spineMid = body.Joints[Kinect.JointType.SpineMid];
 
                 float rightHandNormalizedX = (rightHand.Position.X - (-1f)) / (1f - (-1f));
@@ -104,8 +107,32 @@ public class KinectPointer : MonoBehaviour {
                 float rightShoulderNormalizedY = (rightShoulder.Position.Y - (-1f)) / (1f - (-1f));
                 float rightShoulderNormalizedZ = (rightShoulder.Position.Z - _BodyManager.getMinZ()) / (_BodyManager.getMaxZ() - _BodyManager.getMinZ());
 
-                float distance1 = Mathf.Sqrt(Mathf.Pow(rightElbowNormalizedX - rightWristNormalizedX, 2) + Mathf.Pow(rightElbowNormalizedY - rightWristNormalizedY, 2) + Mathf.Pow(rightElbowNormalizedZ - rightWristNormalizedZ, 2));
-                float distance2 = Mathf.Sqrt(Mathf.Pow(rightShoulderNormalizedX - rightElbowNormalizedX, 2) + Mathf.Pow(rightShoulderNormalizedY - rightElbowNormalizedY, 2) + Mathf.Pow(rightShoulderNormalizedZ - rightElbowNormalizedZ, 2));
+                float leftWristNormalizedX = (leftWrist.Position.X - (-1f)) / (1f - (-1f));
+                float leftWristNormalizedY = (leftWrist.Position.Y - (-1f)) / (1f - (-1f));
+                float leftWristNormalizedZ = (leftWrist.Position.Z - _BodyManager.getMinZ()) / (_BodyManager.getMaxZ() - _BodyManager.getMinZ());
+
+                float leftElbowNormalizedX = (leftElbow.Position.X - (-1f)) / (1f - (-1f));
+                float leftElbowNormalizedY = (leftElbow.Position.Y - (-1f)) / (1f - (-1f));
+                float leftElbowNormalizedZ = (leftElbow.Position.Z - _BodyManager.getMinZ()) / (_BodyManager.getMaxZ() - _BodyManager.getMinZ());
+
+                float leftShoulderNormalizedX = (leftShoulder.Position.X - (-1f)) / (1f - (-1f));
+                float leftShoulderNormalizedY = (leftShoulder.Position.Y - (-1f)) / (1f - (-1f));
+                float leftShoulderNormalizedZ = (leftShoulder.Position.Z - _BodyManager.getMinZ()) / (_BodyManager.getMaxZ() - _BodyManager.getMinZ());
+
+                float averageWristX = (rightWristNormalizedX + leftWristNormalizedY) / 2f;
+                float averageWristY = (rightWristNormalizedY + leftWristNormalizedY) / 2f;
+                float averageWristZ = (rightWristNormalizedZ + leftWristNormalizedZ) / 2f;
+
+                float averageEblowX = (rightElbowNormalizedX + leftElbowNormalizedY) / 2f;
+                float averageElbowY = (rightElbowNormalizedY + leftElbowNormalizedY) / 2f;
+                float averageElbowZ = (rightElbowNormalizedZ + leftElbowNormalizedZ) / 2f;
+
+                float averageShoulderX = (rightShoulderNormalizedX + leftShoulderNormalizedY) / 2f;
+                float averageShoulderY = (rightShoulderNormalizedY + leftShoulderNormalizedY) / 2f;
+                float averageShoulderZ = (rightShoulderNormalizedZ + leftShoulderNormalizedZ) / 2f;
+
+                float distance1 = Mathf.Sqrt(Mathf.Pow(averageEblowX - averageWristX, 2) + Mathf.Pow(averageElbowY - averageWristY, 2) + Mathf.Pow(averageElbowZ - averageWristZ, 2));
+                float distance2 = Mathf.Sqrt(Mathf.Pow(averageShoulderX - averageEblowX, 2) + Mathf.Pow(averageShoulderY - averageElbowY, 2) + Mathf.Pow(averageShoulderZ - averageElbowZ, 2));
                 float totalDistance = distance1 + distance2;
 
                 float spineMidNormalizedX = (spineMid.Position.X - (-1f)) / (1f - (-1f));
@@ -117,13 +144,19 @@ public class KinectPointer : MonoBehaviour {
                 float customCoordinateMaxY = spineMidNormalizedY + totalDistance;
                 float customCoordinateMinY = spineMidNormalizedY - totalDistance;
 
-                
+                float rightPersonalX = (rightHandNormalizedX - customCoordinateMinX) / (customCoordinateMaxX - customCoordinateMinX);
+                float rightPersonalY = (rightHandNormalizedY - customCoordinateMinY) / (customCoordinateMaxY - customCoordinateMinY);
+                float leftPersonalX = (leftHandNormalizedX - customCoordinateMinX) / (customCoordinateMaxX - customCoordinateMinX);
+                float leftPersonalY = (leftHandNormalizedY - customCoordinateMinX) / (customCoordinateMaxY - customCoordinateMinY);
 
-                endRightVertex = new Vector3(rightHandNormalizedX * Screen.width, rightHandNormalizedY * Screen.height, 0);
-                endLeftVertex = new Vector3(leftHandNormalizedX * Screen.width, leftHandNormalizedY * Screen.height, 0);
+
+                endRightVertex = new Vector3(rightPersonalX * Screen.width, rightPersonalY * Screen.height, 0);
+                endLeftVertex = new Vector3(leftPersonalX * Screen.width, leftPersonalY * Screen.height, 0);
+
+                //endRightVertex = new Vector3(rightHandNormalizedX * Screen.width, rightHandNormalizedY * Screen.height, 0);
+                //endLeftVertex = new Vector3(leftHandNormalizedX * Screen.width, leftHandNormalizedY * Screen.height, 0);
 
                // Debug.Log(endRightVertex.ToString());
-
 
 
                 image.transform.position = endRightVertex;
