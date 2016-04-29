@@ -15,6 +15,10 @@ public class SuperSuckerScript : MonoBehaviour {
 	
 	}
 
+    /// <summary>
+    /// Tells teh algae script to start lowering the max particles.
+    /// </summary>
+    /// <param name="other"></param>
     void OnTriggerEnter(Collider other) {
         if (other.gameObject.transform.name.Equals("acanthophora simulation(Clone)")) {
             Debug.Log("Colliding with " + other.gameObject.transform.ToString());

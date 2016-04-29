@@ -5,12 +5,8 @@ using Kinect = Windows.Kinect;
 using UnityEngine.UI;
 
 public class KinectPointer : MonoBehaviour {
-    public Material mat;
-    private Vector3 startVertex;
-    private Vector3 mousePos;
     private Vector3 endRightVertex;
     private Vector3 endLeftVertex;
-
 
     public GameObject BodySourceManager;
 
@@ -20,9 +16,11 @@ public class KinectPointer : MonoBehaviour {
     public Image rightImage;
     public Image leftImage;
 
-    void start() {
-    }
-
+    /// <summary>
+    /// Updates the pointer position on screen with the right and left hands.
+    /// Position of the cursor is the relative distance between the hands and spines.
+    /// The custom coordinate plane system from using the spine is based on the length of the person's arm.
+    /// </summary>
     void Update() {
 
         if (Input.GetKey("escape"))

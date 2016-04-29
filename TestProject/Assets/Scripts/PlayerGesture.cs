@@ -13,7 +13,9 @@ public class PlayerGesture : MonoBehaviour {
     private Transform joint;
     private Kinect.Body[] data;
 
-	// Use this for initialization
+    /// <summary>
+    /// Finds joint51 of the super sucker.
+    /// </summary>
 	void Start () {
         joint = superSucker.transform.Find("joint1");
         for (int i = 2; i < 32; i++) {
@@ -74,16 +76,17 @@ public class PlayerGesture : MonoBehaviour {
             }
         }
 
-        //Debug.Log(nearestBodyID);
-
         if (nearestBodyID == -1) {
             return;
         }
-
         forcePush(nearestBodyID);
-
 	}
 
+    /// <summary>
+    /// Applies force to the specified joint.
+    /// Force is calculated by the distance between the midpoint of hands and the spine.
+    /// </summary>
+    /// <param name="bodyID">ID of the body to track</param>
     private void forcePush(int bodyID) {
         Kinect.Body body = data[bodyID];
         Kinect.Joint handRight = body.Joints[Kinect.JointType.HandRight];
@@ -100,21 +103,15 @@ public class PlayerGesture : MonoBehaviour {
         float distanceY = handMixNormalizedY - spineMidNormalizedY;
 
         Vector3 ret;
-        Debug.Log(distanceX.ToString() + distanceY.ToString());
         if (Mathf.Abs(distanceX) < 0.1f && Mathf.Abs(distanceY) < 0.1f) {
             ret = new Vector3(0, 0, 0);
         }
         else {
             ret = new Vector3(distanceX, 0, distanceY);
         }
-        
-
-      
+            
         Rigidbody rbJoint = joint.GetComponent<Rigidbody>();
         rbJoint.AddForce(ret);
-       // Debug.Log(ret.ToString());
-        //return ret;
-
     }
   
 }
