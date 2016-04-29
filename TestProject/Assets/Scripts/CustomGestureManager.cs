@@ -29,7 +29,7 @@ public class CustomGestureManager : MonoBehaviour {
 
         _kinect = KinectSensor.GetDefault();
 
-        _gestureDatabase = VisualGestureBuilderDatabase.Create(Application.streamingAssetsPath + "/GestureDatabase2.gbd");
+        _gestureDatabase = VisualGestureBuilderDatabase.Create(Application.streamingAssetsPath + "/gestureDatabase.gbd");
         _gestureFrameSource = VisualGestureBuilderFrameSource.Create(_kinect, 0);
 
         foreach (var gesture in _gestureDatabase.AvailableGestures) {

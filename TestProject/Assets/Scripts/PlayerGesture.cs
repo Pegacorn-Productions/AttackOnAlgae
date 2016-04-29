@@ -100,9 +100,13 @@ public class PlayerGesture : MonoBehaviour {
         float distanceY = handMixNormalizedY - spineMidNormalizedY;
 
         Vector3 ret;
-
-        //Using y for z axis for now.
-        ret = new Vector3(distanceX*400, distanceY*400, 0 );
+        Debug.Log(distanceX.ToString() + distanceY.ToString());
+        if (Mathf.Abs(distanceX) < 0.1f && Mathf.Abs(distanceY) < 0.1f) {
+            ret = new Vector3(0, 0, 0);
+        }
+        else {
+            ret = new Vector3(distanceX, 0, distanceY);
+        }
         
 
       

@@ -17,24 +17,16 @@ public class KinectPointer : MonoBehaviour {
     private Dictionary<ulong, GameObject> _Bodies = new Dictionary<ulong, GameObject>();
     private BodySourceManager _BodyManager;
 
-    public Image image;
-    public Image image2;
+    public Image rightImage;
+    public Image leftImage;
 
     void start() {
     }
 
     void Update() {
-       // mousePos = Input.mousePosition;
-       // if (Input.GetKeyDown(KeyCode.Space))
-       //     startVertex = new Vector3(mousePos.x / Screen.width, mousePos.y / Screen.height, 0);
-       // Debug.Log(mousePos.x / Screen.width + " " + mousePos.y / Screen.height);
-
-       // image.transform.position = Input.mousePosition;
-       
 
         if (Input.GetKey("escape"))
             Application.Quit();
-
 
         if (BodySourceManager == null) {
             return;
@@ -153,14 +145,8 @@ public class KinectPointer : MonoBehaviour {
                 endRightVertex = new Vector3(rightPersonalX * Screen.width, rightPersonalY * Screen.height, 0);
                 endLeftVertex = new Vector3(leftPersonalX * Screen.width, leftPersonalY * Screen.height, 0);
 
-                //endRightVertex = new Vector3(rightHandNormalizedX * Screen.width, rightHandNormalizedY * Screen.height, 0);
-                //endLeftVertex = new Vector3(leftHandNormalizedX * Screen.width, leftHandNormalizedY * Screen.height, 0);
-
-               // Debug.Log(endRightVertex.ToString());
-
-
-                image.transform.position = endRightVertex;
-                image2.transform.position = endLeftVertex;
+                rightImage.transform.position = endRightVertex;
+                leftImage.transform.position = endLeftVertex;
             }
 
         }
@@ -169,65 +155,5 @@ public class KinectPointer : MonoBehaviour {
       
 
     }
-    //void OnPostRender() {
-    //    if (!mat) {
-    //        Debug.LogError("Please Assign a material on the inspector");
-    //        return;
-    //    }
-    //    GL.PushMatrix();
-    //    mat.SetPass(0);
-    //    GL.LoadOrtho();
-    //    GL.Begin(GL.LINES);
-    //    GL.Color(Color.red);
-    //    GL.Vertex(startVertex);
-    //    GL.Vertex(endRightVertex);
-    //    GL.End();
-    //    GL.Begin(GL.LINES);
-    //    GL.Color(Color.red);
-    //    GL.Vertex(startVertex);
-    //    GL.Vertex(endLeftVertex);
-    //    GL.End();
-    //    GL.PopMatrix();
-    //}
 
-
-    void Example() {
-        startVertex = new Vector3(0, 0, 0);
-    }
-
-
-
-
-
-    private Dictionary<Kinect.JointType, Kinect.JointType> _BoneMap = new Dictionary<Kinect.JointType, Kinect.JointType>()
-    {
-        { Kinect.JointType.FootLeft, Kinect.JointType.AnkleLeft },
-        { Kinect.JointType.AnkleLeft, Kinect.JointType.KneeLeft },
-        { Kinect.JointType.KneeLeft, Kinect.JointType.HipLeft },
-        { Kinect.JointType.HipLeft, Kinect.JointType.SpineBase },
-        
-        { Kinect.JointType.FootRight, Kinect.JointType.AnkleRight },
-        { Kinect.JointType.AnkleRight, Kinect.JointType.KneeRight },
-        { Kinect.JointType.KneeRight, Kinect.JointType.HipRight },
-        { Kinect.JointType.HipRight, Kinect.JointType.SpineBase },
-        
-        { Kinect.JointType.HandTipLeft, Kinect.JointType.HandLeft },
-        { Kinect.JointType.ThumbLeft, Kinect.JointType.HandLeft },
-        { Kinect.JointType.HandLeft, Kinect.JointType.WristLeft },
-        { Kinect.JointType.WristLeft, Kinect.JointType.ElbowLeft },
-        { Kinect.JointType.ElbowLeft, Kinect.JointType.ShoulderLeft },
-        { Kinect.JointType.ShoulderLeft, Kinect.JointType.SpineShoulder },
-        
-        { Kinect.JointType.HandTipRight, Kinect.JointType.HandRight },
-        { Kinect.JointType.ThumbRight, Kinect.JointType.HandRight },
-        { Kinect.JointType.HandRight, Kinect.JointType.WristRight },
-        { Kinect.JointType.WristRight, Kinect.JointType.ElbowRight },
-        { Kinect.JointType.ElbowRight, Kinect.JointType.ShoulderRight },
-        { Kinect.JointType.ShoulderRight, Kinect.JointType.SpineShoulder },
-        
-        { Kinect.JointType.SpineBase, Kinect.JointType.SpineMid },
-        { Kinect.JointType.SpineMid, Kinect.JointType.SpineShoulder },
-        { Kinect.JointType.SpineShoulder, Kinect.JointType.Neck },
-        { Kinect.JointType.Neck, Kinect.JointType.Head },
-    };
 }
