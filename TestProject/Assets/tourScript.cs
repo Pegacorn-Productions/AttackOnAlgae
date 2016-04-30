@@ -14,7 +14,7 @@ public class tourScript : MonoBehaviour {
     private Animator diverAnim, fishAnim, CameraAnim;
 
     public GameObject[] diverTargets, fishTargets;
-    public GameObject diverCurrentTarget, fishCurrentTarget;
+    private GameObject diverCurrentTarget, fishCurrentTarget;
 
     public GameObject fish, diver, cameraLocation, miniMap, viewcamera, supersucker; //viewcamera is basically the camera location, but y is at the feet of the diver
 
