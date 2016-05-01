@@ -3,7 +3,7 @@ using System.Collections;
 
 public class tourScript : MonoBehaviour {
 
-    public string[,] script = new string[10,2];
+    public string[,] script = new string[11,2];
     private int currLine;
 
     public GameObject diverSpeechBubble, fishSpeechBubble;
@@ -44,11 +44,12 @@ public class tourScript : MonoBehaviour {
         script[2,0] = "diver"; script[2,1] = "Well, we are going to try and help fix it. But first, let's check in on this little urchin.";
         script[3,0] = "diver"; script[3,1] = "This is <color=green>Tripneustes gratilla</color>, a type of sea urchin.";
         script[4,0] = "aumakua"; script[4,1] = "It's also called a <color=darkblue>Collector Urchin!</color>";
-		script[5,0] = "diver"; script[5,1] = "This <color=darkblue>little</color> friend eats, algae, which is a good thing because there's a lot of it here.";
+		script[5,0] = "diver"; script[5,1] = "This little friend eats, algae, which is a good thing because there's a lot of it here.";
         script[6,0] = "aumakua"; script[6,1] = "Yeah, and it's taking over my reef!";
-        script[7,0] = "diver"; script[7,1] = "But even though there are a lot of these <bold>Collector Urchins</bold> here, they can't keep up with how fast this algae grows.";
-        script[8,0] = "aumakua"; script[8,1] = "It's invasive! That means it wasn't growing here originally and was introduced to the area by humans.";
-        script[9,0] = "diver"; script[9,1] = "Yep, so now we have to help out and try to remove what we can so the reef can bounce back and get healthy.";
+		script[7,0] = "diver"; script [7, 1] = "But even though there are a lot of these <b>Collector Urchins</b> here, ";
+		script[8,0] = "diver"; script[8,1] = 	"they can't keep up with how fast this algae grows.";
+        script[9,0] = "aumakua"; script[9,1] = "It's invasive! That means it wasn't growing here originally and was introduced to the area by humans.";
+        script[10,0] = "diver"; script[10,1] = "Yep, so now we have to help out and try to remove what we can so the reef can bounce back and get healthy.";
 
 
 

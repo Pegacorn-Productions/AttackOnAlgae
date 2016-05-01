@@ -39,6 +39,10 @@ public class SpeechBubble : MonoBehaviour
     private bool dismissed3 = false;
 	public int sw = Screen.width;
 	public int sh = Screen.height;
+	public static int area = Screen.height * Screen.width;
+	public float swr = Screen.width * 0.03f;
+	public float shr = Screen.height * -0.02f;
+	public float test = (area * 0.1f)/2f;
 
     private float oldTime = Time.time;
 
@@ -120,11 +124,11 @@ public class SpeechBubble : MonoBehaviour
             //mat = temp;
 
             //Render the round part of the bubble
-			GUI.Label(new Rect(10,-20,bubbleX,bubbleY),"",guiSkin.customStyles[0]);
+			GUI.Label(new Rect(26,-6,Mathf.Sqrt(area* 0.1f),Mathf.Sqrt(area*0.1f)),"",guiSkin.customStyles[0]);
 
 			//Render the text
-			GUI.Label(new Rect(20,50,bubbleX-10,bubbleY/4+20),text,guiSkin.label);
-			if (GUI.Button(new Rect(85, 120, bubbleY/4 + 20, bubbleY/10), "Dismiss"))
+			GUI.Label(new Rect(52,19,Mathf.Sqrt(area* 0.05f),Mathf.Sqrt(area* 0.05f)),text,guiSkin.label);
+			if (GUI.Button(new Rect(69, 102, Mathf.Sqrt(area* 0.02f),Mathf.Sqrt(area* 0.002f)), "Dismiss"))
             {
                 dismissed = true;
                // mat = null;
@@ -137,13 +141,12 @@ public class SpeechBubble : MonoBehaviour
         {
           //  mat = temp;
             //Render the round part of the bubble
-			GUI.Label(new Rect(10, -20, bubbleX, bubbleY), "", guiSkin.customStyles[0]);
+			GUI.Label(new Rect(Screen.width * 0.03f,Screen.height * -0.02f,Screen.width * 0.20f,Screen.height * 0.5f),"",guiSkin.customStyles[0]);
 
             //Render the text
-			GUI.Label(new Rect(20, 50, bubbleX-10,bubbleY/4+20), text, guiSkin.label);
-
-			if (GUI.Button(new Rect(85, 120, bubbleY/4 + 20, bubbleY/10), "Dismiss"))
-            {
+			GUI.Label(new Rect(Screen.width * 0.06f,Screen.height * 0.06f,Screen.width * 0.14f,Screen.height * 0.30f),text,guiSkin.label);
+			if (GUI.Button(new Rect(Screen.width * 0.08f, Screen.height *0.39f, Screen.width * 0.08f, Screen.height * 0.06f), "Dismiss"))
+		    {
                 dismissed2 = true;
                // mat = null;
                 script.moveOnToThree = true;
@@ -156,14 +159,12 @@ public class SpeechBubble : MonoBehaviour
         {
             //mat = temp;
             //Render the round part of the bubble
-			GUI.Label(new Rect(10, -20, bubbleX, bubbleY), "", guiSkin.customStyles[0]);
+			GUI.Label(new Rect(Screen.width * 0.03f,Screen.height * -0.02f,Screen.width * 0.20f,Screen.height * 0.5f),"",guiSkin.customStyles[0]);
 
             //Render the text
-			GUI.Label(new Rect(20, 50, bubbleX-10,bubbleY/4+20),text, guiSkin.label);
-
-    
-			if (GUI.Button(new Rect(85,120, bubbleY/4 + 20, bubbleY/10), "Dismiss"))
-            {
+			GUI.Label(new Rect(Screen.width * 0.06f,Screen.height * 0.06f,Screen.width * 0.14f,Screen.height * 0.30f),text,guiSkin.label);
+			if (GUI.Button(new Rect(Screen.width * 0.08f, Screen.height *0.39f, Screen.width * 0.08f, Screen.height * 0.06f), "Dismiss"))
+			 {
                 dismissed2 = true;
                // mat = null;
                 script.moveOnToFour = true;
