@@ -41,6 +41,8 @@ public class tourScript : MonoBehaviour {
         fishAnim = gameObject.GetComponent<Animator>();
         CameraAnim = GameObject.Find("Main Camera").GetComponent<Animator>();
 
+
+        fishAnim.SetBool("swim", true);
         //set the script for the different characters
         script[0,0] = "diver"; script[0,1] = "Hello! I'm so glad you're here!";
         script[1,0] = "aumakua"; script[1,1] = "It's about time you showed up, my reef is getting ruined!";
@@ -84,7 +86,10 @@ public class tourScript : MonoBehaviour {
         if (exitCutscene == false)
         {
             /*Put pathing stuff here.
-             *example would be if(condition) diverPathing.setPathing(true, nameofWaypoint);
+             * 
+             *example would be if(condition) diverPathing.setPathing(true, nameofWaypointSet);
+             * 
+             * 
             if(fishCurrentTarget) moveFish(fishCurrentTarget);
             if (diverCurrentTarget) moveDiver(diverCurrentTarget);
             */
