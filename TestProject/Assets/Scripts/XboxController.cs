@@ -32,7 +32,7 @@ public class XboxController : MonoBehaviour {
         }
         if (Input.GetButtonDown("Start")) {
 
-            diver.GetComponenet<tourScript>().setGoScriptTrue();
+            diver.GetComponent<tourScript>().setGoScriptTrue();
         }
         if (Input.GetButtonDown("Select")) {
             //Select button to quit?
