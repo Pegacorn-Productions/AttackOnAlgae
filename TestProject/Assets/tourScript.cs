@@ -12,7 +12,7 @@ public class tourScript : MonoBehaviour {
     public float textspeed = 5;
 
     private Animator diverAnim, fishAnim, CameraAnim;
-
+    public Animation walk, kneel, stand, wave, idle;
     public GameObject[] diverTargets, fishTargets;
     public GameObject diverCurrentTarget, fishCurrentTarget;
 
@@ -26,6 +26,9 @@ public class tourScript : MonoBehaviour {
     public bool moveOnToFour = false;
 
     private bool supersuckerMove = false, superSuckerOn = true;
+
+    //pathing to waypoints
+    public Paths diverPathing, humuPathing;
     
 
 
@@ -61,16 +64,16 @@ public class tourScript : MonoBehaviour {
 
         if (moveOnFromBreakpoint == true)
         {
-            Debug.Log("Moving on to part 2!");
+            //Debug.Log("Moving on to part 2!");
         }
         if (moveOnToThree == true)
         {
-            Debug.Log("Moving on to part 3!");
+            //Debug.Log("Moving on to part 3!");
         }
 
         if (moveOnToFour == true)
         {
-            Debug.Log("Moving on to part 4!");
+            //Debug.Log("Moving on to part 4!");
 
         }
 
@@ -80,11 +83,13 @@ public class tourScript : MonoBehaviour {
         }
         if (exitCutscene == false)
         {
+            /*Put pathing stuff here.
+             *example would be if(condition) diverPathing.setPathing(true, nameofWaypoint);
             if(fishCurrentTarget) moveFish(fishCurrentTarget);
             if (diverCurrentTarget) moveDiver(diverCurrentTarget);
+            */
             
-            
-            
+               
         }
 
 
@@ -172,21 +177,20 @@ public class tourScript : MonoBehaviour {
 
     void moveDiver(GameObject moveTarget)
     {
-
         diverAnim.SetBool("move", true);
-
+        
 
         if (moveTarget.transform.position != diver.transform.position)
         {
             Vector3 direction = moveTarget.transform.position - diver.transform.position;
             diverLookAtTarget(moveTarget);
             diver.transform.position = Vector3.MoveTowards(diver.transform.position, moveTarget.transform.position, 0.05f);
-            Debug.Log("Moving!");
+            //Debug.Log("Moving!");
             turnCamera(moveTarget);
         }
         else
         {
-            Debug.Log("Not Moving!");
+            //Debug.Log("Not Moving!");
             stopMoveDiver();
             diverLookAtTarget(viewcamera);
 
@@ -196,6 +200,7 @@ public class tourScript : MonoBehaviour {
     void stopMoveDiver()
     {
         diverAnim.SetBool("move", false);
+        
     }
 
     void moveFish(GameObject moveTarget)
@@ -268,8 +273,10 @@ public class tourScript : MonoBehaviour {
 
     void diverLookAtTarget(GameObject target)
     {
-        Debug.Log("turning diver!");
+        //Debug.Log("turning diver!");
+        var newRot = Quaternion.LookRotation(transform.position - target.transform.position, Vector3.up);
         Vector3 newDir = new Vector3(target.transform.position.x, diver.transform.position.y, target.transform.position.z);
+        //diver.transform.rotation = Quaternion.Slerp(diver.transform.rotation, newRot, Time.deltaTime * 8);
         diver.transform.rotation = Quaternion.LookRotation(newDir - diver.transform.position);
     }
 
