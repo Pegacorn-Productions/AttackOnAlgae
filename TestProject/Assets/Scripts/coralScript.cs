@@ -8,6 +8,8 @@ public class coralScript : MonoBehaviour {
     public GameObject urchin;
     public GameObject algae;
     private GameObject algaeClone;
+    public GameObject algaeRemovingObject;
+    private GameObject algaeRemoveClone;
 
     // Use this for initialization
     void Start () {
@@ -18,11 +20,6 @@ public class coralScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(hasUrchin == true || supersucker == true)
-        {
-            Destroy(algaeClone);
-            Destroy(algae);
-        }
 	
 	}
 
@@ -30,11 +27,15 @@ public class coralScript : MonoBehaviour {
     {
         if(collision.gameObject.tag == "supersucker")
         {
-            //for proof of concept, we can just add the urchin here
-           // GameObject urchinClone1 = Instantiate(urchin, new Vector3(transform.position.x, transform.position.y+2.7f, transform.position.z), Quaternion.identity) as GameObject;
-            //and then set the boolean to true so we don't grow anymore algae
-            hasUrchin = true;
+            StartCoroutine("removeAlgae");
         }
 
+    }
+
+    IEnumerator removeAlgae()
+    {
+        GameObject algaeRemoveClone = Instantiate(algaeRemovingObject, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z - 0.25f), Quaternion.identity) as GameObject;
+        yield return new WaitForSeconds(5);
+        Destroy(algaeClone);
     }
 }
