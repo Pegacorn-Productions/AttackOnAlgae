@@ -25,6 +25,7 @@ public class tourScript : MonoBehaviour {
     public bool moveOnToThree = false;
     public bool moveOnToFour = false;
     private bool goScript = false;
+    private bool scriptStarted = false;
 
     private bool supersuckerMove = false, superSuckerOn = true;
     
@@ -74,8 +75,9 @@ public class tourScript : MonoBehaviour {
 	void FixedUpdate () {
 
 
-        if(goScript == true)
+        if(goScript == true && scriptStarted == false)
         {
+            scriptStarted = true;
             StartCoroutine("play");
         }
 
