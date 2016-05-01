@@ -79,6 +79,7 @@ public class CustomGestureManager : MonoBehaviour {
                 }
 
                 if (handWaveResult.Detected == true && handWaveResult.Confidence > 0.80f) {
+                    AttachedObject.GetComponent<tourScript>().setGoScriptTrue();
                     Debug.Log("Hand Wave detected. Confidence is " + handWaveResult.Confidence.ToString());
                 }
 

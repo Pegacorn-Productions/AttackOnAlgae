@@ -24,6 +24,7 @@ public class tourScript : MonoBehaviour {
     public bool moveOnFromBreakpoint = false;
     public bool moveOnToThree = false;
     public bool moveOnToFour = false;
+    private bool goScript = false;
 
     private bool supersuckerMove = false, superSuckerOn = true;
     
@@ -65,12 +66,18 @@ public class tourScript : MonoBehaviour {
 
 
 
-        StartCoroutine("play");
+       
 
     }
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+
+
+        if(goScript == true)
+        {
+            StartCoroutine("play");
+        }
 
         if (moveOnFromBreakpoint == true)
         {
@@ -108,6 +115,8 @@ public class tourScript : MonoBehaviour {
         Debug.Log("starting script");
         yield return new WaitForSeconds(6);
         setDiverWave(false);
+
+
 
         StartCoroutine("sayNextLine");
         
@@ -294,6 +303,11 @@ public class tourScript : MonoBehaviour {
             supersuckerMove = true;
         }
 
+    }
+
+    public void setGoScriptTrue()
+    {
+        goScript = true;
     }
 
 
