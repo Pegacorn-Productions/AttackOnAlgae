@@ -54,7 +54,7 @@ public class tourScript : MonoBehaviour
     public GameObject thanks;
     public GameObject credits;
 
-    private bool fishFinished = false, diverFinished = false;
+    private bool fishFinished = false, diverFinished = false, turndiver = false;
 
 
 
@@ -123,6 +123,8 @@ public class tourScript : MonoBehaviour
         sceneStarting = false;
         sceneEnding = false;
         StartCoroutine("intro");
+        gestures_text.SetActive(false);
+       // CameraAnim.SetBool("start", false);
     }
     void Update()
     {
@@ -130,7 +132,7 @@ public class tourScript : MonoBehaviour
         if (sceneStarting) StartScene();
         if (sceneEnding) EndScene();
 
-        if(fadeinIntro1) GameObject.Find("intro").GetComponent<Image>().CrossFadeAlpha(1.0f, 4.0f, false);
+        if (fadeinIntro1) GameObject.Find("intro").GetComponent<Image>().CrossFadeAlpha(1.0f, 4.0f, false);
         if (fadeoutIntro1) GameObject.Find("intro").GetComponent<Image>().CrossFadeAlpha(-1.0f, 4.0f, false);
         if (fadeinIntro2) GameObject.Find("intro 2").GetComponent<Image>().CrossFadeAlpha(1.0f, 4.0f, false);
         if (fadeoutIntro2) GameObject.Find("intro 2").GetComponent<Image>().CrossFadeAlpha(-1.0f, 4.0f, false);
@@ -149,11 +151,16 @@ public class tourScript : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
         {
-           moveOnFromBreakpoint = true;
+            moveOnFromBreakpoint = true;
             //THIS IS FOR TESTING ONLY, THE GESTURES SHOULD TAKE CARE OF THIS ALREADY
             GetSuperSucker();
 
         }
+
+     /*   if (turndiver == true)
+        {
+            diverLookAtTarget(viewcamera);
+        }*/
 
         if (goScript == true && started == false)
         {
@@ -205,9 +212,14 @@ public class tourScript : MonoBehaviour
         //pan camera down
         //keep it like that until player waves
         CameraAnim.SetBool("start", true);
-        GameObject.Find("Logo test").GetComponent<Image>().CrossFadeAlpha(1.0f, 3.0f, false);
+        //GameObject.Find("Logo test").GetComponent<Image>().CrossFadeAlpha(1.0f, 3.0f, false);
+        yield return new WaitForSeconds(2.5f);
+        GameObject.Find("splash").GetComponent<AudioSource>().Play();
+        yield return new WaitForSeconds(2);
         GameObject.Find("gestures").GetComponent<Image>().CrossFadeAlpha(1.0f, 3.0f, false);
-        yield return new WaitForSeconds(6);
+        gestures_text.SetActive(true);
+
+        yield return new WaitForSeconds(4);
         started = false;
 
 
@@ -221,7 +233,9 @@ public class tourScript : MonoBehaviour
 
         // camera pan up and out of the water
         CameraAnim.SetBool("exit", true);
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(7);
+        GameObject.Find("splash").GetComponent<AudioSource>().Play();
+        yield return new WaitForSeconds(3);
         thanks.SetActive(true);
         //thanks for playing shows up
         // fade to black
@@ -238,7 +252,7 @@ public class tourScript : MonoBehaviour
         credits.GetComponent<Text>().CrossFadeColor(Color.black, 3.0f, false, false);
 
         yield return new WaitForSeconds(5);
-        
+
 
 
         //reload scene
@@ -248,14 +262,17 @@ public class tourScript : MonoBehaviour
 
     IEnumerator play()
     {
-       
+
         Debug.Log("starting script");
         setDiverWave(false);
-        CameraAnim.SetBool("move1", true);
-        GameObject.Find("Logo test").GetComponent<Image>().CrossFadeAlpha(-1.0f, 3.0f, false);
+
         GameObject.Find("gestures").GetComponent<Image>().CrossFadeAlpha(-1.0f, 3.0f, false);
         gestures_text.SetActive(false);
+        CameraAnim.SetBool("move1", true);
         yield return new WaitForSeconds(4);
+        // GameObject.Find("Logo test").GetComponent<Image>().CrossFadeAlpha(-1.0f, 3.0f, false);
+
+
         GameObject.Find("Title Screen").SetActive(false);
         GameObject.Find("gestures").GetComponent<CanvasRenderer>().SetAlpha(0.0f);
 
@@ -272,7 +289,7 @@ public class tourScript : MonoBehaviour
 
         StartCoroutine("sayNextLine"); //Amakua - *Swims up to the camera then around to the Diver* It’s about time you showed up, my reef is getting ruined!
         yield return new WaitForSeconds(2.5f);
-      
+
         diverFinished = false;
         yield return new WaitForSeconds(2.5f);
         //move fish to second target
@@ -287,6 +304,8 @@ public class tourScript : MonoBehaviour
         StartCoroutine("sayNextLine"); //Diver- Well, we are going to try and help fix it. But first let’s check in on this little urchin *walks over to urchin*
 
         startPath(diver, "DiverWP_Set1");
+        diverAnim.SetBool("move", true);
+        CameraAnim.SetBool("move2", true);
         yield return new WaitForSeconds(3.5f);
 
         //Diver *walks over to urchin*
@@ -295,6 +314,8 @@ public class tourScript : MonoBehaviour
             yield return new WaitForSeconds(1);
         }
         diverFinished = false;
+        
+
 
         StartCoroutine("sayNextLine"); //Diver - This is Tripneustes gratilla a type of Sea Urchin... 
         yield return new WaitForSeconds(2.5f);
@@ -327,12 +348,7 @@ public class tourScript : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
 
         //Diver- *stands up and goes over to some Algae* 
-        startPath(diver, "DiverWP_Set2");
-        while (diverFinished == false)
-        {
-            yield return new WaitForSeconds(1);
-        }
-        diverFinished = false;
+       
 
         StartCoroutine("sayNextLine"); //Diver - Yep, so now we have to help out and try to remove what we can so the reef can bounce back and get healthy.
         yield return new WaitForSeconds(2.5f);
@@ -353,18 +369,23 @@ public class tourScript : MonoBehaviour
         StartCoroutine("sayNextLine"); // Amakua - This is Kaneohe Bay, on Oahu. It used to be a nice reef, but lately these algae have shown up and they are taking over!
         yield return new WaitForSeconds(2.5f);
 
+        startPath(diver, "DiverWP_Set2");
+        diverAnim.SetBool("move", true);
+        CameraAnim.SetBool("move3", true);
+        while (diverFinished == false)
+        {
+            yield return new WaitForSeconds(1);
+        }
+        diverFinished = false;
+        diverAnim.SetBool("move", false);
+
 
         StartCoroutine("sayNextLine"); //*Map changes to show the algae showing up and taking over Kaneohe bay* Diver- There are three species causing problems.
         yield return new WaitForSeconds(2.5f);
 
         map.GetComponent<Image>().sprite = maps[0];
 
-        //Diver - *Walks over to one of the coral heads covered in algae *
-        while (diverFinished == false)
-        {
-            yield return new WaitForSeconds(1);
-        }
-        diverFinished = false;
+
 
         StartCoroutine("sayNextLine"); // Diver -  We have acanthrophora spicifera
         yield return new WaitForSeconds(2.5f);
@@ -377,15 +398,30 @@ public class tourScript : MonoBehaviour
         map.GetComponent<Image>().sprite = maps[1];
 
         // *Diver walks over to another coral head with algae*
+        startPath(diver, "DiverWP_Set3");
+        diverAnim.SetBool("move", true);
+        CameraAnim.SetBool("move4", true);
         while (diverFinished == false)
         {
             yield return new WaitForSeconds(1);
         }
         diverFinished = false;
+        diverAnim.SetBool("move", false);
 
         StartCoroutine("sayNextLine"); // Diver - There’s also  kappaphycus alvarezii
         //*as before, image comes up with name and color block map changes to show range*
         yield return new WaitForSeconds(2.5f);
+
+        //Diver - *Walks over to one of the coral heads covered in algae *
+        startPath(diver, "DiverWP_Set4");
+        diverAnim.SetBool("move", true);
+        CameraAnim.SetBool("move5", true);
+        while (diverFinished == false)
+        {
+            yield return new WaitForSeconds(1);
+        }
+        diverFinished = false;
+        diverAnim.SetBool("move", false);
 
 
         map.GetComponent<Image>().sprite = maps[2];
@@ -412,11 +448,16 @@ public class tourScript : MonoBehaviour
         map.SetActive(false);
 
         //*Diver walks over to a coral head* 
+        startPath(diver, "DiverWP_Set5");
+        diverAnim.SetBool("move", true);
+        CameraAnim.SetBool("move6", true);
         while (diverFinished == false)
         {
             yield return new WaitForSeconds(1);
         }
         diverFinished = false;
+        diverAnim.SetBool("move", false);
+       // turndiver = true;
 
         StartCoroutine("sayNextLine"); //Diver - So we’ve got to pull to pull off what we can and use the Super Sucker to remove as much of it as we can.
         yield return new WaitForSeconds(2.5f);
@@ -436,7 +477,7 @@ public class tourScript : MonoBehaviour
         int counter = 0;
         while (moveOnFromBreakpoint == false)
         {
-            if(counter%13 == 0)
+            if (counter % 13 == 0)
             {
                 updateDiverBubble("In order to call down the supersucker, you'll need to raise your hand!");
                 showDiverBubble(true);
@@ -457,19 +498,19 @@ public class tourScript : MonoBehaviour
             counter++;
         }
 
-        
+
 
         //move camera into algae patch to get cleared
         gestures_img.GetComponent<Image>().sprite = gestures[1];
         gestures_text.GetComponent<Text>().text = "Move the supersucker!";
-         StartCoroutine("sayNextLine"); //Diver- Great! Now move it over the algae covered coral to suck it off!
+        StartCoroutine("sayNextLine"); //Diver- Great! Now move it over the algae covered coral to suck it off!
         yield return new WaitForSeconds(2.5f);
 
-        //yield return new WaitForSeconds(60);
+        // yield return new WaitForSeconds(60);
 
         StartCoroutine("sayNextLine"); //Diver- Nice work! Only 30 more seconds to go, suck up as much algae as you can!
 
-        //yield return new WaitForSeconds(30);
+        // yield return new WaitForSeconds(30);
 
         //now the player is doing supersucker stuff, should we give them a certain number of time to complete it or just wait for them to finish completely?
         gestures_text.SetActive(false);
@@ -477,7 +518,7 @@ public class tourScript : MonoBehaviour
 
 
         //make all algae disappear slowly from corals <- NOT WORKING PROPERLY, LAGS EVERYTHING AND CALLS OVER AND OVER...
-        // GameObject.Find("All reefs").GetComponent<receiverScript>().fire = true;
+       // GameObject.Find("All reefs").GetComponent<receiverScript>().BroadcastMessage("getSuperSucked");
 
         //then diver congratulates player
         GameObject.Find("Main Camera").GetComponent<AudioSource>().clip = music;
@@ -486,7 +527,7 @@ public class tourScript : MonoBehaviour
         StartCoroutine("sayNextLine"); //Diver-Excellent!! Looks like the reef is feeling better already.
         yield return new WaitForSeconds(2.5f);
 
-        
+
 
         StartCoroutine("sayNextLine"); //Aumakua-Wow, look how many fish have returned now that the reef is healthy!.
         yield return new WaitForSeconds(2.5f);
@@ -704,14 +745,15 @@ public class tourScript : MonoBehaviour
 
         // If the screen is almost black...
         //if (FadeImg.color.a >= 0.95f)
-           //show the credits
+        //show the credits
     }
 
     //this will get called externally when the diver is done pathing
     //put whatever you want to happen after each path is complete here
-   void diverDone()
+    void diverDone()
     {
         diverFinished = true;
+        diverAnim.SetBool("move", false);
         Debug.Log("Diver has finished a path!");
     }
 
