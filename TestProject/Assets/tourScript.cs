@@ -88,7 +88,7 @@ public class tourScript : MonoBehaviour
 
 
 
-        started = false;
+        started = true;
         currLine = 0;
         GameObject.Find("intro").GetComponent<CanvasRenderer>().SetAlpha(0.0f);
         GameObject.Find("intro 2").GetComponent<CanvasRenderer>().SetAlpha(0.0f);
@@ -188,10 +188,11 @@ public class tourScript : MonoBehaviour
         //pan camera down
         //keep it like that until player waves
         CameraAnim.SetBool("start", true);
-        GameObject.Find("Logo test").GetComponent<Image>().CrossFadeAlpha(1.0f, 2.0f, false);
-        GameObject.Find("gestures").GetComponent<Image>().CrossFadeAlpha(1.0f, 2.0f, false);
-        yield return new WaitForSeconds(8);
-     
+        GameObject.Find("Logo test").GetComponent<Image>().CrossFadeAlpha(1.0f, 3.0f, false);
+        GameObject.Find("gestures").GetComponent<Image>().CrossFadeAlpha(1.0f, 3.0f, false);
+        yield return new WaitForSeconds(6);
+        started = false;
+
 
 
     }
