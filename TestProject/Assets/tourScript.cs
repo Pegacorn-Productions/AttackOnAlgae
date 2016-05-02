@@ -147,7 +147,9 @@ public class tourScript : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
            moveOnFromBreakpoint = true;
+            //THIS IS FOR TESTING ONLY, THE GESTURES SHOULD TAKE CARE OF THIS ALREADY
             GetSuperSucker();
+
         }
 
         if (goScript == true && started == false)
@@ -159,16 +161,6 @@ public class tourScript : MonoBehaviour
         if (moveOnFromBreakpoint == true)
         {
             Debug.Log("Moving on to part 2!");
-        }
-        if (moveOnToThree == true)
-        {
-            Debug.Log("Moving on to part 3!");
-        }
-
-        if (moveOnToFour == true)
-        {
-            Debug.Log("Moving on to part 4!");
-
         }
 
         if (supersuckerMove)
@@ -234,8 +226,15 @@ public class tourScript : MonoBehaviour
         thanks.SetActive(false);
         sceneEnding = true;
 
+        //start fading in credits here!!
+
         yield return new WaitForSeconds(10);
-        // show credits
+        //fade out creds
+
+        yield return new WaitForSeconds(5);
+        
+
+
         //reload scene
         SceneManager.LoadScene(0);
     }
@@ -374,6 +373,9 @@ public class tourScript : MonoBehaviour
             yield return new WaitForSeconds(1);
             counter++;
         }
+
+        
+
         //move camera into algae patch to get cleared
         gestures_img.GetComponent<Image>().sprite = gestures[1];
         gestures_text.GetComponent<Text>().text = "Move the supersucker!";
