@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class AlgaeScreen : MonoBehaviour {
 
-    public Image algae;
+    public Image algaeScreen;
 
     public bool spawnAlgae = true;
     private float oldTime;
@@ -19,7 +19,7 @@ public class AlgaeScreen : MonoBehaviour {
     void Update() {
         if (Time.time - oldTime > 3) {
             oldTime = Time.time;
-            Image newAlgae = Instantiate(algae);
+            Image newAlgae = Instantiate(algaeScreen);
             newAlgae.CrossFadeAlpha(0, 0, false);
             newAlgae.CrossFadeAlpha(1, 1f, false);
 

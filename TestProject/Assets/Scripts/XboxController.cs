@@ -41,7 +41,7 @@ public class XboxController : MonoBehaviour {
         //Allow the use of left joystick to control supersucker
         if (useController) {
            // Debug.Log(Input.GetAxis("LeftJoystickX").ToString());
-            playerGesture.GetComponent<PlayerGesture>().forcePush(Input.GetAxis("LeftJoystickX"), Input.GetAxis("LeftJoystickY"));
+            playerGesture.GetComponent<PlayerGesture>().forcePush(Input.GetAxis("LeftJoystickX"), -1f*Input.GetAxis("LeftJoystickY"));
         }
     }
 }
