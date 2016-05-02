@@ -125,6 +125,7 @@ public class tourScript : MonoBehaviour {
         GameObject.Find("Title Screen").SetActive(false);
         GameObject.Find("Wave").SetActive(false);
         CameraAnim.SetBool("move1", true);
+        yield return new WaitForSeconds(2.5f);
         //Move camera to final view distance
         StartCoroutine("sayNextLine");
         
