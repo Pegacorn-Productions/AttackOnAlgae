@@ -304,6 +304,8 @@ public class tourScript : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
 
         StartCoroutine("sayNextLine"); //Diver - *nods and crouches down* This little friend eats algae, which is a good thing because there’s a lot of it here. *Waves towards beds of algae*
+        diverAnim.SetBool("kneel", true);
+        diverAnim.SetBool("stand", false);
         yield return new WaitForSeconds(2.5f);
 
         //Amakua - *swims over the algae circling*
@@ -317,6 +319,8 @@ public class tourScript : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
 
         StartCoroutine("sayNextLine"); //Diver - But even though there are a lot of these Collector Urchins here, they can’t keep up with how fast this algae grows.
+        diverAnim.SetBool("kneel", false);
+        diverAnim.SetBool("stand", true);
         yield return new WaitForSeconds(2.5f);
 
         StartCoroutine("sayNextLine"); //Amakua - It’s invasive!
