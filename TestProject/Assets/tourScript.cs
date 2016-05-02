@@ -64,7 +64,7 @@ public class tourScript : MonoBehaviour {
         script[20, 0] = "diver"; script[20, 1] = "So we’ve got to pull to pull off what we can and use the Super Sucker to remove as much of it as we can.";
         script[21, 0] = "aumakua"; script[21, 1] = "What’s a Super Sucker?";
         script[22, 0] = "diver"; script[22, 1] = "It’s a special underwater vacuum that we can use to help clean algae off the reef! Call it down when you’re ready!";
-        script[23, 0] = "diver"; script[23, 1] = "It’s a special underwater vacuum that we can use to help clean algae off the reef! Call it down when you’re ready!";
+        script[23, 0] = "diver"; script[23, 1] = "Great! Now move it over the algae covered coral to suck it off!";
 
 
         started = false;
@@ -127,50 +127,99 @@ public class tourScript : MonoBehaviour {
         CameraAnim.SetBool("move1", true);
         yield return new WaitForSeconds(2.5f);
         //Move camera to final view distance
-        StartCoroutine("sayNextLine");
-        
+        StartCoroutine("sayNextLine"); //Diver- Hello! I’m so glad you’re here!
+
         yield return new WaitForSeconds(2.5f);
         //move fish to first target
 
         yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
+
+        StartCoroutine("sayNextLine"); //Amakua - *Swims up to the camera then around to the Diver* It’s about time you showed up, my reef is getting ruined!
         yield return new WaitForSeconds(2.5f);
        //move diver to first target
         yield return new WaitForSeconds(2.5f);
         //move fish to second target
         yield return new WaitForSeconds(1.5f);
-        StartCoroutine("sayNextLine");
+
+        StartCoroutine("sayNextLine"); //Diver- Well, we are going to try and help fix it. But first let’s check in on this little urchin *walks over to urchin*
         yield return new WaitForSeconds(3.5f);
-        StartCoroutine("sayNextLine");
+
+        StartCoroutine("sayNextLine"); //Diver - This is Tripneustes gratilla a type of Sea Urchin... 
         yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
+
+        StartCoroutine("sayNextLine"); //Amakua- It’s also called a Collector Urchin!
         yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
+
+        StartCoroutine("sayNextLine"); //Diver - *nods and crouches down* This little friend eats algae, which is a good thing because there’s a lot of it here. *Waves towards beds of algae*
         yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
+
+        StartCoroutine("sayNextLine"); //Amakua - *swims over the algae circling and saying* Yeah, and it’s taking over my reef!
         yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
+
+        StartCoroutine("sayNextLine"); //Diver - But even though there are a lot of these Collector Urchins here, they can’t keep up with how fast this algae grows.
         yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
+
+        StartCoroutine("sayNextLine"); //Amakua - It’s invasive!
         yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
+
+        StartCoroutine("sayNextLine"); //Diver- *stands up and goes over to some Algae* Yep, so now we have to help out and try to remove what we can so the reef can bounce back and get healthy.
         yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
+
+        StartCoroutine("sayNextLine"); //*Map shows up, Amakua swims up towards it and says* Amakua - This is Kaneohe Bay, on Oahu. It used to be a nice reef, but lately these algae have shown up and they are taking over!
         yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
+
+        StartCoroutine("sayNextLine"); //*Map changes to show the algae showing up and taking over Kaneohe bay* Diver- There are three species causing problems. *Walks over to one of the coral heads covered in algae* We have acanthrophora spicifera
         yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
+
+        StartCoroutine("sayNextLine"); //Amakua- Sometimes people call it Spiny Seaweed *image shows up underneath the map with a color block*
+        //*map changes to show range and coverage of acanthrophora spicifera using the same color as the block*
         yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
+
+        
+
+        StartCoroutine("sayNextLine"); // *walks over to another coral head with algae* There’s also  kappaphycus alvarezii
+        //*as before, image comes up with name and color block map changes to show range*
         yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
+
+        
+
+        StartCoroutine("sayNextLine"); //And lastly we’ve got, gracilera salicornia
+        //*as before*
         yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
+
+
+        StartCoroutine("sayNextLine"); //Amakua - It’s also called gorilla ogo!
         yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
+
+        StartCoroutine("sayNextLine"); //Diver- So these three algae are taking over the reef, and all three were introduced by us humans.
         yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
+
+        StartCoroutine("sayNextLine"); //Amakua- That’s why you should fix it!
         yield return new WaitForSeconds(2.5f);
+
+
+
+        StartCoroutine("sayNextLine"); // *Diver nods and kneels down and motions to sea urchin again* Diver - Yep, we can’t depend on our friend here to do all the work, the algae grows too fast.
+        yield return new WaitForSeconds(2.5f);
+
+
+
+        StartCoroutine("sayNextLine"); //*Diver walks over to a coral head* Diver - So we’ve got to pull to pull off what we can and use the Super Sucker to remove as much of it as we can.
+         yield return new WaitForSeconds(2.5f);
+
+
+        StartCoroutine("sayNextLine"); //Amakua - What’s a Super Sucker?
+        yield return new WaitForSeconds(2.5f);
+
+        StartCoroutine("sayNextLine"); //Diver- It’s a special underwater vacuum that we can use to help clean algae off the reef! Call it down when you’re ready!
+        yield return new WaitForSeconds(2.5f);
+
+        StartCoroutine("sayNextLine"); //Diver- Great! Now move it over the algae covered coral to suck it off!
+        yield return new WaitForSeconds(2.5f);
+
+        StartCoroutine("sayNextLine"); //Diver- Great! Now move it over the algae covered coral to suck it off!
+        yield return new WaitForSeconds(2.5f);
+
 
 
 
