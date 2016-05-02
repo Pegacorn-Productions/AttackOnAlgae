@@ -128,12 +128,12 @@ public class SpeechBubble : MonoBehaviour
 
 			//Render the text
 			GUI.Label(new Rect(52,19,Mathf.Sqrt(area* 0.05f),Mathf.Sqrt(area* 0.05f)),text,guiSkin.label);
-			if (GUI.Button(new Rect(69, 102, Mathf.Sqrt(area* 0.02f),Mathf.Sqrt(area* 0.002f)), "Dismiss"))
-			{
-				dismissed = true;
+		//	if (GUI.Button(new Rect(69, 102, Mathf.Sqrt(area* 0.02f),Mathf.Sqrt(area* 0.002f)), "Dismiss"))
+		//	{
+			//	dismissed = true;
 				// mat = null;
-				script.moveOnFromBreakpoint = true;
-			}
+				//script.moveOnFromBreakpoint = true;
+			//}
 
 
 		}
@@ -206,24 +206,25 @@ public class SpeechBubble : MonoBehaviour
 
 	public void DismissSpeechBuble() {
 
-		if (Time.time - oldTime > 3) {
-			oldTime = Time.time;
-			if (dismissed == false) {
-				dismissed = true;
-				script.moveOnFromBreakpoint = true;
-			}
-			else if (dismissed2 == false) {
-				dismissed = true;
-				script.moveOnToThree = true;
-			}
-			else if (dismissed3 == false) {
-				dismissed = true;
-				script.moveOnToFour = true;
-			}
-		} 
-		else {
-			return;
-		}
+        /*	if (Time.time - oldTime > 3) {
+                oldTime = Time.time;
+                if (dismissed == false) {
+                    dismissed = true;
+                    script.moveOnFromBreakpoint = true;
+                }
+                else if (dismissed2 == false) {
+                    dismissed = true;
+                    script.moveOnToThree = true;
+                }
+                else if (dismissed3 == false) {
+                    dismissed = true;
+                    script.moveOnToFour = true;
+                }
+            } 
+            else {
+                return;
+            }*/
+        Debug.Log("Dismiss msg");
 
 	}
 }
