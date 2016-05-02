@@ -103,11 +103,11 @@ public class PlayerGesture : MonoBehaviour {
         float distanceY = handMixNormalizedY - spineMidNormalizedY;
 
         Vector3 ret;
-        if (Mathf.Abs(distanceX) < 0.1f && Mathf.Abs(distanceY) < 0.1f) {
+        if (Mathf.Abs(distanceX) < 0.025f && Mathf.Abs(distanceY) < 0.025f) {
             ret = new Vector3(0, 0, 0);
         }
         else {
-            ret = new Vector3(distanceX, 0, distanceY);
+            ret = new Vector3(distanceX*5, 0, distanceY*5);
         }
             
         Rigidbody rbJoint = joint.GetComponent<Rigidbody>();
