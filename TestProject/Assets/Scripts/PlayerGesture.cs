@@ -113,5 +113,17 @@ public class PlayerGesture : MonoBehaviour {
         Rigidbody rbJoint = joint.GetComponent<Rigidbody>();
         rbJoint.AddForce(ret);
     }
-  
+
+
+    /// <summary>
+    /// Public method for allowing Xbox controller to interface with the sueprsucker.
+    /// </summary>
+    /// <param name="x">Value of the force in x direction</param>
+    /// <param name="y">Value of the force in y direction</param>
+    public void forcePush(float x, float y) {
+        Vector3 ret;
+        ret = new Vector3(x, 0, y);
+        Rigidbody rbJoint = joint.GetComponent<Rigidbody>();
+        rbJoint.AddForce(ret);
+    }
 }

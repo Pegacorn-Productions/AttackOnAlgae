@@ -63,10 +63,11 @@ public class tourScript : MonoBehaviour {
         script[20, 0] = "diver"; script[20, 1] = "So we’ve got to pull to pull off what we can and use the Super Sucker to remove as much of it as we can.";
         script[21, 0] = "aumakua"; script[21, 1] = "What’s a Super Sucker?";
         script[22, 0] = "diver"; script[22, 1] = "It’s a special underwater vacuum that we can use to help clean algae off the reef! Call it down when you’re ready!";
+        script[23, 0] = "diver"; script[23, 1] = "It’s a special underwater vacuum that we can use to help clean algae off the reef! Call it down when you’re ready!";
 
 
 
-       
+
 
     }
 	
