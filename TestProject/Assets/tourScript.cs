@@ -200,6 +200,9 @@ public class tourScript : MonoBehaviour
     IEnumerator outro()
     {
         // camera pan up and out of the water
+        CameraAnim.SetBool("exit", true);
+        yield return new WaitForSeconds(6);
+        GameObject.Find("thanks").SetActive(true);
         //thanks for playing shows up
         // fade to black
         GameObject.Find("Main Camera").GetComponent<AudioSource>().clip = music;

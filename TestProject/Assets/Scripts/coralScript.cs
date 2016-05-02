@@ -12,6 +12,7 @@ public class coralScript : MonoBehaviour {
     private GameObject algaeRemoveClone;
     public GameObject algaeSuckingPhysics;
     public Material healthyCoral;
+    private bool removed = false;
 
     // Use this for initialization
     void Start () {
@@ -27,9 +28,12 @@ public class coralScript : MonoBehaviour {
 
     void OnTriggerEnter(Collider collision)
     {
-        if(collision.gameObject.tag == "supersucker")
+        if (collision.gameObject.tag == "supersucker")
         {
-            StartCoroutine("removeAlgae");
+            if (removed == false) { 
+              StartCoroutine("removeAlgae");
+              removed = true;
+             }
         }
 
     }
