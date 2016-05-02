@@ -10,21 +10,27 @@ public class PlayerGesture : MonoBehaviour {
     private BodySourceManager _BodyManager;
     public GameObject superSucker;
 
+    private float timeVar;
     private Transform joint;
     private Kinect.Body[] data;
-
+    private float compX, compY;
     /// <summary>
     /// Finds joint51 of the super sucker.
     /// </summary>
-	void Start () {
+	void Start ()
+    {
         joint = superSucker.transform.Find("joint1");
-        for (int i = 2; i < 32; i++) {
+        for (int i = 2; i < 52; i++) {
             joint = joint.transform.Find("joint" + i);
         }
+
+        timeVar = Time.time;
+        compX = 0;
+        compY = 0;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         if (BodySourceManager == null) {
             return;
         }
@@ -92,6 +98,15 @@ public class PlayerGesture : MonoBehaviour {
         Kinect.Joint handRight = body.Joints[Kinect.JointType.HandRight];
         Kinect.Joint handLeft = body.Joints[Kinect.JointType.HandLeft];
         Kinect.Joint spineMid = body.Joints[Kinect.JointType.SpineMid];
+        Rigidbody rbJoint = joint.GetComponent<Rigidbody>();
+
+
+        joint = superSucker.transform.Find("joint1");
+        for (int i = 2; i < 52; i++)
+        {
+            joint = joint.transform.Find("joint" + i);
+            joint.GetComponent<Rigidbody>().isKinematic = false;
+        }
 
         float handMidNormalizedX = (handLeft.Position.X + handRight.Position.X + 2) / 2.0f;
         float handMixNormalizedY = (handLeft.Position.Y + handRight.Position.Y + 2) / 2.0f;
@@ -102,16 +117,37 @@ public class PlayerGesture : MonoBehaviour {
         float distanceX = handMidNormalizedX - spineMidNormalizedX;
         float distanceY = handMixNormalizedY - spineMidNormalizedY;
 
+
         Vector3 ret;
-        if (Mathf.Abs(distanceX) < 0.025f && Mathf.Abs(distanceY) < 0.025f) {
+        if (Mathf.Abs(distanceX-compX) < 0.025f && Mathf.Abs(distanceY-compY) < 0.025f) {
             ret = new Vector3(0, 0, 0);
         }
         else {
-            ret = new Vector3(distanceX*5, 0, distanceY*5);
+            ret = new Vector3(distanceX, 0, distanceY);
         }
-            
-        Rigidbody rbJoint = joint.GetComponent<Rigidbody>();
-        rbJoint.AddForce(ret);
+        
+
+        if (ret != Vector3.zero)
+        {
+            rbJoint.AddForce(ret);
+        }
+        else if(Time.time - timeVar >= 1.5)
+        {   
+            rbJoint.velocity = ret;
+            rbJoint.angularVelocity = ret;
+            joint = superSucker.transform.Find("joint1");
+            for (int i = 2; i < 52; i++)
+            {
+                joint = joint.transform.Find("joint" + i);
+                joint.GetComponent<Rigidbody>().isKinematic = !joint.GetComponent<Rigidbody>().isKinematic;
+            }
+
+            timeVar = Time.time;
+        }
+
+        
+        compX = distanceX;
+        compY = distanceY;
     }
 
 
