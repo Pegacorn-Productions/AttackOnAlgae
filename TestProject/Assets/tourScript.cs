@@ -37,6 +37,7 @@ public class tourScript : MonoBehaviour
     public Image FadeImg;
     public float fadeSpeed = 0.1f;
     public bool sceneStarting = false;
+    public bool sceneEnding = false;
     public bool fadeinIntro1 = false;
     public bool fadeoutIntro1 = false;
     public bool fadeinIntro2 = false;
@@ -46,6 +47,11 @@ public class tourScript : MonoBehaviour
     public Sprite[] gestures;
 
     public AudioClip music;
+
+    public GameObject map;
+    public GameObject gestures_img;
+    public GameObject gestures_text;
+    public GameObject thanks;
 
 
 
@@ -80,7 +86,7 @@ public class tourScript : MonoBehaviour
         script[17, 0] = "diver"; script[17, 1] = "So these three algae are taking over the reef, and all three were introduced by us humans.";
         script[18, 0] = "aumakua"; script[18, 1] = "That’s why you should fix it!";
         script[19, 0] = "diver"; script[19, 1] = "Yep, we can’t depend on our friend here to do all the work, the algae grows too fast.";
-        script[20, 0] = "diver"; script[20, 1] = "So we’ve got to pull to pull off what we can and use the Super Sucker to remove as much of it as we can.";
+        script[20, 0] = "diver"; script[20, 1] = "So we’ve got to pull off what we can and use the Super Sucker to remove as much of it as we can.";
         script[21, 0] = "aumakua"; script[21, 1] = "What’s a Super Sucker?";
         script[22, 0] = "diver"; script[22, 1] = "It’s a special underwater vacuum that we can use to help clean algae off the reef! Call it down when you’re ready!";
         script[23, 0] = "diver"; script[23, 1] = "Great! Now move it over the algae covered coral to suck it off!";
@@ -104,12 +110,14 @@ public class tourScript : MonoBehaviour
         // Set the texture so that it is the the size of the screen and covers it.
         FadeImg.rectTransform.localScale = new Vector2(Screen.width, Screen.height);
         sceneStarting = false;
+        sceneEnding = false;
         StartCoroutine("intro");
     }
     void Update()
     {
         // If the scene is starting...
         if (sceneStarting) StartScene();
+        if (sceneEnding) EndScene();
 
         if(fadeinIntro1) GameObject.Find("intro").GetComponent<Image>().CrossFadeAlpha(0.8f, 4.0f, false);
         if (fadeoutIntro1) GameObject.Find("intro").GetComponent<Image>().CrossFadeAlpha(-0.8f, 4.0f, false);
@@ -128,6 +136,10 @@ public class tourScript : MonoBehaviour
             goScript = true;
         }
 
+        if (Input.GetMouseButtonDown(1))
+        {
+           moveOnFromBreakpoint = true;
+        }
 
         if (goScript == true && started == false)
         {
@@ -199,15 +211,20 @@ public class tourScript : MonoBehaviour
 
     IEnumerator outro()
     {
-        // camera pan up and out of the water
-        CameraAnim.SetBool("exit", true);
-        yield return new WaitForSeconds(6);
-        GameObject.Find("thanks").SetActive(true);
-        //thanks for playing shows up
-        // fade to black
+
+
         GameObject.Find("Main Camera").GetComponent<AudioSource>().clip = music;
         GameObject.Find("Main Camera").GetComponent<AudioSource>().Play();
-        EndScene();
+        // camera pan up and out of the water MAKE THE PAN LONGER PLZ
+        CameraAnim.SetBool("exit", true);
+        yield return new WaitForSeconds(6);
+        thanks.SetActive(true);
+        //thanks for playing shows up
+        // fade to black
+        yield return new WaitForSeconds(5);
+        thanks.SetActive(false);
+        sceneEnding = true;
+
         yield return new WaitForSeconds(10);
         // show credits
         //reload scene
@@ -263,7 +280,7 @@ public class tourScript : MonoBehaviour
         StartCoroutine("sayNextLine"); //Diver- *stands up and goes over to some Algae* Yep, so now we have to help out and try to remove what we can so the reef can bounce back and get healthy.
         yield return new WaitForSeconds(2.5f);
 
-        GameObject.Find("Map").SetActive(true);
+        map.SetActive(true);
 
         StartCoroutine("sayNextLine"); //*Map shows up, Amakua swims up towards it and says* Amakua - This is Kaneohe Bay, on Oahu. It used to be a nice reef, but lately these algae have shown up and they are taking over!
         yield return new WaitForSeconds(2.5f);
@@ -272,7 +289,7 @@ public class tourScript : MonoBehaviour
         StartCoroutine("sayNextLine"); //*Map changes to show the algae showing up and taking over Kaneohe bay* Diver- There are three species causing problems.
         yield return new WaitForSeconds(2.5f);
 
-        GameObject.Find("Map").GetComponent<Image>().sprite = maps[0];
+        map.GetComponent<Image>().sprite = maps[0];
         StartCoroutine("sayNextLine"); // Diver - *Walks over to one of the coral heads covered in algae* We have acanthrophora spicifera
         yield return new WaitForSeconds(2.5f);
 
@@ -281,20 +298,20 @@ public class tourScript : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
 
 
-        GameObject.Find("Map").GetComponent<Image>().sprite = maps[1];
+        map.GetComponent<Image>().sprite = maps[1];
         StartCoroutine("sayNextLine"); // *walks over to another coral head with algae* There’s also  kappaphycus alvarezii
         //*as before, image comes up with name and color block map changes to show range*
         yield return new WaitForSeconds(2.5f);
 
 
-        GameObject.Find("Map").GetComponent<Image>().sprite = maps[2];
+        map.GetComponent<Image>().sprite = maps[2];
         StartCoroutine("sayNextLine"); //And lastly we’ve got, gracilera salicornia
         yield return new WaitForSeconds(2.5f);
 
 
         StartCoroutine("sayNextLine"); //Amakua - It’s also called gorilla ogo!
         yield return new WaitForSeconds(2.5f);
-        GameObject.Find("Map").GetComponent<Image>().sprite = maps[3];
+        map.GetComponent<Image>().sprite = maps[3];
 
         StartCoroutine("sayNextLine"); //Diver- So these three algae are taking over the reef, and all three were introduced by us humans.
         yield return new WaitForSeconds(2.5f);
@@ -303,7 +320,7 @@ public class tourScript : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
 
         //hide the map
-        GameObject.Find("Map").SetActive(false);
+        map.SetActive(false);
 
 
         StartCoroutine("sayNextLine"); // *Diver nods and kneels down and motions to sea urchin again* Diver - Yep, we can’t depend on our friend here to do all the work, the algae grows too fast.
@@ -320,8 +337,9 @@ public class tourScript : MonoBehaviour
 
         StartCoroutine("sayNextLine"); //Diver- It’s a special underwater vacuum that we can use to help clean algae off the reef! Call it down when you’re ready!
         yield return new WaitForSeconds(2.5f);
-        GameObject.Find("gestures").GetComponent<Image>().sprite = gestures[0];
-        GameObject.Find("gestures").SetActive(true);
+        gestures_img.GetComponent<Image>().sprite = gestures[0];
+        gestures_text.GetComponent<Text>().text = "Raise your hand!";
+        gestures_img.SetActive(true);
 
         //need a way to wait for a signal from update
         while (moveOnFromBreakpoint == false)
@@ -329,12 +347,13 @@ public class tourScript : MonoBehaviour
             yield return new WaitForSeconds(1);
         }
         //move camera into algae patch to get cleared
-        GameObject.Find("gestures").GetComponent<Image>().sprite = gestures[1];
-       // StartCoroutine("sayNextLine"); //Diver- Great! Now move it over the algae covered coral to suck it off!
+        gestures_img.GetComponent<Image>().sprite = gestures[1];
+        gestures_text.GetComponent<Text>().text = "Move the supersucker!";
+        // StartCoroutine("sayNextLine"); //Diver- Great! Now move it over the algae covered coral to suck it off!
         yield return new WaitForSeconds(2.5f);
 
         //now the player is doing supersucker stuff, should we give them a certain number of time to complete it or just wait for them to finish completely?
-        GameObject.Find("gestures").SetActive(false);
+        gestures_img.SetActive(false);
         //then diver congratulates player
 
         //aumakua is happy
