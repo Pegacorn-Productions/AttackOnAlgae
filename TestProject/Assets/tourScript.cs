@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class tourScript : MonoBehaviour
 {
 
-    public string[,] script = new string[24, 2];
+    public string[,] script = new string[30, 2];
     private int currLine;
 
     public GameObject diverSpeechBubble, fishSpeechBubble;
@@ -90,6 +90,14 @@ public class tourScript : MonoBehaviour
         script[21, 0] = "aumakua"; script[21, 1] = "What’s a Super Sucker?";
         script[22, 0] = "diver"; script[22, 1] = "It’s a special underwater vacuum that we can use to help clean algae off the reef! Call it down when you’re ready!";
         script[23, 0] = "diver"; script[23, 1] = "Great! Now move it over the algae covered coral to suck it off!";
+        script[24, 0] = "diver"; script[24, 1] = "Nice work! Only 30 more seconds to go, suck up as much algae as you can!";
+        script[25, 0] = "diver"; script[25, 1] = "Excellent!! Looks like the reef is feeling better already.";
+        script[26, 0] = "aumakua"; script[26, 1] = "Wow, look how many fish have returned now that the reef is healthy!";
+        script[27, 0] = "diver"; script[27, 1] = "Thanks for helping us remove all of that algae. Hopefully now these <b>Collector Urchins</b> will continue to help us keep the algae under control!";
+        script[28, 0] = "aumakua"; script[28, 1] = "I really appreciate your hard work. Now I can live here happily again!";
+        script[29, 0] = "diver"; script[29, 1] = "I hope you had fun helping out today! I'll see you later!";
+
+
 
 
 
@@ -139,6 +147,7 @@ public class tourScript : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
            moveOnFromBreakpoint = true;
+            GetSuperSucker();
         }
 
         if (goScript == true && started == false)
@@ -212,12 +221,11 @@ public class tourScript : MonoBehaviour
     IEnumerator outro()
     {
 
+        yield return new WaitForSeconds(7);
 
-        GameObject.Find("Main Camera").GetComponent<AudioSource>().clip = music;
-        GameObject.Find("Main Camera").GetComponent<AudioSource>().Play();
-        // camera pan up and out of the water MAKE THE PAN LONGER PLZ
+        // camera pan up and out of the water
         CameraAnim.SetBool("exit", true);
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(10);
         thanks.SetActive(true);
         //thanks for playing shows up
         // fade to black
@@ -349,20 +357,37 @@ public class tourScript : MonoBehaviour
         //move camera into algae patch to get cleared
         gestures_img.GetComponent<Image>().sprite = gestures[1];
         gestures_text.GetComponent<Text>().text = "Move the supersucker!";
-        // StartCoroutine("sayNextLine"); //Diver- Great! Now move it over the algae covered coral to suck it off!
+         StartCoroutine("sayNextLine"); //Diver- Great! Now move it over the algae covered coral to suck it off!
         yield return new WaitForSeconds(2.5f);
+
+        //yield return new WaitForSeconds(60);
+
+        StartCoroutine("sayNextLine"); //Diver- Nice work! Only 30 more seconds to go, suck up as much algae as you can!
+
+        //yield return new WaitForSeconds(30);
 
         //now the player is doing supersucker stuff, should we give them a certain number of time to complete it or just wait for them to finish completely?
         gestures_img.SetActive(false);
         //then diver congratulates player
+        GameObject.Find("Main Camera").GetComponent<AudioSource>().clip = music;
+        GameObject.Find("Main Camera").GetComponent<AudioSource>().Play();
+        supersucker.SetActive(false);
+        StartCoroutine("sayNextLine"); //Diver-Excellent!! Looks like the reef is feeling better already.
+        yield return new WaitForSeconds(2.5f);
 
-        //aumakua is happy
+        StartCoroutine("sayNextLine"); //Aumakua-Wow, look how many fish have returned now that the reef is healthy!.
+        yield return new WaitForSeconds(2.5f);
 
+        StartCoroutine("sayNextLine"); //Diver-Thanks for helping us remove all of that algae. Hopefully now these <b>Collector Urchins</b> will continue to help us keep the algae under control!
+        yield return new WaitForSeconds(2.5f);
+
+        StartCoroutine("sayNextLine"); //Aumakua-I really appreciate your hard work! Now I can live here happily again.
+        yield return new WaitForSeconds(2.5f);
+
+        StartCoroutine("sayNextLine"); //Diver-I Hope you had fun helping out today! I'll see you later!
+        yield return new WaitForSeconds(2.5f);
         //more fish spawn
-
-        //diver says thanks
-
-        //diver says goodbye, waves
+        diverAnim.SetBool("wave", true);
 
 
         Debug.Log("Got to end of play coroutine!");

@@ -48,7 +48,7 @@ public class coralScript : MonoBehaviour {
         yield return new WaitForSeconds(7);
         algaeSuckingPhysics.GetComponent<ParticleSystem>().loop = false;
         Debug.Log("turned off looping...");
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3);
         gameObject.GetComponent <MeshRenderer>().material = healthyCoral;
     }
 }
