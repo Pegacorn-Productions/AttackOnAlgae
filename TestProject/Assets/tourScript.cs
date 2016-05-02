@@ -272,14 +272,11 @@ public class tourScript : MonoBehaviour
 
         StartCoroutine("sayNextLine"); //Amakua - *Swims up to the camera then around to the Diver* It’s about time you showed up, my reef is getting ruined!
         yield return new WaitForSeconds(2.5f);
-        //move diver to first target
-        while (diverFinished == false)
-        {
-            yield return new WaitForSeconds(1);
-        }
+      
         diverFinished = false;
         yield return new WaitForSeconds(2.5f);
         //move fish to second target
+        startPath(fish, "HumuWP_Set1");
         while (fishFinished == false)
         {
             yield return new WaitForSeconds(1);
@@ -288,6 +285,8 @@ public class tourScript : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
         StartCoroutine("sayNextLine"); //Diver- Well, we are going to try and help fix it. But first let’s check in on this little urchin *walks over to urchin*
+
+        startPath(diver, "DiverWP_Set1");
         yield return new WaitForSeconds(3.5f);
 
         //Diver *walks over to urchin*
@@ -308,6 +307,7 @@ public class tourScript : MonoBehaviour
         diverAnim.SetBool("stand", false);
         yield return new WaitForSeconds(2.5f);
 
+        startPath(fish, "HumuWP_Set1");
         //Amakua - *swims over the algae circling*
         while (fishFinished == false)
         {
@@ -327,6 +327,7 @@ public class tourScript : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
 
         //Diver- *stands up and goes over to some Algae* 
+        startPath(diver, "DiverWP_Set2");
         while (diverFinished == false)
         {
             yield return new WaitForSeconds(1);
@@ -340,7 +341,8 @@ public class tourScript : MonoBehaviour
         map.GetComponent<CanvasRenderer>().SetAlpha(0.0f);
         map.SetActive(true);
         map.GetComponent<Image>().CrossFadeAlpha(1.0f, 3.0f, false);
-
+        //change this
+        startPath(fish, "HumuWP_Set1");
         //*Map shows up, Amakua swims up towards it and says*
         while (fishFinished == false)
         {
