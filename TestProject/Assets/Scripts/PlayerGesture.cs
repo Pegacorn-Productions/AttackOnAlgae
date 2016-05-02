@@ -18,7 +18,7 @@ public class PlayerGesture : MonoBehaviour {
     /// </summary>
 	void Start () {
         joint = superSucker.transform.Find("joint1");
-        for (int i = 2; i < 32; i++) {
+        for (int i = 2; i < 52; i++) {
             joint = joint.transform.Find("joint" + i);
         }
 	}
@@ -107,7 +107,7 @@ public class PlayerGesture : MonoBehaviour {
             ret = new Vector3(0, 0, 0);
         }
         else {
-            ret = new Vector3(distanceX*5, 0, distanceY*5);
+            ret = new Vector3(distanceX, 0, distanceY);
         }
             
         Rigidbody rbJoint = joint.GetComponent<Rigidbody>();
@@ -125,5 +125,18 @@ public class PlayerGesture : MonoBehaviour {
         ret = new Vector3(x, 0, y);
         Rigidbody rbJoint = joint.GetComponent<Rigidbody>();
         rbJoint.AddForce(ret);
+    }
+
+    /// <summary>
+    /// Sets the velocity of all joints in supersucker to zero. This will return super sucker to neutral position.
+    /// </summary>
+    public void forceStop() {
+        Transform tempJoint = superSucker.transform.Find("joint1");
+        for (int i = 2; i < 52; i++) {
+            tempJoint = tempJoint.transform.Find("joint" + i);
+            Rigidbody rbJoint = tempJoint.GetComponent<Rigidbody>();
+            rbJoint.velocity = Vector3.zero;
+        }
+     
     }
 }

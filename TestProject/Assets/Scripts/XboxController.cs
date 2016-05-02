@@ -24,6 +24,7 @@ public class XboxController : MonoBehaviour {
         }
 
         if (Input.GetButtonDown("X")) {
+            playerGesture.GetComponent<PlayerGesture>().forceStop();
 
         }
 
