@@ -62,7 +62,7 @@ public class moveOnPath : MonoBehaviour {
         }
     }
 
-    void setPathing(bool go, string wayPointSet)
+    public void setPathing(bool go, string wayPointSet)
     {
         doPath = go;
         PathToFollow = GameObject.Find(wayPointSet).GetComponent<Paths>();

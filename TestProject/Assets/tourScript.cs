@@ -683,6 +683,7 @@ public class tourScript : MonoBehaviour
 
             // The scene is no longer starting.
             sceneStarting = false;
+            startPath(fish, "HumuWP_Set1");
         }
     }
 
@@ -713,6 +714,12 @@ public class tourScript : MonoBehaviour
     {
         fishFinished = true;
         Debug.Log("Humuhumu has finished a path!");
+    }
+
+    //example of how to trigger a path to run send the appropriate game object and the path name and it will start on that path
+    void startPath(GameObject target, string pathName)
+    {
+        target.GetComponent<moveOnPath>().setPathing(true, pathName);
     }
 
 
