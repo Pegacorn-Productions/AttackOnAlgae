@@ -37,6 +37,10 @@ public class tourScript : MonoBehaviour
     public Image FadeImg;
     public float fadeSpeed = 0.1f;
     public bool sceneStarting = false;
+    public bool fadeinIntro1 = false;
+    public bool fadeoutIntro1 = false;
+    public bool fadeinIntro2 = false;
+    public bool fadeoutIntro2 = false;
 
     public Sprite[] maps;
     public Sprite[] gestures;
@@ -85,8 +89,12 @@ public class tourScript : MonoBehaviour
 
         started = false;
         currLine = 0;
+        GameObject.Find("intro").GetComponent<CanvasRenderer>().SetAlpha(0.0f);
+        GameObject.Find("intro 2").GetComponent<CanvasRenderer>().SetAlpha(0.0f);
+        GameObject.Find("Logo test").GetComponent<CanvasRenderer>().SetAlpha(0.0f);
+        GameObject.Find("gestures").GetComponent<CanvasRenderer>().SetAlpha(0.0f);
 
-        StartCoroutine("intro");
+
 
     }
 
@@ -94,13 +102,18 @@ public class tourScript : MonoBehaviour
     {
         // Set the texture so that it is the the size of the screen and covers it.
         FadeImg.rectTransform.localScale = new Vector2(Screen.width, Screen.height);
+        sceneStarting = false;
+        StartCoroutine("intro");
     }
     void Update()
     {
         // If the scene is starting...
-        if (sceneStarting)
-            // ... call the StartScene function.
-            StartScene();
+        if (sceneStarting) StartScene();
+
+        if(fadeinIntro1) GameObject.Find("intro").GetComponent<Image>().CrossFadeAlpha(0.8f, 4.0f, false);
+        if (fadeoutIntro1) GameObject.Find("intro").GetComponent<Image>().CrossFadeAlpha(-0.8f, 4.0f, false);
+        if (fadeinIntro2) GameObject.Find("intro 2").GetComponent<Image>().CrossFadeAlpha(0.8f, 4.0f, false);
+        if (fadeoutIntro2) GameObject.Find("intro 2").GetComponent<Image>().CrossFadeAlpha(-0.8f, 4.0f, false);
     }
 
 
@@ -155,14 +168,25 @@ public class tourScript : MonoBehaviour
     IEnumerator intro()
     {
         //fade pegacorn productions presents in
+        fadeinIntro1 = true;
         yield return new WaitForSeconds(5);
         //fade it out
-        yield return new WaitForSeconds(5);
+        fadeinIntro1 = false;
+        fadeoutIntro1 = true;
+        yield return new WaitForSeconds(3);
+        fadeoutIntro1 = false;
         //fade in the attack on algae
+        fadeinIntro2 = true;
         yield return new WaitForSeconds(5);
-        //move it up to the top of the screen 
+        fadeinIntro2 = false;
+        fadeoutIntro2 = true;
+        yield return new WaitForSeconds(5);
+        fadeoutIntro2 = false;
         //while fading into the scene
         sceneStarting = true;
+        CameraAnim.SetBool("start", true);
+        GameObject.Find("Logo test").GetComponent<Image>().CrossFadeAlpha(1.0f, 2.0f, false);
+        GameObject.Find("gestures").GetComponent<Image>().CrossFadeAlpha(1.0f, 2.0f, false);
         yield return new WaitForSeconds(8);
         //pan camera down
         //keep it like that until player waves
