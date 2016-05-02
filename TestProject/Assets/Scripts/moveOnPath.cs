@@ -9,6 +9,7 @@ public class moveOnPath : MonoBehaviour {
     public float reachDist = 1f;
     public float rotateSpeed = 5f;
     public string pathName;
+    public GameObject msgTarget;
     public string funcName = "This Is the Function We want to Call";
 
     private bool doPath;
@@ -51,7 +52,8 @@ public class moveOnPath : MonoBehaviour {
         {
             CurrentPointID = 0;
             doPath = false;
-            BroadcastMessage(funcName);
+            msgTarget.BroadcastMessage(funcName);
+            Debug.Log("Sent message " + funcName);
         }
     }
 

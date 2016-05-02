@@ -634,9 +634,18 @@ public class tourScript : MonoBehaviour
            //show the credits
     }
 
-   
+    //this will get called externally when the diver is done pathing
+    //put whatever you want to happen after each path is complete here
+   void diverDone()
+    {
+        Debug.Log("Diver has finished a path!");
+    }
 
-
+    //same as Diver
+    void humuDone()
+    {
+        Debug.Log("Humuhumu has finished a path!");
+    }
 
 
 }
