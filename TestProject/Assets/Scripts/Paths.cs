@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class Paths : MonoBehaviour {
 
     public Color rayColor = Color.white;
+    public bool drawPathInUI;
     public List<Transform> path_objs = new List<Transform>();
     Transform[] wayPoints;
 
@@ -28,8 +29,11 @@ public class Paths : MonoBehaviour {
             if(i > 0)
             {
                 Vector3 previous = path_objs[i - 1].position;
-                Gizmos.DrawLine(previous, position);
-                Gizmos.DrawWireSphere(position, 0.3f);
+                if (drawPathInUI)
+                {
+                    Gizmos.DrawLine(previous, position);
+                    Gizmos.DrawWireSphere(position, 0.3f);
+                }
             }
         }
     }

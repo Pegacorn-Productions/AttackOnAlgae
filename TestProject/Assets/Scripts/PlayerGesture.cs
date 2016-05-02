@@ -103,15 +103,27 @@ public class PlayerGesture : MonoBehaviour {
         float distanceY = handMixNormalizedY - spineMidNormalizedY;
 
         Vector3 ret;
-        if (Mathf.Abs(distanceX) < 0.1f && Mathf.Abs(distanceY) < 0.1f) {
+        if (Mathf.Abs(distanceX) < 0.025f && Mathf.Abs(distanceY) < 0.025f) {
             ret = new Vector3(0, 0, 0);
         }
         else {
-            ret = new Vector3(distanceX, 0, distanceY);
+            ret = new Vector3(distanceX*5, 0, distanceY*5);
         }
             
         Rigidbody rbJoint = joint.GetComponent<Rigidbody>();
         rbJoint.AddForce(ret);
     }
-  
+
+
+    /// <summary>
+    /// Public method for allowing Xbox controller to interface with the sueprsucker.
+    /// </summary>
+    /// <param name="x">Value of the force in x direction</param>
+    /// <param name="y">Value of the force in y direction</param>
+    public void forcePush(float x, float y) {
+        Vector3 ret;
+        ret = new Vector3(x, 0, y);
+        Rigidbody rbJoint = joint.GetComponent<Rigidbody>();
+        rbJoint.AddForce(ret);
+    }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class tourScript : MonoBehaviour {
 
-    public string[,] script = new string[10,2];
+    public string[,] script = new string[24,2];
     private int currLine;
 
     public GameObject diverSpeechBubble, fishSpeechBubble;
@@ -24,6 +24,8 @@ public class tourScript : MonoBehaviour {
     public bool moveOnFromBreakpoint = false;
     public bool moveOnToThree = false;
     public bool moveOnToFour = false;
+    private bool goScript = false;
+    private bool started = false;
 
     private bool supersuckerMove = false, superSuckerOn = true;
     
@@ -62,15 +64,28 @@ public class tourScript : MonoBehaviour {
         script[20, 0] = "diver"; script[20, 1] = "So we’ve got to pull to pull off what we can and use the Super Sucker to remove as much of it as we can.";
         script[21, 0] = "aumakua"; script[21, 1] = "What’s a Super Sucker?";
         script[22, 0] = "diver"; script[22, 1] = "It’s a special underwater vacuum that we can use to help clean algae off the reef! Call it down when you’re ready!";
+        script[23, 0] = "diver"; script[23, 1] = "It’s a special underwater vacuum that we can use to help clean algae off the reef! Call it down when you’re ready!";
 
 
-
-        StartCoroutine("play");
+        started = false;
+        currLine = 0;
 
     }
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            goScript = true;
+        }
+
+
+        if(goScript == true && started == false)
+        {
+            started = true;
+            StartCoroutine("play");
+        }
 
         if (moveOnFromBreakpoint == true)
         {
@@ -106,26 +121,44 @@ public class tourScript : MonoBehaviour {
     IEnumerator play()
     {
         Debug.Log("starting script");
-        yield return new WaitForSeconds(6);
         setDiverWave(false);
-
+        GameObject.Find("Title Screen").SetActive(false);
+        GameObject.Find("Wave").SetActive(false);
+        CameraAnim.SetBool("move1", true);
+        yield return new WaitForSeconds(2.5f);
+        //Move camera to final view distance
         StartCoroutine("sayNextLine");
         
         yield return new WaitForSeconds(2.5f);
-        fishCurrentTarget = fishTargets[0];
-        moveFish(fishCurrentTarget);
+        //move fish to first target
 
         yield return new WaitForSeconds(2.5f);
         StartCoroutine("sayNextLine");
         yield return new WaitForSeconds(2.5f);
-        diverCurrentTarget = diverTargets[0];
-        moveDiver(diverCurrentTarget);
+       //move diver to first target
         yield return new WaitForSeconds(2.5f);
-        fishCurrentTarget = fishTargets[1];
-        moveFish(fishCurrentTarget);
+        //move fish to second target
         yield return new WaitForSeconds(1.5f);
         StartCoroutine("sayNextLine");
         yield return new WaitForSeconds(3.5f);
+        StartCoroutine("sayNextLine");
+        yield return new WaitForSeconds(2.5f);
+        StartCoroutine("sayNextLine");
+        yield return new WaitForSeconds(2.5f);
+        StartCoroutine("sayNextLine");
+        yield return new WaitForSeconds(2.5f);
+        StartCoroutine("sayNextLine");
+        yield return new WaitForSeconds(2.5f);
+        StartCoroutine("sayNextLine");
+        yield return new WaitForSeconds(2.5f);
+        StartCoroutine("sayNextLine");
+        yield return new WaitForSeconds(2.5f);
+        StartCoroutine("sayNextLine");
+        yield return new WaitForSeconds(2.5f);
+        StartCoroutine("sayNextLine");
+        yield return new WaitForSeconds(2.5f);
+        StartCoroutine("sayNextLine");
+        yield return new WaitForSeconds(2.5f);
         StartCoroutine("sayNextLine");
         yield return new WaitForSeconds(2.5f);
         StartCoroutine("sayNextLine");
@@ -171,6 +204,7 @@ public class tourScript : MonoBehaviour {
             yield return new WaitForSeconds(5);
             showFishBubble(false);
         }
+        yield break;
     
     }
 
@@ -294,6 +328,11 @@ public class tourScript : MonoBehaviour {
             supersuckerMove = true;
         }
 
+    }
+
+    public void setGoScriptTrue()
+    {
+        goScript = true;
     }
 
 
