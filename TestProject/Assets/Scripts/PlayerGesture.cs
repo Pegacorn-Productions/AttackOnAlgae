@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Kinect = Windows.Kinect;
@@ -11,26 +11,29 @@ public class PlayerGesture : MonoBehaviour {
     public GameObject superSucker;
 
     private float timeVar;
+    private float oldTime;
+    private bool freezeSucker;
     private Transform joint;
     private Kinect.Body[] data;
     private float compX, compY;
     /// <summary>
     /// Finds joint51 of the super sucker.
     /// </summary>
-	void Start ()
-    {
+    void Start() {
         joint = superSucker.transform.Find("joint1");
         for (int i = 2; i < 52; i++) {
             joint = joint.transform.Find("joint" + i);
         }
 
         timeVar = Time.time;
+        oldTime = Time.time;
+        freezeSucker = false;
         compX = 0;
         compY = 0;
-	}
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+    }
+
+    // Update is called once per frame
+    void FixedUpdate() {
         if (BodySourceManager == null) {
             return;
         }
@@ -85,8 +88,9 @@ public class PlayerGesture : MonoBehaviour {
         if (nearestBodyID == -1) {
             return;
         }
-        forcePush(nearestBodyID);
-	}
+            forcePush(nearestBodyID);
+
+    }
 
     /// <summary>
     /// Applies force to the specified joint.
@@ -94,6 +98,7 @@ public class PlayerGesture : MonoBehaviour {
     /// </summary>
     /// <param name="bodyID">ID of the body to track</param>
     private void forcePush(int bodyID) {
+
         Kinect.Body body = data[bodyID];
         Kinect.Joint handRight = body.Joints[Kinect.JointType.HandRight];
         Kinect.Joint handLeft = body.Joints[Kinect.JointType.HandLeft];
@@ -102,8 +107,7 @@ public class PlayerGesture : MonoBehaviour {
 
 
         joint = superSucker.transform.Find("joint1");
-        for (int i = 2; i < 52; i++)
-        {
+        for (int i = 2; i < 52; i++) {
             joint = joint.transform.Find("joint" + i);
             joint.GetComponent<Rigidbody>().isKinematic = false;
         }
@@ -119,33 +123,31 @@ public class PlayerGesture : MonoBehaviour {
 
 
         Vector3 ret;
-        if (Mathf.Abs(distanceX-compX) < 0.025f && Mathf.Abs(distanceY-compY) < 0.025f) {
+       if (Mathf.Abs(distanceX - compX) < 0.025f && Mathf.Abs(distanceY - compY) < 0.025f && Time.time - oldTime > 1f) {
             ret = new Vector3(0, 0, 0);
+            oldTime = Time.time;
         }
         else {
             ret = new Vector3(distanceX, 0, distanceY);
         }
-        
 
-        if (ret != Vector3.zero)
-        {
+
+        if (ret != Vector3.zero) {
             rbJoint.AddForce(ret);
         }
-        else if(Time.time - timeVar >= 1.5)
-        {   
+        else {
             rbJoint.velocity = ret;
             rbJoint.angularVelocity = ret;
             joint = superSucker.transform.Find("joint1");
-            for (int i = 2; i < 52; i++)
-            {
+            for (int i = 2; i < 52; i++) {
                 joint = joint.transform.Find("joint" + i);
                 joint.GetComponent<Rigidbody>().isKinematic = !joint.GetComponent<Rigidbody>().isKinematic;
             }
 
-            timeVar = Time.time;
+
         }
 
-        
+
         compX = distanceX;
         compY = distanceY;
     }
