@@ -128,10 +128,10 @@ public class SpeechBubble : MonoBehaviour
 			//mat = temp;
 
 			//Render the round part of the bubble
-			GUI.Label(new Rect(0,Screen.height*0.1f,Mathf.Sqrt(area) * 0.5f,Mathf.Sqrt(area) * 0.5f),"",guiSkin.customStyles[0]);
+			GUI.Label(new Rect(0,Screen.height*0.1f,Mathf.Sqrt(area) * 0.6f,Mathf.Sqrt(area) * 0.6f),"",guiSkin.customStyles[0]);
 
 			//Render the text
-			GUI.Label(new Rect(Screen.width*0.01f,Screen.height*0.15f,Mathf.Sqrt(area)*0.4f,Mathf.Sqrt(area) * 0.4f),text,guiSkin.label);
+			GUI.Label(new Rect(Screen.width*0.01f,Screen.height*0.15f,Mathf.Sqrt(area)*0.5f,Mathf.Sqrt(area) * 0.5f),text,guiSkin.label);
 		//	if (GUI.Button(new Rect(69, 102, Mathf.Sqrt(area* 0.02f),Mathf.Sqrt(area* 0.002f)), "Dismiss"))
 		//	{
 			//	dismissed = true;
