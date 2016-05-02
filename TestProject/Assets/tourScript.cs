@@ -45,6 +45,7 @@ public class tourScript : MonoBehaviour
     public Sprite[] maps;
     public Sprite[] gestures;
 
+    public AudioClip music;
 
 
 
@@ -200,6 +201,8 @@ public class tourScript : MonoBehaviour
         // camera pan up and out of the water
         //thanks for playing shows up
         // fade to black
+        GameObject.Find("Main Camera").GetComponent<AudioSource>().clip = music;
+        GameObject.Find("Main Camera").GetComponent<AudioSource>().Play();
         EndScene();
         yield return new WaitForSeconds(10);
         // show credits
@@ -210,6 +213,7 @@ public class tourScript : MonoBehaviour
 
     IEnumerator play()
     {
+       
         Debug.Log("starting script");
         setDiverWave(false);
         GameObject.Find("Title Screen").SetActive(false);
