@@ -32,7 +32,7 @@ public class flocking : MonoBehaviour
 			Collider col = enemies[i].GetComponent<Collider>();
 			enemy.Add(col);
 		}
-		SpawnFlockOne();
+
 	}
 
 
