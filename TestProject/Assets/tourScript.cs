@@ -54,6 +54,8 @@ public class tourScript : MonoBehaviour
     public GameObject thanks;
     public GameObject credits;
 
+    private bool fishFinished = false, diverFinished = false;
+
 
 
     // Use this for initialization
@@ -262,18 +264,38 @@ public class tourScript : MonoBehaviour
 
         yield return new WaitForSeconds(2.5f);
         //move fish to first target
-
-        yield return new WaitForSeconds(2.5f);
+        while (fishFinished == false)
+        {
+            yield return new WaitForSeconds(1);
+        }
+        fishFinished = false;
 
         StartCoroutine("sayNextLine"); //Amakua - *Swims up to the camera then around to the Diver* It’s about time you showed up, my reef is getting ruined!
         yield return new WaitForSeconds(2.5f);
         //move diver to first target
+        while (diverFinished == false)
+        {
+            yield return new WaitForSeconds(1);
+        }
+        diverFinished = false;
         yield return new WaitForSeconds(2.5f);
         //move fish to second target
+        while (fishFinished == false)
+        {
+            yield return new WaitForSeconds(1);
+        }
+        fishFinished = false;
         yield return new WaitForSeconds(1.5f);
 
         StartCoroutine("sayNextLine"); //Diver- Well, we are going to try and help fix it. But first let’s check in on this little urchin *walks over to urchin*
         yield return new WaitForSeconds(3.5f);
+
+        //Diver *walks over to urchin*
+        while (diverFinished == false)
+        {
+            yield return new WaitForSeconds(1);
+        }
+        diverFinished = false;
 
         StartCoroutine("sayNextLine"); //Diver - This is Tripneustes gratilla a type of Sea Urchin... 
         yield return new WaitForSeconds(2.5f);
@@ -284,7 +306,14 @@ public class tourScript : MonoBehaviour
         StartCoroutine("sayNextLine"); //Diver - *nods and crouches down* This little friend eats algae, which is a good thing because there’s a lot of it here. *Waves towards beds of algae*
         yield return new WaitForSeconds(2.5f);
 
-        StartCoroutine("sayNextLine"); //Amakua - *swims over the algae circling and saying* Yeah, and it’s taking over my reef!
+        //Amakua - *swims over the algae circling*
+        while (fishFinished == false)
+        {
+            yield return new WaitForSeconds(1);
+        }
+        fishFinished = false;
+
+        StartCoroutine("sayNextLine"); //Amakua -  Yeah, and it’s taking over my reef!
         yield return new WaitForSeconds(2.5f);
 
         StartCoroutine("sayNextLine"); //Diver - But even though there are a lot of these Collector Urchins here, they can’t keep up with how fast this algae grows.
@@ -293,14 +322,29 @@ public class tourScript : MonoBehaviour
         StartCoroutine("sayNextLine"); //Amakua - It’s invasive!
         yield return new WaitForSeconds(2.5f);
 
-        StartCoroutine("sayNextLine"); //Diver- *stands up and goes over to some Algae* Yep, so now we have to help out and try to remove what we can so the reef can bounce back and get healthy.
+        //Diver- *stands up and goes over to some Algae* 
+        while (diverFinished == false)
+        {
+            yield return new WaitForSeconds(1);
+        }
+        diverFinished = false;
+
+        StartCoroutine("sayNextLine"); //Diver - Yep, so now we have to help out and try to remove what we can so the reef can bounce back and get healthy.
         yield return new WaitForSeconds(2.5f);
+
 
         map.GetComponent<CanvasRenderer>().SetAlpha(0.0f);
         map.SetActive(true);
         map.GetComponent<Image>().CrossFadeAlpha(1.0f, 3.0f, false);
 
-        StartCoroutine("sayNextLine"); //*Map shows up, Amakua swims up towards it and says* Amakua - This is Kaneohe Bay, on Oahu. It used to be a nice reef, but lately these algae have shown up and they are taking over!
+        //*Map shows up, Amakua swims up towards it and says*
+        while (fishFinished == false)
+        {
+            yield return new WaitForSeconds(1);
+        }
+        fishFinished = false;
+
+        StartCoroutine("sayNextLine"); // Amakua - This is Kaneohe Bay, on Oahu. It used to be a nice reef, but lately these algae have shown up and they are taking over!
         yield return new WaitForSeconds(2.5f);
 
 
@@ -308,7 +352,15 @@ public class tourScript : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
 
         map.GetComponent<Image>().sprite = maps[0];
-        StartCoroutine("sayNextLine"); // Diver - *Walks over to one of the coral heads covered in algae* We have acanthrophora spicifera
+
+        //Diver - *Walks over to one of the coral heads covered in algae *
+        while (diverFinished == false)
+        {
+            yield return new WaitForSeconds(1);
+        }
+        diverFinished = false;
+
+        StartCoroutine("sayNextLine"); // Diver -  We have acanthrophora spicifera
         yield return new WaitForSeconds(2.5f);
 
         StartCoroutine("sayNextLine"); //Amakua- Sometimes people call it Spiny Seaweed *image shows up underneath the map with a color block*
@@ -317,7 +369,15 @@ public class tourScript : MonoBehaviour
 
 
         map.GetComponent<Image>().sprite = maps[1];
-        StartCoroutine("sayNextLine"); // *walks over to another coral head with algae* There’s also  kappaphycus alvarezii
+
+        // *Diver walks over to another coral head with algae*
+        while (diverFinished == false)
+        {
+            yield return new WaitForSeconds(1);
+        }
+        diverFinished = false;
+
+        StartCoroutine("sayNextLine"); // Diver - There’s also  kappaphycus alvarezii
         //*as before, image comes up with name and color block map changes to show range*
         yield return new WaitForSeconds(2.5f);
 
@@ -345,8 +405,14 @@ public class tourScript : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
         map.SetActive(false);
 
+        //*Diver walks over to a coral head* 
+        while (diverFinished == false)
+        {
+            yield return new WaitForSeconds(1);
+        }
+        diverFinished = false;
 
-        StartCoroutine("sayNextLine"); //*Diver walks over to a coral head* Diver - So we’ve got to pull to pull off what we can and use the Super Sucker to remove as much of it as we can.
+        StartCoroutine("sayNextLine"); //Diver - So we’ve got to pull to pull off what we can and use the Super Sucker to remove as much of it as we can.
         yield return new WaitForSeconds(2.5f);
 
 
@@ -638,12 +704,14 @@ public class tourScript : MonoBehaviour
     //put whatever you want to happen after each path is complete here
    void diverDone()
     {
+        diverFinished = true;
         Debug.Log("Diver has finished a path!");
     }
 
     //same as Diver
     void humuDone()
     {
+        fishFinished = true;
         Debug.Log("Humuhumu has finished a path!");
     }
 
