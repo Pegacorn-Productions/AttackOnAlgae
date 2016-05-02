@@ -17,10 +17,8 @@ public class AlgaeScreen : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if(Input.GetKeyDown("space")){
-            destroyAllAlgae();
-        }
-        if (Time.time - oldTime > 1 && spawnAlgae == true) {
+  
+        if (Time.time - oldTime > 3 && spawnAlgae == true) {
             oldTime = Time.time;
             Image newAlgae = Instantiate(algaeScreen);
             newAlgae.CrossFadeAlpha(0, 0, false);

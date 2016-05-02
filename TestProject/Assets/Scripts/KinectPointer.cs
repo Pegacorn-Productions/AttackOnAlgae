@@ -16,9 +16,6 @@ public class KinectPointer : MonoBehaviour {
     public Image rightImage;
     public Image leftImage;
 
-    private Image newRightImage;
-    private Image newLeftImage;
-
 
     /// <summary>
     /// Updates the pointer position on screen with the right and left hands.
