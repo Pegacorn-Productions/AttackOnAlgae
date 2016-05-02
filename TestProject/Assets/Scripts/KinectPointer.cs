@@ -24,7 +24,7 @@ public class KinectPointer : MonoBehaviour {
     /// </summary>
     void Update() {
 
-        if (Input.GetKey("escape"))
+        if (Input.GetKey(KeyCode.Escape))
             Application.Quit();
 
         if (BodySourceManager == null) {
