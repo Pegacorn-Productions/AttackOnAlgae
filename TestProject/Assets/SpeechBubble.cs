@@ -19,17 +19,17 @@ public class SpeechBubble : MonoBehaviour
 	private Vector3 goViewportPos;
 
 	//the width of the speech bubble
-	public int bubbleWidth = 200;
+	public float bubbleWidth = Mathf.Sqrt(area* 0.1f);
 	//the height of the speech bubble
-	public int bubbleHeight = 100;
+	public float bubbleHeight = Mathf.Sqrt(area* 0.1f);
 
 	//an offset, to better position the bubble 
 	public float offsetX = 0;
 	public float offsetY = 150;
 
 	//an offset to center the bubble 
-	private int centerOffsetX;
-	private int centerOffsetY;
+	private float centerOffsetX;
+	private float centerOffsetY;
 
 	public int bubbleX;
 	public int bubbleY;
