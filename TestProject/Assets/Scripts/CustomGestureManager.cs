@@ -68,19 +68,19 @@ public class CustomGestureManager : MonoBehaviour {
                     return;
                 }
 
-                if (handAboveHeadResult.Detected == true && handAboveHeadResult.Confidence > 0.70f) {
-                    Debug.Log("Right hand above head detected. Confidence is " + handAboveHeadResult.Confidence.ToString());
+                if (handAboveHeadResult.Detected == true && handAboveHeadResult.Confidence > 0.30f) {
+                   // Debug.Log("Right hand above head detected. Confidence is " + handAboveHeadResult.Confidence.ToString());
                     AttachedObject.GetComponent<diverScript>().GetSuperSucker();
                 }
 
                 if (handSwipeResult.Detected == true && handSwipeResult.Confidence > 0.80f) {
-                    Debug.Log("Hand Swipe detected. Confidence is" + handSwipeResult.Confidence.ToString());
+                  //  Debug.Log("Hand Swipe detected. Confidence is" + handSwipeResult.Confidence.ToString());
                     SpeechBubble.GetComponent<SpeechBubble>().DismissSpeechBuble();
                 }
 
-                if (handWaveResult.Detected == true && handWaveResult.Confidence > 0.80f) {
+                if (handWaveResult.Detected == true && handWaveResult.Confidence > 0.01f) {
                     AttachedObject.GetComponent<tourScript>().setGoScriptTrue();
-                    Debug.Log("Hand Wave detected. Confidence is " + handWaveResult.Confidence.ToString());
+                   // Debug.Log("Hand Wave detected. Confidence is " + handWaveResult.Confidence.ToString());
                 }
 
             }
