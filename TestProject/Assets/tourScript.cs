@@ -184,12 +184,13 @@ public class tourScript : MonoBehaviour
         fadeoutIntro2 = false;
         //while fading into the scene
         sceneStarting = true;
+        //pan camera down
+        //keep it like that until player waves
         CameraAnim.SetBool("start", true);
         GameObject.Find("Logo test").GetComponent<Image>().CrossFadeAlpha(1.0f, 2.0f, false);
         GameObject.Find("gestures").GetComponent<Image>().CrossFadeAlpha(1.0f, 2.0f, false);
         yield return new WaitForSeconds(8);
-        //pan camera down
-        //keep it like that until player waves
+     
 
 
     }
