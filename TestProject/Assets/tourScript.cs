@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 public class tourScript : MonoBehaviour
 {
 
@@ -29,6 +32,15 @@ public class tourScript : MonoBehaviour
     private bool started = false;
 
     private bool supersuckerMove = false, superSuckerOn = true;
+
+
+    public Image FadeImg;
+    public float fadeSpeed = 0.1f;
+    public bool sceneStarting = false;
+
+    public Sprite[] maps;
+    public Sprite[] gestures;
+
 
 
 
@@ -74,7 +86,24 @@ public class tourScript : MonoBehaviour
         started = false;
         currLine = 0;
 
+        StartCoroutine("intro");
+
     }
+
+    void Awake()
+    {
+        // Set the texture so that it is the the size of the screen and covers it.
+        FadeImg.rectTransform.localScale = new Vector2(Screen.width, Screen.height);
+    }
+    void Update()
+    {
+        // If the scene is starting...
+        if (sceneStarting)
+            // ... call the StartScene function.
+            StartScene();
+    }
+
+
 
     // Update is called once per frame
     void FixedUpdate()
@@ -123,12 +152,43 @@ public class tourScript : MonoBehaviour
 
     }
 
+    IEnumerator intro()
+    {
+        //fade pegacorn productions presents in
+        yield return new WaitForSeconds(5);
+        //fade it out
+        yield return new WaitForSeconds(5);
+        //fade in the attack on algae
+        yield return new WaitForSeconds(5);
+        //move it up to the top of the screen 
+        //while fading into the scene
+        sceneStarting = true;
+        yield return new WaitForSeconds(8);
+        //pan camera down
+        //keep it like that until player waves
+
+
+    }
+
+    IEnumerator outro()
+    {
+        // camera pan up and out of the water
+        //thanks for playing shows up
+        // fade to black
+        EndScene();
+        yield return new WaitForSeconds(10);
+        // show credits
+        //reload scene
+        SceneManager.LoadScene(0);
+    }
+
+
     IEnumerator play()
     {
         Debug.Log("starting script");
         setDiverWave(false);
         GameObject.Find("Title Screen").SetActive(false);
-        GameObject.Find("Wave").SetActive(false);
+        GameObject.Find("gestures").SetActive(false);
         CameraAnim.SetBool("move1", true);
         yield return new WaitForSeconds(2.5f);
         //Move camera to final view distance
@@ -170,12 +230,16 @@ public class tourScript : MonoBehaviour
         StartCoroutine("sayNextLine"); //Diver- *stands up and goes over to some Algae* Yep, so now we have to help out and try to remove what we can so the reef can bounce back and get healthy.
         yield return new WaitForSeconds(2.5f);
 
+        GameObject.Find("Map").SetActive(true);
+
         StartCoroutine("sayNextLine"); //*Map shows up, Amakua swims up towards it and says* Amakua - This is Kaneohe Bay, on Oahu. It used to be a nice reef, but lately these algae have shown up and they are taking over!
         yield return new WaitForSeconds(2.5f);
+
 
         StartCoroutine("sayNextLine"); //*Map changes to show the algae showing up and taking over Kaneohe bay* Diver- There are three species causing problems.
         yield return new WaitForSeconds(2.5f);
 
+        GameObject.Find("Map").GetComponent<Image>().sprite = maps[0];
         StartCoroutine("sayNextLine"); // Diver - *Walks over to one of the coral heads covered in algae* We have acanthrophora spicifera
         yield return new WaitForSeconds(2.5f);
 
@@ -184,20 +248,20 @@ public class tourScript : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
 
 
-
+        GameObject.Find("Map").GetComponent<Image>().sprite = maps[1];
         StartCoroutine("sayNextLine"); // *walks over to another coral head with algae* There’s also  kappaphycus alvarezii
         //*as before, image comes up with name and color block map changes to show range*
         yield return new WaitForSeconds(2.5f);
 
 
-
+        GameObject.Find("Map").GetComponent<Image>().sprite = maps[2];
         StartCoroutine("sayNextLine"); //And lastly we’ve got, gracilera salicornia
-        //*as before*
         yield return new WaitForSeconds(2.5f);
 
 
         StartCoroutine("sayNextLine"); //Amakua - It’s also called gorilla ogo!
         yield return new WaitForSeconds(2.5f);
+        GameObject.Find("Map").GetComponent<Image>().sprite = maps[3];
 
         StartCoroutine("sayNextLine"); //Diver- So these three algae are taking over the reef, and all three were introduced by us humans.
         yield return new WaitForSeconds(2.5f);
@@ -205,6 +269,8 @@ public class tourScript : MonoBehaviour
         StartCoroutine("sayNextLine"); //Amakua- That’s why you should fix it!
         yield return new WaitForSeconds(2.5f);
 
+        //hide the map
+        GameObject.Find("Map").SetActive(false);
 
 
         StartCoroutine("sayNextLine"); // *Diver nods and kneels down and motions to sea urchin again* Diver - Yep, we can’t depend on our friend here to do all the work, the algae grows too fast.
@@ -221,7 +287,8 @@ public class tourScript : MonoBehaviour
 
         StartCoroutine("sayNextLine"); //Diver- It’s a special underwater vacuum that we can use to help clean algae off the reef! Call it down when you’re ready!
         yield return new WaitForSeconds(2.5f);
-
+        GameObject.Find("gestures").GetComponent<Image>().sprite = gestures[0];
+        GameObject.Find("gestures").SetActive(true);
 
         //need a way to wait for a signal from update
         while (moveOnFromBreakpoint == false)
@@ -229,11 +296,12 @@ public class tourScript : MonoBehaviour
             yield return new WaitForSeconds(1);
         }
         //move camera into algae patch to get cleared
-        StartCoroutine("sayNextLine"); //Diver- Great! Now move it over the algae covered coral to suck it off!
+        GameObject.Find("gestures").GetComponent<Image>().sprite = gestures[1];
+       // StartCoroutine("sayNextLine"); //Diver- Great! Now move it over the algae covered coral to suck it off!
         yield return new WaitForSeconds(2.5f);
 
         //now the player is doing supersucker stuff, should we give them a certain number of time to complete it or just wait for them to finish completely?
-
+        GameObject.Find("gestures").SetActive(false);
         //then diver congratulates player
 
         //aumakua is happy
@@ -242,17 +310,11 @@ public class tourScript : MonoBehaviour
 
         //diver says thanks
 
-        //diver says goodbye
-
-        //camera pan out to ship, see algae on top
-
-        //roll credits
-
-        //wait x seconds, then reset scene :)
+        //diver says goodbye, waves
 
 
         Debug.Log("Got to end of play coroutine!");
-        //  SceneManager.LoadScene(SceneManager.loadedLevel);
+        StartCoroutine("outro");
 
 
     }
@@ -406,6 +468,55 @@ public class tourScript : MonoBehaviour
     {
         goScript = true;
     }
+
+
+    //intro/exit stuff
+    void FadeToClear()
+    {
+        // Lerp the colour of the image between itself and transparent.
+        FadeImg.color = Color.Lerp(FadeImg.color, Color.clear, fadeSpeed * Time.deltaTime);
+    }
+
+
+    void FadeToBlack()
+    {
+        // Lerp the colour of the image between itself and black.
+        FadeImg.color = Color.Lerp(FadeImg.color, Color.black, fadeSpeed * Time.deltaTime);
+    }
+
+
+    void StartScene()
+    {
+        // Fade the texture to clear.
+        FadeToClear();
+
+        // If the texture is almost clear...
+        if (FadeImg.color.a <= 0.05f)
+        {
+            // ... set the colour to clear and disable the RawImage.
+            FadeImg.color = Color.clear;
+            FadeImg.enabled = false;
+
+            // The scene is no longer starting.
+            sceneStarting = false;
+        }
+    }
+
+
+    public void EndScene()
+    {
+        // Make sure the RawImage is enabled.
+        FadeImg.enabled = true;
+
+        // Start fading towards black.
+        FadeToBlack();
+
+        // If the screen is almost black...
+        //if (FadeImg.color.a >= 0.95f)
+           //show the credits
+    }
+
+   
 
 
 
