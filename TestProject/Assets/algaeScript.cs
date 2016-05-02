@@ -7,15 +7,26 @@ public class algaeScript : MonoBehaviour {
     private GameObject algaeRemoveClone;
     public GameObject algaeSuckingPhysics;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
+    private float prevTime;
+    private ParticleSystem ps;
+    private bool gotSuperSucked = false;
+    private bool called = false;
+
+    // Use this for initialization
+    void Start () {
+        ps = GetComponent<ParticleSystem>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+
+        if (gotSuperSucked && (Time.time - prevTime > 1.0f) && (ps.maxParticles > 0))
+        {
+            ps.maxParticles = ps.maxParticles - 100;
+            prevTime = Time.time;
+        }
+
+    }
 
     void OnTriggerEnter(Collider collision)
     {
@@ -38,5 +49,15 @@ public class algaeScript : MonoBehaviour {
         algaeSuckingPhysics.GetComponent<ParticleSystem>().loop = false;
         Debug.Log("turned off looping...");
         Debug.Log(algaeSuckingPhysics.GetComponent<ParticleSystem>().loop);
+    }
+
+    public void getSuperSucked()
+    {
+        if (called == false)
+        {
+            gotSuperSucked = true;
+            Debug.Log("Function call");
+            called = true;
+        }
     }
 }

@@ -127,10 +127,10 @@ public class tourScript : MonoBehaviour
         if (sceneStarting) StartScene();
         if (sceneEnding) EndScene();
 
-        if(fadeinIntro1) GameObject.Find("intro").GetComponent<Image>().CrossFadeAlpha(0.8f, 4.0f, false);
-        if (fadeoutIntro1) GameObject.Find("intro").GetComponent<Image>().CrossFadeAlpha(-0.8f, 4.0f, false);
-        if (fadeinIntro2) GameObject.Find("intro 2").GetComponent<Image>().CrossFadeAlpha(0.8f, 4.0f, false);
-        if (fadeoutIntro2) GameObject.Find("intro 2").GetComponent<Image>().CrossFadeAlpha(-0.8f, 4.0f, false);
+        if(fadeinIntro1) GameObject.Find("intro").GetComponent<Image>().CrossFadeAlpha(1.0f, 4.0f, false);
+        if (fadeoutIntro1) GameObject.Find("intro").GetComponent<Image>().CrossFadeAlpha(-1.0f, 4.0f, false);
+        if (fadeinIntro2) GameObject.Find("intro 2").GetComponent<Image>().CrossFadeAlpha(1.0f, 4.0f, false);
+        if (fadeoutIntro2) GameObject.Find("intro 2").GetComponent<Image>().CrossFadeAlpha(-1.0f, 4.0f, false);
     }
 
 
@@ -201,8 +201,9 @@ public class tourScript : MonoBehaviour
         fadeinIntro2 = true;
         yield return new WaitForSeconds(5);
         fadeinIntro2 = false;
+        yield return new WaitForSeconds(2);
         fadeoutIntro2 = true;
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(4);
         fadeoutIntro2 = false;
         //while fading into the scene
         sceneStarting = true;
@@ -350,9 +351,28 @@ public class tourScript : MonoBehaviour
         gestures_img.SetActive(true);
 
         //need a way to wait for a signal from update
+        int counter = 0;
         while (moveOnFromBreakpoint == false)
         {
+            if(counter%15 == 0)
+            {
+                updateDiverBubble("In order to call down the supersucker, you'll need to raise your hand!");
+                showDiverBubble(true);
+                yield return new WaitForSeconds(5);
+                showDiverBubble(false);
+
+            }
+            if (counter % 32 == 0)
+            {
+                updateDiverBubble("C'mon, what are you waiting for? Call down the supersucker so we can get started cleaning up the reef!");
+                showDiverBubble(true);
+                yield return new WaitForSeconds(5);
+                showDiverBubble(false);
+
+            }
+
             yield return new WaitForSeconds(1);
+            counter++;
         }
         //move camera into algae patch to get cleared
         gestures_img.GetComponent<Image>().sprite = gestures[1];
@@ -368,6 +388,11 @@ public class tourScript : MonoBehaviour
 
         //now the player is doing supersucker stuff, should we give them a certain number of time to complete it or just wait for them to finish completely?
         gestures_img.SetActive(false);
+
+
+        //make all algae disappear slowly from corals <- NOT WORKING PROPERLY, LAGS EVERYTHING AND CALLS OVER AND OVER...
+       // GameObject.Find("All reefs").GetComponent<receiverScript>().fire = true;
+
         //then diver congratulates player
         GameObject.Find("Main Camera").GetComponent<AudioSource>().clip = music;
         GameObject.Find("Main Camera").GetComponent<AudioSource>().Play();
