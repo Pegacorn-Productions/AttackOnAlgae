@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class tourScript : MonoBehaviour {
+public class tourScript : MonoBehaviour
+{
 
-    public string[,] script = new string[24,2];
+    public string[,] script = new string[24, 2];
     private int currLine;
 
     public GameObject diverSpeechBubble, fishSpeechBubble;
@@ -28,11 +29,12 @@ public class tourScript : MonoBehaviour {
     private bool started = false;
 
     private bool supersuckerMove = false, superSuckerOn = true;
-    
+
 
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
         diverSpeechScript = diverSpeechBubble.GetComponent<SpeechBubble>();
         fishSpeechScript = fishSpeechBubble.GetComponent<SpeechBubble>();
@@ -45,7 +47,7 @@ public class tourScript : MonoBehaviour {
         script[1, 0] = "aumakua"; script[1, 1] = "It's about time you showed up, my reef is getting ruined!";
         script[2, 0] = "diver"; script[2, 1] = "Well, we are going to try and help fix it. But first, let's check in on this little urchin.";
         script[3, 0] = "diver"; script[3, 1] = "This is <color=green><i>Tripneustes gratilla</i></color>, a type of sea urchin.";
-		script[4, 0] = "aumakua"; script[4, 1] = "It's also called a <color=green>Collector Urchin</color>!";
+        script[4, 0] = "aumakua"; script[4, 1] = "It's also called a <color=green>Collector Urchin</color>!";
         script[5, 0] = "diver"; script[5, 1] = "This little friend eats, algae, which is a good thing because there's a lot of it here.";
         script[6, 0] = "aumakua"; script[6, 1] = "Yeah, and it's taking over my reef!";
         script[7, 0] = "diver"; script[7, 1] = "But even though there are a lot of these <b>Collector Urchins</b> here, they can't keep up with how fast this algae grows.";
@@ -53,27 +55,30 @@ public class tourScript : MonoBehaviour {
         script[9, 0] = "diver"; script[9, 1] = "Yep, so now we have to help out and try to remove what we can so the reef can bounce back and get healthy.";
         script[10, 0] = "aumakua"; script[10, 1] = "This is Kaneohe Bay, on Oahu. It used to be a nice reef, but lately these algae have shown up and they are taking over!";
         script[11, 0] = "diver"; script[11, 1] = "There are three species causing problems.";
-		script[12, 0] = "diver"; script[12, 1] = "We have <color=green><i>acanthrophora spicifera</i></color>.";
-		script[13, 0] = "aumakua"; script[13, 1] = "Sometimes people call it <color=green>Spiny Seaweed</color>!";
-		script[14, 0] = "diver"; script[14, 1] = "There’s also  <color=green><i>kappaphycus alvarezii</i></color>";
-		script[15, 0] = "diver"; script[15, 1] = "And lastly we’ve got, <color=green><i>gracilera salicornia</i></color>";
-		script[16, 0] = "aumakua"; script[16, 1] = "It’s also called <color=green>gorilla ogo</color>!";
+        script[12, 0] = "diver"; script[12, 1] = "We have <color=green><i>acanthrophora spicifera</i></color>.";
+        script[13, 0] = "aumakua"; script[13, 1] = "Sometimes people call it <color=green>Spiny Seaweed</color>!";
+        script[14, 0] = "diver"; script[14, 1] = "There’s also  <color=green><i>kappaphycus alvarezii</i></color>";
+        script[15, 0] = "diver"; script[15, 1] = "And lastly we’ve got, <color=green><i>gracilera salicornia</i></color>";
+        script[16, 0] = "aumakua"; script[16, 1] = "It’s also called <color=green>gorilla ogo</color>!";
         script[17, 0] = "diver"; script[17, 1] = "So these three algae are taking over the reef, and all three were introduced by us humans.";
         script[18, 0] = "aumakua"; script[18, 1] = "That’s why you should fix it!";
         script[19, 0] = "diver"; script[19, 1] = "Yep, we can’t depend on our friend here to do all the work, the algae grows too fast.";
         script[20, 0] = "diver"; script[20, 1] = "So we’ve got to pull to pull off what we can and use the Super Sucker to remove as much of it as we can.";
         script[21, 0] = "aumakua"; script[21, 1] = "What’s a Super Sucker?";
         script[22, 0] = "diver"; script[22, 1] = "It’s a special underwater vacuum that we can use to help clean algae off the reef! Call it down when you’re ready!";
-        script[23, 0] = "diver"; script[23, 1] = "It’s a special underwater vacuum that we can use to help clean algae off the reef! Call it down when you’re ready!";
+        script[23, 0] = "diver"; script[23, 1] = "Great! Now move it over the algae covered coral to suck it off!";
+
+
 
 
         started = false;
         currLine = 0;
 
     }
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -81,7 +86,7 @@ public class tourScript : MonoBehaviour {
         }
 
 
-        if(goScript == true && started == false)
+        if (goScript == true && started == false)
         {
             started = true;
             StartCoroutine("play");
@@ -108,11 +113,11 @@ public class tourScript : MonoBehaviour {
         }
         if (exitCutscene == false)
         {
-            if(fishCurrentTarget) moveFish(fishCurrentTarget);
+            if (fishCurrentTarget) moveFish(fishCurrentTarget);
             if (diverCurrentTarget) moveDiver(diverCurrentTarget);
-            
-            
-            
+
+
+
         }
 
 
@@ -127,51 +132,95 @@ public class tourScript : MonoBehaviour {
         CameraAnim.SetBool("move1", true);
         yield return new WaitForSeconds(2.5f);
         //Move camera to final view distance
-        StartCoroutine("sayNextLine");
-        
+        StartCoroutine("sayNextLine"); //Diver- Hello! I’m so glad you’re here!
+
         yield return new WaitForSeconds(2.5f);
         //move fish to first target
 
         yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
+
+        StartCoroutine("sayNextLine"); //Amakua - *Swims up to the camera then around to the Diver* It’s about time you showed up, my reef is getting ruined!
         yield return new WaitForSeconds(2.5f);
-       //move diver to first target
+        //move diver to first target
         yield return new WaitForSeconds(2.5f);
         //move fish to second target
         yield return new WaitForSeconds(1.5f);
-        StartCoroutine("sayNextLine");
+
+        StartCoroutine("sayNextLine"); //Diver- Well, we are going to try and help fix it. But first let’s check in on this little urchin *walks over to urchin*
         yield return new WaitForSeconds(3.5f);
-        StartCoroutine("sayNextLine");
-        yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
-        yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
-        yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
-        yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
-        yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
-        yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
-        yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
-        yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
-        yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
-        yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
-        yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
-        yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
-        yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
-        yield return new WaitForSeconds(2.5f);
-        StartCoroutine("sayNextLine");
+
+        StartCoroutine("sayNextLine"); //Diver - This is Tripneustes gratilla a type of Sea Urchin... 
         yield return new WaitForSeconds(2.5f);
 
+        StartCoroutine("sayNextLine"); //Amakua- It’s also called a Collector Urchin!
+        yield return new WaitForSeconds(2.5f);
+
+        StartCoroutine("sayNextLine"); //Diver - *nods and crouches down* This little friend eats algae, which is a good thing because there’s a lot of it here. *Waves towards beds of algae*
+        yield return new WaitForSeconds(2.5f);
+
+        StartCoroutine("sayNextLine"); //Amakua - *swims over the algae circling and saying* Yeah, and it’s taking over my reef!
+        yield return new WaitForSeconds(2.5f);
+
+        StartCoroutine("sayNextLine"); //Diver - But even though there are a lot of these Collector Urchins here, they can’t keep up with how fast this algae grows.
+        yield return new WaitForSeconds(2.5f);
+
+        StartCoroutine("sayNextLine"); //Amakua - It’s invasive!
+        yield return new WaitForSeconds(2.5f);
+
+        StartCoroutine("sayNextLine"); //Diver- *stands up and goes over to some Algae* Yep, so now we have to help out and try to remove what we can so the reef can bounce back and get healthy.
+        yield return new WaitForSeconds(2.5f);
+
+        StartCoroutine("sayNextLine"); //*Map shows up, Amakua swims up towards it and says* Amakua - This is Kaneohe Bay, on Oahu. It used to be a nice reef, but lately these algae have shown up and they are taking over!
+        yield return new WaitForSeconds(2.5f);
+
+        StartCoroutine("sayNextLine"); //*Map changes to show the algae showing up and taking over Kaneohe bay* Diver- There are three species causing problems.
+        yield return new WaitForSeconds(2.5f);
+
+        StartCoroutine("sayNextLine"); // Diver - *Walks over to one of the coral heads covered in algae* We have acanthrophora spicifera
+        yield return new WaitForSeconds(2.5f);
+
+        StartCoroutine("sayNextLine"); //Amakua- Sometimes people call it Spiny Seaweed *image shows up underneath the map with a color block*
+        //*map changes to show range and coverage of acanthrophora spicifera using the same color as the block*
+        yield return new WaitForSeconds(2.5f);
+
+
+
+        StartCoroutine("sayNextLine"); // *walks over to another coral head with algae* There’s also  kappaphycus alvarezii
+        //*as before, image comes up with name and color block map changes to show range*
+        yield return new WaitForSeconds(2.5f);
+
+
+
+        StartCoroutine("sayNextLine"); //And lastly we’ve got, gracilera salicornia
+        //*as before*
+        yield return new WaitForSeconds(2.5f);
+
+
+        StartCoroutine("sayNextLine"); //Amakua - It’s also called gorilla ogo!
+        yield return new WaitForSeconds(2.5f);
+
+        StartCoroutine("sayNextLine"); //Diver- So these three algae are taking over the reef, and all three were introduced by us humans.
+        yield return new WaitForSeconds(2.5f);
+
+        StartCoroutine("sayNextLine"); //Amakua- That’s why you should fix it!
+        yield return new WaitForSeconds(2.5f);
+
+
+
+        StartCoroutine("sayNextLine"); // *Diver nods and kneels down and motions to sea urchin again* Diver - Yep, we can’t depend on our friend here to do all the work, the algae grows too fast.
+        yield return new WaitForSeconds(2.5f);
+
+
+
+        StartCoroutine("sayNextLine"); //*Diver walks over to a coral head* Diver - So we’ve got to pull to pull off what we can and use the Super Sucker to remove as much of it as we can.
+        yield return new WaitForSeconds(2.5f);
+
+
+        StartCoroutine("sayNextLine"); //Amakua - What’s a Super Sucker?
+        yield return new WaitForSeconds(2.5f);
+
+        StartCoroutine("sayNextLine"); //Diver- It’s a special underwater vacuum that we can use to help clean algae off the reef! Call it down when you’re ready!
+        yield return new WaitForSeconds(2.5f);
 
 
         //need a way to wait for a signal from update
@@ -179,33 +228,56 @@ public class tourScript : MonoBehaviour {
         {
             yield return new WaitForSeconds(1);
         }
+        //move camera into algae patch to get cleared
+        StartCoroutine("sayNextLine"); //Diver- Great! Now move it over the algae covered coral to suck it off!
+        yield return new WaitForSeconds(2.5f);
+
+        //now the player is doing supersucker stuff, should we give them a certain number of time to complete it or just wait for them to finish completely?
+
+        //then diver congratulates player
+
+        //aumakua is happy
+
+        //more fish spawn
+
+        //diver says thanks
+
+        //diver says goodbye
+
+        //camera pan out to ship, see algae on top
+
+        //roll credits
+
+        //wait x seconds, then reset scene :)
+
 
         Debug.Log("Got to end of play coroutine!");
+        //  SceneManager.LoadScene(SceneManager.loadedLevel);
 
-       
+
     }
 
     IEnumerator sayNextLine()
     {
 
-        if (script[currLine,0] == "diver")
+        if (script[currLine, 0] == "diver")
         {
-            updateDiverBubble(script[currLine,1]);
+            updateDiverBubble(script[currLine, 1]);
             showDiverBubble(true);
             currLine++;
             yield return new WaitForSeconds(5);
             showDiverBubble(false);
         }
-        else if(script[currLine,0] == "aumakua")
+        else if (script[currLine, 0] == "aumakua")
         {
-            updateFishBubble(script[currLine,1]);
+            updateFishBubble(script[currLine, 1]);
             showFishBubble(true);
             currLine++;
             yield return new WaitForSeconds(5);
             showFishBubble(false);
         }
         yield break;
-    
+
     }
 
     void turnCamera(GameObject target)
@@ -214,7 +286,7 @@ public class tourScript : MonoBehaviour {
         cameraLocation.GetComponent<Animator>().enabled = false;
         Vector3 newDir = new Vector3(target.transform.position.x, cameraLocation.transform.position.y, target.transform.position.z);
         cameraLocation.transform.rotation = Quaternion.Slerp(cameraLocation.transform.rotation, Quaternion.LookRotation(newDir - cameraLocation.transform.position), 1 * Time.deltaTime);
-        
+
     }
 
     void moveDiver(GameObject moveTarget)
@@ -257,7 +329,7 @@ public class tourScript : MonoBehaviour {
         else
         {
             stopMoveFish();
-            fishLookAtTarget(viewcamera); 
+            fishLookAtTarget(viewcamera);
 
         }
     }
@@ -266,7 +338,7 @@ public class tourScript : MonoBehaviour {
     {
         fishAnim.SetBool("move", false);
     }
-   
+
 
     void setDiverWave(bool value)
     {
@@ -306,7 +378,7 @@ public class tourScript : MonoBehaviour {
         showFishBubble(false);
     }
 
-    
+
     void fishLookAtTarget(GameObject target)
     {
         Vector3 newDir = new Vector3(target.transform.position.x, fish.transform.position.y, target.transform.position.z);
