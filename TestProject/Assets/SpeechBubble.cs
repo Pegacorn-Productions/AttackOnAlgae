@@ -18,10 +18,12 @@ public class SpeechBubble : MonoBehaviour
 	//the game objects position on the screen
 	private Vector3 goViewportPos;
 
+    public static float area = Screen.height * Screen.width;
+
 	//the width of the speech bubble
-	public float bubbleWidth = Mathf.Sqrt(area* 0.1f);
+    public float bubbleWidth = Mathf.Sqrt(area) * 0.1f; 
 	//the height of the speech bubble
-	public float bubbleHeight = Mathf.Sqrt(area* 0.1f);
+	public float bubbleHeight = Mathf.Sqrt(area) * 0.1f;
 
 	//an offset, to better position the bubble 
 	public float offsetX = 0;
@@ -39,7 +41,7 @@ public class SpeechBubble : MonoBehaviour
 	private bool dismissed3 = false;
 	public int sw = Screen.width;
 	public int sh = Screen.height;
-	public static int area = Screen.height * Screen.width;
+
 	public float swr = Screen.width * 0.03f;
 	public float shr = Screen.height * -0.02f;
 	public float test = (area * 0.1f)/2f;
@@ -112,7 +114,9 @@ public class SpeechBubble : MonoBehaviour
 	void OnGUI()
 	{
 		//Begin the GUI group centering the speech bubble at the same position of this game object. After that, apply the offset
-		GUI.BeginGroup(new Rect(goScreenPos.x-centerOffsetX-offsetX,Screen.height-goScreenPos.y-centerOffsetY-offsetY,bubbleWidth,bubbleHeight));
+        offsetX = Screen.width * 0.10f;
+        offsetY = Screen.height * 0.50f;
+		GUI.BeginGroup(new Rect(goScreenPos.x-centerOffsetX-offsetX,Screen.height-goScreenPos.y-centerOffsetY-offsetY,Screen.width*1f,Screen.height*1f));
 
 		// if (addDismiss)
 		//   {
@@ -124,10 +128,10 @@ public class SpeechBubble : MonoBehaviour
 			//mat = temp;
 
 			//Render the round part of the bubble
-			GUI.Label(new Rect(26,-6,Mathf.Sqrt(area* 0.1f),Mathf.Sqrt(area*0.1f)),"",guiSkin.customStyles[0]);
+			GUI.Label(new Rect(0,Screen.height*0.1f,Mathf.Sqrt(area) * 0.5f,Mathf.Sqrt(area) * 0.5f),"",guiSkin.customStyles[0]);
 
 			//Render the text
-			GUI.Label(new Rect(59,19,Mathf.Sqrt(area* 0.05f),Mathf.Sqrt(area* 0.05f)),text,guiSkin.label);
+			GUI.Label(new Rect(Screen.width*0.01f,Screen.height*0.15f,Mathf.Sqrt(area)*0.4f,Mathf.Sqrt(area) * 0.4f),text,guiSkin.label);
 		//	if (GUI.Button(new Rect(69, 102, Mathf.Sqrt(area* 0.02f),Mathf.Sqrt(area* 0.002f)), "Dismiss"))
 		//	{
 			//	dismissed = true;
@@ -188,7 +192,7 @@ public class SpeechBubble : MonoBehaviour
 		//load orthogonal projection matrix
 		GL.LoadOrtho();
 		//a triangle primitive is going to be rendered
-		GL.Begin(GL.TRIANGLES);
+		//GL.Begin(GL.TRIANGLES);
 
 		//set the color
 		GL.Color(Color.white);
