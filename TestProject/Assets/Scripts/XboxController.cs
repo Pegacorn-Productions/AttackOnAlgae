@@ -35,7 +35,7 @@ public class XboxController : MonoBehaviour {
             diver.GetComponent<tourScript>().setGoScriptTrue();
         }
         if (Input.GetButtonDown("Select")) {
-            //Select button to quit?
+            Application.Quit();
         }
 
         //Allow the use of left joystick to control supersucker

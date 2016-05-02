@@ -17,7 +17,10 @@ public class AlgaeScreen : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (Time.time - oldTime > 3) {
+        if(Input.GetKeyDown("space")){
+            destroyAllAlgae();
+        }
+        if (Time.time - oldTime > 1 && spawnAlgae == true) {
             oldTime = Time.time;
             Image newAlgae = Instantiate(algaeScreen);
             newAlgae.CrossFadeAlpha(0, 0, false);
@@ -56,4 +59,18 @@ public class AlgaeScreen : MonoBehaviour {
     public void setSpawnAlgae(bool value) {
         spawnAlgae = value;
     }
+
+    /// <summary>
+    /// Destroys all the algae on screen.
+    /// </summary>
+    public void destroyAllAlgae() {
+        foreach (Transform child in this.transform) {
+            Debug.Log(child.ToString());
+            if (child.name.Equals("AlgaeScreen(Clone)")) {
+                child.GetComponent<Image>().CrossFadeAlpha(0, 1f, false);
+            }
+        }
+    }
+
+
 }
