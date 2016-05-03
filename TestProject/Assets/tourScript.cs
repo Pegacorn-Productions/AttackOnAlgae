@@ -293,7 +293,7 @@ public class tourScript : MonoBehaviour
         diverFinished = false;
         yield return new WaitForSeconds(2.5f);
         //move fish to second target
-        startPath(fish, "HumuWP_Set1");
+        startPath(fish, "HumuWP_Set2");
         while (fishFinished == false)
         {
             yield return new WaitForSeconds(1);
@@ -320,6 +320,7 @@ public class tourScript : MonoBehaviour
         StartCoroutine("sayNextLine"); //Diver - This is Tripneustes gratilla a type of Sea Urchin... 
         yield return new WaitForSeconds(2.5f);
 
+        startPath(fish, "HumuWP_Set2");
         StartCoroutine("sayNextLine"); //Amakua- It’s also called a Collector Urchin!
         yield return new WaitForSeconds(2.5f);
 
@@ -328,7 +329,7 @@ public class tourScript : MonoBehaviour
         diverAnim.SetBool("stand", false);
         yield return new WaitForSeconds(2.5f);
 
-        startPath(fish, "HumuWP_Set1");
+        startPath(fish, "HumuWP_Set3");
         //Amakua - *swims over the algae circling*
         while (fishFinished == false)
         {
@@ -358,7 +359,7 @@ public class tourScript : MonoBehaviour
         map.SetActive(true);
         map.GetComponent<Image>().CrossFadeAlpha(1.0f, 3.0f, false);
         //change this
-        startPath(fish, "HumuWP_Set1");
+        startPath(fish, "HumuWP_Set3");
         //*Map shows up, Amakua swims up towards it and says*
         while (fishFinished == false)
         {
@@ -389,7 +390,7 @@ public class tourScript : MonoBehaviour
 
         StartCoroutine("sayNextLine"); // Diver -  We have acanthrophora spicifera
         yield return new WaitForSeconds(2.5f);
-
+        startPath(fish, "HumuWP_Set4");
         StartCoroutine("sayNextLine"); //Amakua- Sometimes people call it Spiny Seaweed *image shows up underneath the map with a color block*
         //*map changes to show range and coverage of acanthrophora spicifera using the same color as the block*
         yield return new WaitForSeconds(2.5f);
@@ -407,7 +408,7 @@ public class tourScript : MonoBehaviour
         }
         diverFinished = false;
         diverAnim.SetBool("move", false);
-
+        startPath(fish, "HumuWP_Set5");
         StartCoroutine("sayNextLine"); // Diver - There’s also  kappaphycus alvarezii
         //*as before, image comes up with name and color block map changes to show range*
         yield return new WaitForSeconds(2.5f);
@@ -423,7 +424,7 @@ public class tourScript : MonoBehaviour
         diverFinished = false;
         diverAnim.SetBool("move", false);
 
-
+        startPath(fish, "HumuWP_Set6");
         map.GetComponent<Image>().sprite = maps[2];
         StartCoroutine("sayNextLine"); //And lastly we’ve got, gracilera salicornia
         yield return new WaitForSeconds(2.5f);
@@ -446,7 +447,7 @@ public class tourScript : MonoBehaviour
         StartCoroutine("sayNextLine"); // *Diver nods and kneels down and motions to sea urchin again* Diver - Yep, we can’t depend on our friend here to do all the work, the algae grows too fast.
         yield return new WaitForSeconds(2.5f);
         map.SetActive(false);
-
+        startPath(fish, "HumuWP_Set7");
         //*Diver walks over to a coral head* 
         startPath(diver, "DiverWP_Set5");
         diverAnim.SetBool("move", true);
