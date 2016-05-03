@@ -18,7 +18,7 @@ public class receiverScript : MonoBehaviour {
 	    if(fire == true && called == false)
         {
             Debug.Log("Broadcasting!");
-            BroadcastMessage("getSuperSucked");
+           // BroadcastMessage("getSuperSucked");
             called = true;
         }
 	}

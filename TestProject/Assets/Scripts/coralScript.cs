@@ -70,12 +70,11 @@ public class coralScript : MonoBehaviour {
 
     public void getSuperSucked()
     {
-        if (called == false)
-        {
+      
             gotSuperSucked = true;
             Debug.Log("Function call");
             gameObject.GetComponent<MeshRenderer>().material = healthyCoral;
             called = true;
-        }
+
     }
 }

@@ -519,7 +519,7 @@ public class tourScript : MonoBehaviour
 
 
         //make all algae disappear slowly from corals <- NOT WORKING PROPERLY, LAGS EVERYTHING AND CALLS OVER AND OVER...
-       // GameObject.Find("All reefs").GetComponent<receiverScript>().BroadcastMessage("getSuperSucked");
+        GameObject.Find("All reefs").BroadcastMessage("getSuperSucked");
 
         //then diver congratulates player
         GameObject.Find("Main Camera").GetComponent<AudioSource>().clip = music;
