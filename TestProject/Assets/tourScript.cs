@@ -54,7 +54,7 @@ public class tourScript : MonoBehaviour
     public GameObject thanks;
     public GameObject credits;
 
-    private bool fishFinished = false, diverFinished = false, turndiver = false;
+    private bool fishFinished = false, diverFinished = false, turndiver = false, allowSupersucker = false;
 
 
 
@@ -473,6 +473,8 @@ public class tourScript : MonoBehaviour
         StartCoroutine("sayNextLine"); //Amakua - What’s a Super Sucker?
         yield return new WaitForSeconds(2.5f);
 
+
+        allowSupersucker = true;
         StartCoroutine("sayNextLine"); //Diver- It’s a special underwater vacuum that we can use to help clean algae off the reef! Call it down when you’re ready!
         yield return new WaitForSeconds(2.5f);
         gestures_img.GetComponent<Image>().sprite = gestures[0];
@@ -643,7 +645,7 @@ public class tourScript : MonoBehaviour
 
     public void GetSuperSucker()
     {
-        if (superSuckerOn == true)
+        if (superSuckerOn == true && allowSupersucker == true)
         {
             supersucker.SetActive(true);
             supersuckerMove = true;
