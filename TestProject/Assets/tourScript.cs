@@ -53,6 +53,7 @@ public class tourScript : MonoBehaviour
     public GameObject gestures_text;
     public GameObject thanks;
     public GameObject credits;
+    public GameObject pointer;
 
     private bool fishFinished = false, diverFinished = false, turndiver = false, allowSupersucker = false;
 
@@ -261,6 +262,7 @@ public class tourScript : MonoBehaviour
 
         Debug.Log("starting script");
         setDiverWave(false);
+        pointer.SetActive(true);
 
         GameObject.Find("gestures").GetComponent<Image>().CrossFadeAlpha(-1.0f, 3.0f, false);
         gestures_text.SetActive(false);
@@ -513,13 +515,13 @@ public class tourScript : MonoBehaviour
         gestures_img.GetComponent<Image>().sprite = gestures[1];
         gestures_text.GetComponent<Text>().text = "Move the supersucker!";
         StartCoroutine("sayNextLine"); //Diver- Great! Now move it over the algae covered coral to suck it off!
-        yield return new WaitForSeconds(2.5f);
+        //yield return new WaitForSeconds(2.5f);
 
-        // yield return new WaitForSeconds(60);
+         yield return new WaitForSeconds(60);
 
         StartCoroutine("sayNextLine"); //Diver- Nice work! Only 30 more seconds to go, suck up as much algae as you can!
 
-        // yield return new WaitForSeconds(30);
+         yield return new WaitForSeconds(30);
 
         //now the player is doing supersucker stuff, should we give them a certain number of time to complete it or just wait for them to finish completely?
         gestures_text.SetActive(false);
