@@ -178,11 +178,7 @@ public class tourScript : MonoBehaviour
             supersucker.transform.position = Vector3.MoveTowards(supersucker.transform.position, gameObject.transform.position, 0.05f);
         }
         if (exitCutscene == false)
-        {
-            if (fishCurrentTarget) moveFish(fishCurrentTarget);
-            if (diverCurrentTarget) moveDiver(diverCurrentTarget);
-
-
+        { 
 
         }
 
@@ -323,20 +319,12 @@ public class tourScript : MonoBehaviour
        
         StartCoroutine("sayNextLine"); //Amakua- It’s also called a Collector Urchin!
         yield return new WaitForSeconds(2.5f);
-        startPath(fish, "HumuWP_Set2");
+        startPath(fish, "HumuWP_Set2 (1)");
 
         StartCoroutine("sayNextLine"); //Diver - *nods and crouches down* This little friend eats algae, which is a good thing because there’s a lot of it here. *Waves towards beds of algae*
         diverAnim.SetBool("kneel", true);
         diverAnim.SetBool("stand", false);
         yield return new WaitForSeconds(2.5f);
-
-        startPath(fish, "HumuWP_Set3");
-        //Amakua - *swims over the algae circling*
-        while (fishFinished == false)
-        {
-            yield return new WaitForSeconds(1);
-        }
-        fishFinished = false;
 
         StartCoroutine("sayNextLine"); //Amakua -  Yeah, and it’s taking over my reef!
         yield return new WaitForSeconds(2.5f);
@@ -372,6 +360,8 @@ public class tourScript : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
 
         startPath(diver, "DiverWP_Set2");
+        //startPath(fish, "HumuWP_Set3");
+        //Amakua - *swims over the algae circling*
         diverAnim.SetBool("move", true);
         CameraAnim.SetBool("move3", true);
         while (diverFinished == false)
@@ -598,57 +588,6 @@ public class tourScript : MonoBehaviour
         cameraLocation.transform.rotation = Quaternion.Slerp(cameraLocation.transform.rotation, Quaternion.LookRotation(newDir - cameraLocation.transform.position), 1 * Time.deltaTime);
 
     }
-
-    void moveDiver(GameObject moveTarget)
-    {
-
-        diverAnim.SetBool("move", true);
-
-
-        if (moveTarget.transform.position != diver.transform.position)
-        {
-            Vector3 direction = moveTarget.transform.position - diver.transform.position;
-            diverLookAtTarget(moveTarget);
-            diver.transform.position = Vector3.MoveTowards(diver.transform.position, moveTarget.transform.position, 0.05f);
-            Debug.Log("Moving!");
-            turnCamera(moveTarget);
-        }
-        else
-        {
-            Debug.Log("Not Moving!");
-            stopMoveDiver();
-            diverLookAtTarget(viewcamera);
-
-        }
-    }
-
-    void stopMoveDiver()
-    {
-        diverAnim.SetBool("move", false);
-    }
-
-    void moveFish(GameObject moveTarget)
-    {
-        if (moveTarget.transform.position != fish.transform.position)
-        {
-            Vector3 direction = moveTarget.transform.position - fish.transform.position;
-            fishLookAtTarget(moveTarget);
-            fish.transform.position = Vector3.MoveTowards(fish.transform.position, moveTarget.transform.position, 0.05f);
-            turnCamera(moveTarget);
-        }
-        else
-        {
-            stopMoveFish();
-            fishLookAtTarget(viewcamera);
-
-        }
-    }
-
-    void stopMoveFish()
-    {
-        fishAnim.SetBool("move", false);
-    }
-
 
     void setDiverWave(bool value)
     {
