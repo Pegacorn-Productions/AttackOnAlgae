@@ -116,7 +116,7 @@ public class SpeechBubble : MonoBehaviour
 		//Begin the GUI group centering the speech bubble at the same position of this game object. After that, apply the offset
         offsetX = Screen.width * 0.10f;
         offsetY = Screen.height * 0.50f;
-		GUI.BeginGroup(new Rect(goScreenPos.x-centerOffsetX-offsetX+450,Screen.height-goScreenPos.y-centerOffsetY-offsetY,Screen.width*1f,Screen.height*1f));
+		GUI.BeginGroup(new Rect(goScreenPos.x-centerOffsetX-offsetX+100,Screen.height-goScreenPos.y-centerOffsetY-offsetY,Screen.width*1f,Screen.height*1f));
 
 		// if (addDismiss)
 		//   {
