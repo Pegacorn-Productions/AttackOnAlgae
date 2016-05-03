@@ -320,9 +320,10 @@ public class tourScript : MonoBehaviour
         StartCoroutine("sayNextLine"); //Diver - This is Tripneustes gratilla a type of Sea Urchin... 
         yield return new WaitForSeconds(2.5f);
 
-        startPath(fish, "HumuWP_Set2");
+       
         StartCoroutine("sayNextLine"); //Amakua- It’s also called a Collector Urchin!
         yield return new WaitForSeconds(2.5f);
+        startPath(fish, "HumuWP_Set2");
 
         StartCoroutine("sayNextLine"); //Diver - *nods and crouches down* This little friend eats algae, which is a good thing because there’s a lot of it here. *Waves towards beds of algae*
         diverAnim.SetBool("kneel", true);
@@ -391,6 +392,11 @@ public class tourScript : MonoBehaviour
         StartCoroutine("sayNextLine"); // Diver -  We have acanthrophora spicifera
         yield return new WaitForSeconds(2.5f);
         startPath(fish, "HumuWP_Set4");
+        while (fishFinished == false)
+        {
+            yield return new WaitForSeconds(1);
+        }
+        fishFinished = false;
         StartCoroutine("sayNextLine"); //Amakua- Sometimes people call it Spiny Seaweed *image shows up underneath the map with a color block*
         //*map changes to show range and coverage of acanthrophora spicifera using the same color as the block*
         yield return new WaitForSeconds(2.5f);
@@ -409,6 +415,11 @@ public class tourScript : MonoBehaviour
         diverFinished = false;
         diverAnim.SetBool("move", false);
         startPath(fish, "HumuWP_Set5");
+        while (fishFinished == false)
+        {
+            yield return new WaitForSeconds(1);
+        }
+        fishFinished = false;
         StartCoroutine("sayNextLine"); // Diver - There’s also  kappaphycus alvarezii
         //*as before, image comes up with name and color block map changes to show range*
         yield return new WaitForSeconds(2.5f);
@@ -425,6 +436,11 @@ public class tourScript : MonoBehaviour
         diverAnim.SetBool("move", false);
 
         startPath(fish, "HumuWP_Set6");
+        while (fishFinished == false)
+        {
+            yield return new WaitForSeconds(1);
+        }
+        fishFinished = false;
         map.GetComponent<Image>().sprite = maps[2];
         StartCoroutine("sayNextLine"); //And lastly we’ve got, gracilera salicornia
         yield return new WaitForSeconds(2.5f);
