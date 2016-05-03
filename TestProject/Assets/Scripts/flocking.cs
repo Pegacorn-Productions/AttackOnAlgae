@@ -101,9 +101,72 @@ public class flocking : MonoBehaviour
 		}
 	}
 
+    void SpawnFlockOne(GameObject thisObj)
+    {
+        Vector3 rPos;
+        //spawning the flock at a spawn point 1
+        for (int i = 0; i < flockSpawnOne; i++)
+        {
+            rPos = spawnPtOne.transform.position + Random.insideUnitSphere * 5;
+            flock.Add(Instantiate(thisObj, rPos, thisObj.transform.rotation) as GameObject);
 
-	//Called oncer per frame if we wanna make sure something gets caught, catch it here, key presses, events etc
-	void Update()
+            Rigidbody phys = flock[flock.Count - 1].GetComponent<Rigidbody>();
+            phys.velocity = new Vector3(Random.Range(-1, 1), 0, Random.Range(-1, 1));
+            phys.velocity = Vector3.ClampMagnitude(phys.velocity, 1);
+            phys.transform.LookAt(phys.transform.position + phys.velocity);
+        }
+    }
+
+    void SpawnFlockTwo(GameObject thisObj)
+    {
+        Vector3 rPos;
+        //spawn point 2 etc
+        for (int i = 0; i < flockSpawnTwo; i++)
+        {
+            rPos = spawnPtTwo.transform.position + Random.insideUnitSphere * 5;
+            flock.Add(Instantiate(thisObj, rPos, thisObj.transform.rotation) as GameObject);
+
+            Rigidbody phys = flock[flock.Count - 1].GetComponent<Rigidbody>();
+            phys.velocity = new Vector3(Random.Range(-1, 1), 0, Random.Range(-1, 1));
+            phys.velocity = Vector3.ClampMagnitude(phys.velocity, 1);
+            phys.transform.LookAt(phys.transform.position + phys.velocity);
+        }
+
+    }
+
+    void SpawnFlockThree(GameObject thisObj)
+    {
+        Vector3 rPos;
+        for (int i = 0; i < flockSpawnThree; i++)
+        {
+            rPos = spawnPtFour.transform.position + Random.insideUnitSphere * 5;
+            flock.Add(Instantiate(thisObj, rPos, thisObj.transform.rotation) as GameObject);
+
+            Rigidbody phys = flock[flock.Count - 1].GetComponent<Rigidbody>();
+            phys.velocity = new Vector3(Random.Range(-1, 1), 0, Random.Range(-1, 1));
+            phys.velocity = Vector3.ClampMagnitude(phys.velocity, 1);
+            phys.transform.LookAt(phys.transform.position + phys.velocity);
+        }
+    }
+
+    void SpawnFlockFour(GameObject thisObj)
+    {
+        Vector3 rPos;
+        for (int i = 0; i < flockSpawnFour; i++)
+        {
+            rPos = spawnPtFour.transform.position + Random.insideUnitSphere * 5;
+            flock.Add(Instantiate(thisObj, rPos, thisObj.transform.rotation) as GameObject);
+
+            Rigidbody phys = flock[flock.Count - 1].GetComponent<Rigidbody>();
+            phys.velocity = new Vector3(Random.Range(-1, 1), 0, Random.Range(-1, 1));
+            phys.velocity = Vector3.ClampMagnitude(phys.velocity, 1);
+            phys.transform.LookAt(phys.transform.position + phys.velocity);
+        }
+    }
+
+
+    //Called oncer per frame if we wanna make sure something gets caught, catch it here, key presses, events etc
+    void Update()
 	{
 
 		if (Input.GetKey("escape"))

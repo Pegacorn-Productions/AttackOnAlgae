@@ -54,7 +54,6 @@ public class tourScript : MonoBehaviour
     public GameObject thanks;
     public GameObject credits;
     public GameObject pointer;
-
     private bool fishFinished = false, diverFinished = false, turndiver = false, allowSupersucker = false;
 
 
@@ -78,9 +77,10 @@ public class tourScript : MonoBehaviour
         script[5, 0] = "diver"; script[5, 1] = "This little friend eats, algae, which is a good thing because there's a lot of it here.";
         script[6, 0] = "aumakua"; script[6, 1] = "Yeah, and it's taking over my reef!";
         script[7, 0] = "diver"; script[7, 1] = "But even though there are a lot of these <b>Collector Urchins</b> here, they can't keep up with how fast this algae grows.";
+        //probably remove this line
         script[8, 0] = "aumakua"; script[8, 1] = "It's invasive!";
         script[9, 0] = "diver"; script[9, 1] = "Yep, so now we have to help out and try to remove what we can so the reef can bounce back and get healthy.";
-        script[10, 0] = "aumakua"; script[10, 1] = "This is Kaneohe Bay, on Oahu. It used to be a nice reef, but lately these algae have shown up and they are taking over!";
+        script[10, 0] = "aumakua"; script[10, 1] = "This is Kaneohe Bay, on Oahu. Lately these algae have shown up and they are taking over!";
         script[11, 0] = "diver"; script[11, 1] = "There are three species causing problems.";
         script[12, 0] = "diver"; script[12, 1] = "We have <color=green><i>acanthrophora spicifera</i></color>.";
         script[13, 0] = "aumakua"; script[13, 1] = "Sometimes people call it <color=green>Spiny Seaweed</color>!";
@@ -89,7 +89,7 @@ public class tourScript : MonoBehaviour
         script[16, 0] = "aumakua"; script[16, 1] = "It’s also called <color=green>gorilla ogo</color>!";
         script[17, 0] = "diver"; script[17, 1] = "So these three algae are taking over the reef, and all three were introduced by us humans.";
         script[18, 0] = "aumakua"; script[18, 1] = "That’s why you should fix it!";
-        script[19, 0] = "diver"; script[19, 1] = "Yep, we can’t depend on our friend here to do all the work, the algae grows too fast.";
+        script[19, 0] = "diver"; script[19, 1] = "Yep, we can’t depend on our friend here to do all the work.";
         script[20, 0] = "diver"; script[20, 1] = "So we’ve got to pull off what we can and use the Super Sucker to remove as much of it as we can.";
         script[21, 0] = "aumakua"; script[21, 1] = "What’s a Super Sucker?";
         script[22, 0] = "diver"; script[22, 1] = "It’s a special underwater vacuum that we can use to help clean algae off the reef! Call it down when you’re ready!";
@@ -322,6 +322,11 @@ public class tourScript : MonoBehaviour
         StartCoroutine("sayNextLine"); //Amakua- It’s also called a Collector Urchin!
         yield return new WaitForSeconds(2.5f);
         startPath(fish, "HumuWP_Set2 (1)");
+        while (fishFinished == false)
+        {
+            yield return new WaitForSeconds(1);
+        }
+        fishFinished = false;
 
         StartCoroutine("sayNextLine"); //Diver - *nods and crouches down* This little friend eats algae, which is a good thing because there’s a lot of it here. *Waves towards beds of algae*
         diverAnim.SetBool("kneel", true);
@@ -350,16 +355,12 @@ public class tourScript : MonoBehaviour
         map.SetActive(true);
         map.GetComponent<Image>().CrossFadeAlpha(1.0f, 3.0f, false);
         //change this
-        startPath(fish, "HumuWP_Set3");
-        //*Map shows up, Amakua swims up towards it and says*
-        while (fishFinished == false)
-        {
-            yield return new WaitForSeconds(1);
-        }
-        fishFinished = false;
+        
 
         StartCoroutine("sayNextLine"); // Amakua - This is Kaneohe Bay, on Oahu. It used to be a nice reef, but lately these algae have shown up and they are taking over!
         yield return new WaitForSeconds(2.5f);
+        startPath(fish, "HumuWP_Set3");
+        //*Map shows up, Amakua swims up towards it and says*
 
         startPath(diver, "DiverWP_Set2");
         //startPath(fish, "HumuWP_Set3");
@@ -372,6 +373,11 @@ public class tourScript : MonoBehaviour
         }
         diverFinished = false;
         diverAnim.SetBool("move", false);
+        while (fishFinished == false)
+        {
+            yield return new WaitForSeconds(1);
+        }
+        fishFinished = false;
 
 
         StartCoroutine("sayNextLine"); //*Map changes to show the algae showing up and taking over Kaneohe bay* Diver- There are three species causing problems.
@@ -471,7 +477,11 @@ public class tourScript : MonoBehaviour
         StartCoroutine("sayNextLine"); //Diver - So we’ve got to pull to pull off what we can and use the Super Sucker to remove as much of it as we can.
         yield return new WaitForSeconds(2.5f);
 
-
+        while (fishFinished == false)
+        {
+            yield return new WaitForSeconds(1);
+        }
+        fishFinished = false;
         StartCoroutine("sayNextLine"); //Amakua - What’s a Super Sucker?
         yield return new WaitForSeconds(2.5f);
 
@@ -549,6 +559,9 @@ public class tourScript : MonoBehaviour
         StartCoroutine("sayNextLine"); //Aumakua-I really appreciate your hard work! Now I can live here happily again.
         yield return new WaitForSeconds(2.5f);
 
+        BroadcastMessage("SpawnFlockOne");
+        BroadcastMessage("SpawnFlockTwo");
+        BroadcastMessage("SpawnFlockThree");
         StartCoroutine("sayNextLine"); //Diver-I Hope you had fun helping out today! I'll see you later!
         yield return new WaitForSeconds(2.5f);
         //more fish spawn
@@ -629,20 +642,6 @@ public class tourScript : MonoBehaviour
     {
         //run the animation to destroy the object
         showFishBubble(false);
-    }
-
-
-    void fishLookAtTarget(GameObject target)
-    {
-        Vector3 newDir = new Vector3(target.transform.position.x, fish.transform.position.y, target.transform.position.z);
-        fish.transform.rotation = Quaternion.LookRotation(newDir - fish.transform.position);
-    }
-
-    void diverLookAtTarget(GameObject target)
-    {
-        Debug.Log("turning diver!");
-        Vector3 newDir = new Vector3(target.transform.position.x, diver.transform.position.y, target.transform.position.z);
-        diver.transform.rotation = Quaternion.LookRotation(newDir - diver.transform.position);
     }
 
     public void GetSuperSucker()
