@@ -116,7 +116,7 @@ public class SpeechBubble : MonoBehaviour
 		//Begin the GUI group centering the speech bubble at the same position of this game object. After that, apply the offset
         offsetX = Screen.width * 0.10f;
         offsetY = Screen.height * 0.50f;
-		GUI.BeginGroup(new Rect(goScreenPos.x-centerOffsetX-offsetX+100,Screen.height-goScreenPos.y-centerOffsetY-offsetY,Screen.width*1f,Screen.height*1f));
+		GUI.BeginGroup(new Rect(goScreenPos.x-centerOffsetX-offsetX,Screen.height-goScreenPos.y-centerOffsetY-offsetY,Screen.width*1f,Screen.height*1f));
 
 		// if (addDismiss)
 		//   {
@@ -128,10 +128,10 @@ public class SpeechBubble : MonoBehaviour
 			//mat = temp;
 
 			//Render the round part of the bubble
-			GUI.Label(new Rect(0,Screen.height*0.1f,Mathf.Sqrt(area) * 0.30f,Mathf.Sqrt(area) * 0.30f),"",guiSkin.customStyles[0]);
+			GUI.Label(new Rect(0,Screen.height*0.1f,Mathf.Sqrt(area) * 0.25f,Mathf.Sqrt(area) * 0.25f),"",guiSkin.customStyles[0]);
 
 			//Render the text
-			GUI.Label(new Rect(Screen.width*0.015f,Screen.height*0.15f,Mathf.Sqrt(area)*0.20f,Mathf.Sqrt(area) * 0.20f),text,guiSkin.label);
+			GUI.Label(new Rect(Screen.width*0.020f,Screen.height*0.15f,Mathf.Sqrt(area)*0.20f,Mathf.Sqrt(area) * 0.20f),text,guiSkin.label);
 		//	if (GUI.Button(new Rect(69, 102, Mathf.Sqrt(area* 0.02f),Mathf.Sqrt(area* 0.002f)), "Dismiss"))
 		//	{
 			//	dismissed = true;
