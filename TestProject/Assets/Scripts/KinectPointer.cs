@@ -105,7 +105,7 @@ public class KinectPointer : MonoBehaviour {
                 float rightPersonalX = (rightHandNormalizedX - customCoordinateMinX) / (customCoordinateMaxX - customCoordinateMinX);
                 float rightPersonalY = (rightHandNormalizedY - customCoordinateMinY) / (customCoordinateMaxY - customCoordinateMinY);
                 float leftPersonalX = (leftHandNormalizedX - customCoordinateMinX) / (customCoordinateMaxX - customCoordinateMinX);
-                float leftPersonalY = (leftHandNormalizedY - customCoordinateMinX) / (customCoordinateMaxY - customCoordinateMinY);
+                float leftPersonalY = (leftHandNormalizedY - customCoordinateMinY) / (customCoordinateMaxY - customCoordinateMinY);
 
 
                 endRightVertex = new Vector3(rightPersonalX * Screen.width, rightPersonalY * Screen.height, 0);

@@ -531,7 +531,7 @@ public class tourScript : MonoBehaviour
 
 
         //make all algae disappear slowly from corals <- NOT WORKING PROPERLY, LAGS EVERYTHING AND CALLS OVER AND OVER...
-       // GameObject.Find("All reefs").GetComponent<receiverScript>().BroadcastMessage("getSuperSucked");
+      //  GameObject.Find("All reefs").GetComponent<receiverScript>().BroadcastMessage("getSuperSucked");
 
         //then diver congratulates player
         GameObject.Find("Main Camera").GetComponent<AudioSource>().clip = music;
@@ -547,7 +547,7 @@ public class tourScript : MonoBehaviour
 
 
         StartCoroutine("sayNextLine"); //Aumakua-Wow, look how many fish have returned now that the reef is healthy!.
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(3);
 
         BroadcastMessage("SpawnFlockThree");
 
@@ -555,7 +555,7 @@ public class tourScript : MonoBehaviour
         yield return new WaitForSeconds(4);
 
         StartCoroutine("sayNextLine"); //Aumakua-I really appreciate your hard work! Now I can live here happily again.
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(3);
 
         BroadcastMessage("SpawnFlockTwo");
 
