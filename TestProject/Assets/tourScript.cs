@@ -491,7 +491,7 @@ public class tourScript : MonoBehaviour
         yield return new WaitForSeconds(4);
         gestures_img.GetComponent<Image>().sprite = gestures[0];
         gestures_text.GetComponent<Text>().text = "Raise your hand!";
-        gestures_img.GetComponent<Image>().CrossFadeAlpha(1.0f, 3.0f, false);
+        gestures_img.GetComponent<Image>().CrossFadeAlpha(1.0f, 2.0f, false);
         gestures_text.SetActive(true);
 
         //need a way to wait for a signal from update
@@ -535,7 +535,7 @@ public class tourScript : MonoBehaviour
 
         //now the player is doing supersucker stuff, should we give them a certain number of time to complete it or just wait for them to finish completely?
         gestures_text.SetActive(false);
-        gestures_img.GetComponent<Image>().CrossFadeAlpha(-1.0f, 3.0f, false);
+        gestures_img.GetComponent<Image>().CrossFadeAlpha(-1.0f, 2.0f, false);
 
 
         //make all algae disappear slowly from corals <- NOT WORKING PROPERLY, LAGS EVERYTHING AND CALLS OVER AND OVER...

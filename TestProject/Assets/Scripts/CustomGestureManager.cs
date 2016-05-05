@@ -70,7 +70,8 @@ public class CustomGestureManager : MonoBehaviour {
 
                 if (handAboveHeadResult.Detected == true && handAboveHeadResult.Confidence > 0.30f) {
                     Debug.Log("Right hand above head detected. Confidence is " + handAboveHeadResult.Confidence.ToString());
-                    AttachedObject.GetComponent<diverScript>().GetSuperSucker();
+                    AttachedObject.GetComponent<tourScript>().moveOnFromBreakpoint = true;
+                    AttachedObject.GetComponent<tourScript>().GetSuperSucker();
                 }
 
                 if (handSwipeResult.Detected == true && handSwipeResult.Confidence > 0.80f) {
