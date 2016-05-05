@@ -55,6 +55,7 @@ public class coralScript : MonoBehaviour {
     IEnumerator removeAlgae()
     {
         algaeSuckingPhysics.GetComponent<ParticleSystem>().loop = true;
+        algaeSuckingPhysics.GetComponent<ParticleSystem>().Play();
         GameObject algaeRemoveClone = Instantiate(algaeRemovingObject, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z - 0.25f), Quaternion.identity) as GameObject;
         yield return new WaitForSeconds(5);
         Destroy(algaeClone);

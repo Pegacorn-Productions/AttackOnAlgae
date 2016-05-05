@@ -289,7 +289,7 @@ public class tourScript : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
 
         diverFinished = false;
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(4);
         //move fish to second target
         startPath(fish, "HumuWP_Set2");
         while (fishFinished == false)
@@ -304,7 +304,7 @@ public class tourScript : MonoBehaviour
         startPath(diver, "DiverWP_Set1");
         diverAnim.SetBool("move", true);
         CameraAnim.SetBool("move2", true);
-        yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(4);
 
         //Diver *walks over to urchin*
         while (diverFinished == false)
@@ -316,11 +316,11 @@ public class tourScript : MonoBehaviour
 
 
         StartCoroutine("sayNextLine"); //Diver - This is Tripneustes gratilla a type of Sea Urchin... 
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(3);
 
        
         StartCoroutine("sayNextLine"); //Amakua- It’s also called a Collector Urchin!
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(3);
         startPath(fish, "HumuWP_Set2 (1)");
         while (fishFinished == false)
         {
@@ -331,7 +331,7 @@ public class tourScript : MonoBehaviour
         StartCoroutine("sayNextLine"); //Diver - *nods and crouches down* This little friend eats algae, which is a good thing because there’s a lot of it here. *Waves towards beds of algae*
         diverAnim.SetBool("kneel", true);
         diverAnim.SetBool("stand", false);
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(4);
 
         StartCoroutine("sayNextLine"); //Amakua -  Yeah, and it’s taking over my reef!
         yield return new WaitForSeconds(2.5f);
@@ -339,7 +339,7 @@ public class tourScript : MonoBehaviour
         StartCoroutine("sayNextLine"); //Diver - But even though there are a lot of these Collector Urchins here, they can’t keep up with how fast this algae grows.
         diverAnim.SetBool("kneel", false);
         diverAnim.SetBool("stand", true);
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(4);
 
         StartCoroutine("sayNextLine"); //Amakua - It’s invasive!
         yield return new WaitForSeconds(2.5f);
@@ -348,7 +348,7 @@ public class tourScript : MonoBehaviour
        
 
         StartCoroutine("sayNextLine"); //Diver - Yep, so now we have to help out and try to remove what we can so the reef can bounce back and get healthy.
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(4);
 
 
         map.GetComponent<CanvasRenderer>().SetAlpha(0.0f);
@@ -358,7 +358,7 @@ public class tourScript : MonoBehaviour
         
 
         StartCoroutine("sayNextLine"); // Amakua - This is Kaneohe Bay, on Oahu. It used to be a nice reef, but lately these algae have shown up and they are taking over!
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(4);
         startPath(fish, "HumuWP_Set3");
         //*Map shows up, Amakua swims up towards it and says*
 
@@ -381,7 +381,7 @@ public class tourScript : MonoBehaviour
 
 
         StartCoroutine("sayNextLine"); //*Map changes to show the algae showing up and taking over Kaneohe bay* Diver- There are three species causing problems.
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(3);
 
         map.GetComponent<Image>().sprite = maps[0];
 
@@ -449,7 +449,7 @@ public class tourScript : MonoBehaviour
         map.GetComponent<Image>().sprite = maps[3];
 
         StartCoroutine("sayNextLine"); //Diver- So these three algae are taking over the reef, and all three were introduced by us humans.
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(3);
 
         StartCoroutine("sayNextLine"); //Amakua- That’s why you should fix it!
         yield return new WaitForSeconds(2.5f);
@@ -459,7 +459,7 @@ public class tourScript : MonoBehaviour
 
 
         StartCoroutine("sayNextLine"); // *Diver nods and kneels down and motions to sea urchin again* Diver - Yep, we can’t depend on our friend here to do all the work, the algae grows too fast.
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(4);
         map.SetActive(false);
         startPath(fish, "HumuWP_Set7");
         //*Diver walks over to a coral head* 
@@ -475,7 +475,7 @@ public class tourScript : MonoBehaviour
        // turndiver = true;
 
         StartCoroutine("sayNextLine"); //Diver - So we’ve got to pull to pull off what we can and use the Super Sucker to remove as much of it as we can.
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(4);
 
         while (fishFinished == false)
         {
@@ -488,7 +488,7 @@ public class tourScript : MonoBehaviour
 
         allowSupersucker = true;
         StartCoroutine("sayNextLine"); //Diver- It’s a special underwater vacuum that we can use to help clean algae off the reef! Call it down when you’re ready!
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(4);
         gestures_img.GetComponent<Image>().sprite = gestures[0];
         gestures_text.GetComponent<Text>().text = "Raise your hand!";
         gestures_img.GetComponent<Image>().CrossFadeAlpha(1.0f, 3.0f, false);
@@ -527,7 +527,7 @@ public class tourScript : MonoBehaviour
         StartCoroutine("sayNextLine"); //Diver- Great! Now move it over the algae covered coral to suck it off!
         //yield return new WaitForSeconds(2.5f);
 
-         yield return new WaitForSeconds(60);
+         yield return new WaitForSeconds(30);
 
         StartCoroutine("sayNextLine"); //Diver- Nice work! Only 30 more seconds to go, suck up as much algae as you can!
 
@@ -554,7 +554,7 @@ public class tourScript : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
 
         StartCoroutine("sayNextLine"); //Diver-Thanks for helping us remove all of that algae. Hopefully now these <b>Collector Urchins</b> will continue to help us keep the algae under control!
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(4);
 
         StartCoroutine("sayNextLine"); //Aumakua-I really appreciate your hard work! Now I can live here happily again.
         yield return new WaitForSeconds(2.5f);
