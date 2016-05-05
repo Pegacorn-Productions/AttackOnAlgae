@@ -55,8 +55,8 @@ public class moveOnPath : MonoBehaviour {
 
         if (CurrentPointID >= PathToFollow.path_objs.Count)
         {
-            CurrentPointID = 0;
             doPath = false;
+            CurrentPointID = 0;
             msgTarget.BroadcastMessage(funcName);
             Debug.Log("Sent message " + funcName);
         }
