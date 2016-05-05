@@ -538,12 +538,18 @@ public class tourScript : MonoBehaviour
         GameObject.Find("Main Camera").GetComponent<AudioSource>().Play();
         supersucker.SetActive(false);
         StartCoroutine("sayNextLine"); //Diver-Excellent!! Looks like the reef is feeling better already.
+
+        BroadcastMessage("SpawnFlockOne");
         yield return new WaitForSeconds(2.5f);
+
+        BroadcastMessage("SpawnFlockTwo");
 
 
 
         StartCoroutine("sayNextLine"); //Aumakua-Wow, look how many fish have returned now that the reef is healthy!.
         yield return new WaitForSeconds(2.5f);
+
+        BroadcastMessage("SpawnFlockThree");
 
         StartCoroutine("sayNextLine"); //Diver-Thanks for helping us remove all of that algae. Hopefully now these <b>Collector Urchins</b> will continue to help us keep the algae under control!
         yield return new WaitForSeconds(4);
@@ -551,9 +557,9 @@ public class tourScript : MonoBehaviour
         StartCoroutine("sayNextLine"); //Aumakua-I really appreciate your hard work! Now I can live here happily again.
         yield return new WaitForSeconds(2.5f);
 
-        BroadcastMessage("SpawnFlockOne");
         BroadcastMessage("SpawnFlockTwo");
-        BroadcastMessage("SpawnFlockThree");
+
+
         StartCoroutine("sayNextLine"); //Diver-I Hope you had fun helping out today! I'll see you later!
         yield return new WaitForSeconds(2.5f);
         //more fish spawn
