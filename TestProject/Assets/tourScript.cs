@@ -537,6 +537,7 @@ public class tourScript : MonoBehaviour
         GameObject.Find("Main Camera").GetComponent<AudioSource>().clip = music;
         GameObject.Find("Main Camera").GetComponent<AudioSource>().Play();
         supersucker.SetActive(false);
+        allowSupersucker = false;
         StartCoroutine("sayNextLine"); //Diver-Excellent!! Looks like the reef is feeling better already.
 
         BroadcastMessage("SpawnFlockOne");
