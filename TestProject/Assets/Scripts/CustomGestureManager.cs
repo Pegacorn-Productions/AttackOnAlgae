@@ -75,8 +75,8 @@ public class CustomGestureManager : MonoBehaviour {
                 }
 
                 if (handSwipeResult.Detected == true && handSwipeResult.Confidence > 0.80f) {
-                  //  Debug.Log("Hand Swipe detected. Confidence is" + handSwipeResult.Confidence.ToString());
-                    SpeechBubble.GetComponent<SpeechBubble>().DismissSpeechBuble();
+                    //  Debug.Log("Hand Swipe detected. Confidence is" + handSwipeResult.Confidence.ToString());
+                    AttachedObject.GetComponent<tourScript>().setGoScriptTrue();
                 }
 
                 if (handWaveResult.Detected == true && handWaveResult.Confidence > 0.01f) {

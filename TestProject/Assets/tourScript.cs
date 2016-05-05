@@ -589,15 +589,6 @@ public class tourScript : MonoBehaviour
 
     }
 
-    void turnCamera(GameObject target)
-    {
-
-        cameraLocation.GetComponent<Animator>().enabled = false;
-        Vector3 newDir = new Vector3(target.transform.position.x, cameraLocation.transform.position.y, target.transform.position.z);
-        cameraLocation.transform.rotation = Quaternion.Slerp(cameraLocation.transform.rotation, Quaternion.LookRotation(newDir - cameraLocation.transform.position), 1 * Time.deltaTime);
-
-    }
-
     void setDiverWave(bool value)
     {
         diverAnim.SetBool("wave", value);
