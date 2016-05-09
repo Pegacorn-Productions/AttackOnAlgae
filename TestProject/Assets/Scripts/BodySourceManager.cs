@@ -10,6 +10,9 @@ public class BodySourceManager : MonoBehaviour
     private ulong _trackingId = 0;
     public CustomGestureManager GestureManager;
 
+    private float maxZ;
+    private float minZ;
+
     public Body[] GetData()
     {
         return _Data;
@@ -57,6 +60,8 @@ public class BodySourceManager : MonoBehaviour
                         break;
                     }
                 }
+                maxZ = _Sensor.DepthFrameSource.DepthMaxReliableDistance;
+                minZ = _Sensor.DepthFrameSource.DepthMinReliableDistance;
             }
         }    
     }
@@ -78,5 +83,13 @@ public class BodySourceManager : MonoBehaviour
             
             _Sensor = null;
         }
+    }
+
+    public float getMaxZ() {
+        return maxZ;
+    }
+
+    public float getMinZ() {
+        return minZ;
     }
 }

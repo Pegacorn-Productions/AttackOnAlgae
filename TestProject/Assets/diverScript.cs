@@ -68,21 +68,33 @@ public class diverScript : MonoBehaviour {
 
     }
 
+    IEnumerator runScript(string[] script)
+    {
+     
+
+        int index = 0;
+        foreach (string text in script)
+        {
+            Debug.Log(text);
+            speechBubbleScript.text = text;
+            //if (index == part2.Length-1) speechBubbleScript.addDismiss = true;
+            yield return new WaitForSeconds(textspeed);
+            index++;
+
+        }
+
+
+    }
+
     IEnumerator partOne()
     {
         Debug.Log("starting script");
         yield return new WaitForSeconds(6);
         diverAnim.SetBool("wave", false);
         speechBubbleObject.SetActive(true);
+        
+        StartCoroutine("runScript", part1);
 
-        int index = 0;
-        foreach (string text in part1) {
-            speechBubbleScript.text = text;
-            if (index == part1.Length - 1) speechBubbleScript.addDismiss = true;
-            else yield return new WaitForSeconds(textspeed);
-            index++;
-
-        }
         speechBubbleScript.addDismiss = false;
         yield break;
     }
@@ -97,16 +109,7 @@ public class diverScript : MonoBehaviour {
         target = firstTarget.transform.position;
         move = false;
 
-        int index = 0;
-        foreach (string text in part2)
-        {
-            Debug.Log(text);
-            speechBubbleScript.text = text;
-            //if (index == part2.Length-1) speechBubbleScript.addDismiss = true;
-            yield return new WaitForSeconds(textspeed);
-            index++;
-
-        }
+        StartCoroutine("runScript", part2);
 
 
     }
@@ -123,32 +126,16 @@ public class diverScript : MonoBehaviour {
         miniMap.SetActive(true);
         move = false;
 
-        int index = 0;
-        foreach (string text in part3)
-        {
-            Debug.Log(text);
-            speechBubbleScript.text = text;
-            //if (index == part2.Length-1) speechBubbleScript.addDismiss = true;
-            yield return new WaitForSeconds(textspeed);
-            index++;
-
-        }
+        StartCoroutine("runScript", part3);
 
     }
     IEnumerator partFour()
     {
         CameraAnim.SetBool("tosupersucker", true);
         superSuckerOn = true;
-        int index = 0;
-        foreach (string text in part4)
-        {
-            Debug.Log(text);
-            speechBubbleScript.text = text;
-            //if (index == part2.Length-1) speechBubbleScript.addDismiss = true;
-            yield return new WaitForSeconds(textspeed);
-            index++;
+        yield return new WaitForSeconds(1f);
 
-        }
+        StartCoroutine("runScript", part4);
 
     }
 
@@ -164,17 +151,20 @@ public class diverScript : MonoBehaviour {
 
         if (moveOnToTwo == true)
         {
+            StopCoroutine("runScript");
             StartCoroutine("partTwo");
             moveOnToTwo = false;
         }
         if (moveOnToThree == true)
         {
+            StopCoroutine("runScript");
             StartCoroutine("partThree");
             moveOnToThree = false;
         }
 
         if(moveOnToFour == true)
         {
+            StopCoroutine("runScript");
             StartCoroutine("partFour");
             moveOnToFour = false;
         }

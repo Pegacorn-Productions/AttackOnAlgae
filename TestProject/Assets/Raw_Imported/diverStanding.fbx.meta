@@ -1,0 +1,363 @@
+fileFormatVersion: 2
+guid: f43c302082a1dee4e98c1bb89c7a3a8f
+timeCreated: 1462142934
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: ankle_L_JNT
+    100002: ankle_R_JNT
+    100004: chest_JNT
+    100006: //RootNode
+    100008: elbow_L_JNT
+    100010: elbow_R_JNT
+    100012: foot_L_JNT
+    100014: foot_R_JNT
+    100016: footTip_L_JNT
+    100018: footTip_R_JNT
+    100020: headTip_JNT
+    100022: hip_L_JNT
+    100024: hip_R_JNT
+    100026: joint1
+    100028: joint2
+    100030: knee_L_JNT
+    100032: knee_R_JNT
+    100034: middle1_L_JNT
+    100036: middle1_R_JNT
+    100038: middle2_L_JNT
+    100040: middle2_R_JNT
+    100042: middle3_L_JNT
+    100044: middle3_R_JNT
+    100046: middle4_L_JNT
+    100048: middle4_R_JNT
+    100050: middleTip_L_JNT
+    100052: middleTip_R_JNT
+    100054: neck_JNT
+    100056: pelvis_L_JNT
+    100058: pelvis_R_JNT
+    100060: pinky1_L_JNT
+    100062: pinky1_R_JNT
+    100064: pinky2_L_JNT
+    100066: pinky2_R_JNT
+    100068: pinky3_L_JNT
+    100070: pinky3_R_JNT
+    100072: pinky4_L_JNT
+    100074: pinky4_R_JNT
+    100076: pinkyTip_L_JNT
+    100078: pinkyTip_R_JNT
+    100080: playerModel
+    100082: pointer1_L_JNT
+    100084: pointer1_R_JNT
+    100086: pointer2_L_JNT
+    100088: pointer2_R_JNT
+    100090: pointer3_L_JNT
+    100092: pointer3_R_JNT
+    100094: pointer4_L_JNT
+    100096: pointer4_R_JNT
+    100098: pointerTip_L_JNT
+    100100: pointerTip_R_JNT
+    100102: root_JNT
+    100104: shoulder_L_JNT
+    100106: shoulder_R_JNT
+    100108: thumb1_L_JNT
+    100110: thumb1_R_JNT
+    100112: thumb2_L_JNT
+    100114: thumb2_R_JNT
+    100116: thumb3_L_JNT
+    100118: thumb3_R_JNT
+    100120: thumbTip_L_JNT
+    100122: thumbTip_R_JNT
+    100124: torso_JNT
+    100126: wrist_L_JNT
+    100128: wrist_R_JNT
+    400000: ankle_L_JNT
+    400002: ankle_R_JNT
+    400004: chest_JNT
+    400006: //RootNode
+    400008: elbow_L_JNT
+    400010: elbow_R_JNT
+    400012: foot_L_JNT
+    400014: foot_R_JNT
+    400016: footTip_L_JNT
+    400018: footTip_R_JNT
+    400020: headTip_JNT
+    400022: hip_L_JNT
+    400024: hip_R_JNT
+    400026: joint1
+    400028: joint2
+    400030: knee_L_JNT
+    400032: knee_R_JNT
+    400034: middle1_L_JNT
+    400036: middle1_R_JNT
+    400038: middle2_L_JNT
+    400040: middle2_R_JNT
+    400042: middle3_L_JNT
+    400044: middle3_R_JNT
+    400046: middle4_L_JNT
+    400048: middle4_R_JNT
+    400050: middleTip_L_JNT
+    400052: middleTip_R_JNT
+    400054: neck_JNT
+    400056: pelvis_L_JNT
+    400058: pelvis_R_JNT
+    400060: pinky1_L_JNT
+    400062: pinky1_R_JNT
+    400064: pinky2_L_JNT
+    400066: pinky2_R_JNT
+    400068: pinky3_L_JNT
+    400070: pinky3_R_JNT
+    400072: pinky4_L_JNT
+    400074: pinky4_R_JNT
+    400076: pinkyTip_L_JNT
+    400078: pinkyTip_R_JNT
+    400080: playerModel
+    400082: pointer1_L_JNT
+    400084: pointer1_R_JNT
+    400086: pointer2_L_JNT
+    400088: pointer2_R_JNT
+    400090: pointer3_L_JNT
+    400092: pointer3_R_JNT
+    400094: pointer4_L_JNT
+    400096: pointer4_R_JNT
+    400098: pointerTip_L_JNT
+    400100: pointerTip_R_JNT
+    400102: root_JNT
+    400104: shoulder_L_JNT
+    400106: shoulder_R_JNT
+    400108: thumb1_L_JNT
+    400110: thumb1_R_JNT
+    400112: thumb2_L_JNT
+    400114: thumb2_R_JNT
+    400116: thumb3_L_JNT
+    400118: thumb3_R_JNT
+    400120: thumbTip_L_JNT
+    400122: thumbTip_R_JNT
+    400124: torso_JNT
+    400126: wrist_L_JNT
+    400128: wrist_R_JNT
+    4300000: playerModel
+    7400000: stand
+    9500000: //RootNode
+    13700000: playerModel
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: stand
+      takeName: Take 001
+      firstFrame: 70
+      lastFrame: 110
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: playerModel
+        weight: 1
+      - path: root_JNT
+        weight: 1
+      - path: root_JNT/pelvis_L_JNT
+        weight: 1
+      - path: root_JNT/pelvis_L_JNT/hip_L_JNT
+        weight: 1
+      - path: root_JNT/pelvis_L_JNT/hip_L_JNT/knee_L_JNT
+        weight: 1
+      - path: root_JNT/pelvis_L_JNT/hip_L_JNT/knee_L_JNT/ankle_L_JNT
+        weight: 1
+      - path: root_JNT/pelvis_L_JNT/hip_L_JNT/knee_L_JNT/ankle_L_JNT/foot_L_JNT
+        weight: 1
+      - path: root_JNT/pelvis_L_JNT/hip_L_JNT/knee_L_JNT/ankle_L_JNT/foot_L_JNT/footTip_L_JNT
+        weight: 1
+      - path: root_JNT/pelvis_R_JNT
+        weight: 1
+      - path: root_JNT/pelvis_R_JNT/hip_R_JNT
+        weight: 1
+      - path: root_JNT/pelvis_R_JNT/hip_R_JNT/knee_R_JNT
+        weight: 1
+      - path: root_JNT/pelvis_R_JNT/hip_R_JNT/knee_R_JNT/ankle_R_JNT
+        weight: 1
+      - path: root_JNT/pelvis_R_JNT/hip_R_JNT/knee_R_JNT/ankle_R_JNT/foot_R_JNT
+        weight: 1
+      - path: root_JNT/pelvis_R_JNT/hip_R_JNT/knee_R_JNT/ankle_R_JNT/foot_R_JNT/footTip_R_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/neck_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/neck_JNT/joint1
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/neck_JNT/joint1/joint2
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/neck_JNT/joint1/joint2/headTip_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_L_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_L_JNT/elbow_L_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_L_JNT/elbow_L_JNT/wrist_L_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_L_JNT/elbow_L_JNT/wrist_L_JNT/middle1_L_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_L_JNT/elbow_L_JNT/wrist_L_JNT/middle1_L_JNT/middle2_L_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_L_JNT/elbow_L_JNT/wrist_L_JNT/middle1_L_JNT/middle2_L_JNT/middle3_L_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_L_JNT/elbow_L_JNT/wrist_L_JNT/middle1_L_JNT/middle2_L_JNT/middle3_L_JNT/middle4_L_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_L_JNT/elbow_L_JNT/wrist_L_JNT/middle1_L_JNT/middle2_L_JNT/middle3_L_JNT/middle4_L_JNT/middleTip_L_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_L_JNT/elbow_L_JNT/wrist_L_JNT/pinky1_L_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_L_JNT/elbow_L_JNT/wrist_L_JNT/pinky1_L_JNT/pinky2_L_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_L_JNT/elbow_L_JNT/wrist_L_JNT/pinky1_L_JNT/pinky2_L_JNT/pinky3_L_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_L_JNT/elbow_L_JNT/wrist_L_JNT/pinky1_L_JNT/pinky2_L_JNT/pinky3_L_JNT/pinky4_L_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_L_JNT/elbow_L_JNT/wrist_L_JNT/pinky1_L_JNT/pinky2_L_JNT/pinky3_L_JNT/pinky4_L_JNT/pinkyTip_L_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_L_JNT/elbow_L_JNT/wrist_L_JNT/pointer1_L_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_L_JNT/elbow_L_JNT/wrist_L_JNT/pointer1_L_JNT/pointer2_L_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_L_JNT/elbow_L_JNT/wrist_L_JNT/pointer1_L_JNT/pointer2_L_JNT/pointer3_L_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_L_JNT/elbow_L_JNT/wrist_L_JNT/pointer1_L_JNT/pointer2_L_JNT/pointer3_L_JNT/pointer4_L_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_L_JNT/elbow_L_JNT/wrist_L_JNT/pointer1_L_JNT/pointer2_L_JNT/pointer3_L_JNT/pointer4_L_JNT/pointerTip_L_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_L_JNT/elbow_L_JNT/wrist_L_JNT/thumb1_L_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_L_JNT/elbow_L_JNT/wrist_L_JNT/thumb1_L_JNT/thumb2_L_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_L_JNT/elbow_L_JNT/wrist_L_JNT/thumb1_L_JNT/thumb2_L_JNT/thumb3_L_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_L_JNT/elbow_L_JNT/wrist_L_JNT/thumb1_L_JNT/thumb2_L_JNT/thumb3_L_JNT/thumbTip_L_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_R_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_R_JNT/elbow_R_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_R_JNT/elbow_R_JNT/wrist_R_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_R_JNT/elbow_R_JNT/wrist_R_JNT/middle1_R_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_R_JNT/elbow_R_JNT/wrist_R_JNT/middle1_R_JNT/middle2_R_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_R_JNT/elbow_R_JNT/wrist_R_JNT/middle1_R_JNT/middle2_R_JNT/middle3_R_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_R_JNT/elbow_R_JNT/wrist_R_JNT/middle1_R_JNT/middle2_R_JNT/middle3_R_JNT/middle4_R_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_R_JNT/elbow_R_JNT/wrist_R_JNT/middle1_R_JNT/middle2_R_JNT/middle3_R_JNT/middle4_R_JNT/middleTip_R_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_R_JNT/elbow_R_JNT/wrist_R_JNT/pinky1_R_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_R_JNT/elbow_R_JNT/wrist_R_JNT/pinky1_R_JNT/pinky2_R_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_R_JNT/elbow_R_JNT/wrist_R_JNT/pinky1_R_JNT/pinky2_R_JNT/pinky3_R_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_R_JNT/elbow_R_JNT/wrist_R_JNT/pinky1_R_JNT/pinky2_R_JNT/pinky3_R_JNT/pinky4_R_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_R_JNT/elbow_R_JNT/wrist_R_JNT/pinky1_R_JNT/pinky2_R_JNT/pinky3_R_JNT/pinky4_R_JNT/pinkyTip_R_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_R_JNT/elbow_R_JNT/wrist_R_JNT/pointer1_R_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_R_JNT/elbow_R_JNT/wrist_R_JNT/pointer1_R_JNT/pointer2_R_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_R_JNT/elbow_R_JNT/wrist_R_JNT/pointer1_R_JNT/pointer2_R_JNT/pointer3_R_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_R_JNT/elbow_R_JNT/wrist_R_JNT/pointer1_R_JNT/pointer2_R_JNT/pointer3_R_JNT/pointer4_R_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_R_JNT/elbow_R_JNT/wrist_R_JNT/pointer1_R_JNT/pointer2_R_JNT/pointer3_R_JNT/pointer4_R_JNT/pointerTip_R_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_R_JNT/elbow_R_JNT/wrist_R_JNT/thumb1_R_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_R_JNT/elbow_R_JNT/wrist_R_JNT/thumb1_R_JNT/thumb2_R_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_R_JNT/elbow_R_JNT/wrist_R_JNT/thumb1_R_JNT/thumb2_R_JNT/thumb3_R_JNT
+        weight: 1
+      - path: root_JNT/torso_JNT/chest_JNT/shoulder_R_JNT/elbow_R_JNT/wrist_R_JNT/thumb1_R_JNT/thumb2_R_JNT/thumb3_R_JNT/thumbTip_R_JNT
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
